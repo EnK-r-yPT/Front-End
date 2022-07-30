@@ -7,12 +7,12 @@ const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(false);
 
   const dropMenuHandler = () => {
-    setDropMenu(!dropMenu);
+    setDropMenu((dropMenu) => !dropMenu);
   };
 
   return (
     <React.Fragment>
-      <nav className=" p-4 md:p-3  shadow-lg shadow-gray-300 border-2 fixed top-0 left-0 w-full z-50">
+      <nav className=" p-4 md:p-3 bg-white  shadow-lg shadow-gray-300 border-2 fixed top-0 left-0 w-full z-50">
         <div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
           <div className="logo">
             <h1 className="font-bold text-2xl">
