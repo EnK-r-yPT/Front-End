@@ -9,3 +9,22 @@
   --secondary-text-color: #7d7d7d;
   --tertiary-text-color: #141f1d;
 }
+
+.btn-base {
+  @apply bg-[color:var(--color-primary)] text-white hover:bg-white hover:text-[color:var(--color-primary)];
+}
+
+.btn-inverted {
+  @apply bg-white text-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] hover:text-white;
+}
+
+button:disabled{
+  background: hsla(153, 73%, 61%, 0.871);
+  border-color: hsla(153, 73%, 61%, 0.871);
+  cursor: not-allowed;
+}
+
+button:disabled:hover{
+  background: hsla(153, 73%, 61%, 0.871);
+  color: white;
+}

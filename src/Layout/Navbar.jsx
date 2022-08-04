@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import Button from "../components/Button/Button.component";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -46,17 +47,15 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="flex gap-4">
-              <Link
-                className="px-4 py-2 border-2 border-[color:var(--color-primary)] bg-white text-[color:var(--color-primary)] rounded-full font-semibold hover:bg-[color:var(--color-primary)] hover:text-white"
-                to="/login"
-              >
-                Log In
+              <Link to="/login">
+                <Button type="button" className="btn-inverted">
+                  Log In
+                </Button>
               </Link>
-              <Link
-                className="px-4 py-2 border-2 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] text-white rounded-full font-semibold hover:bg-white hover:text-[color:var(--color-primary)]"
-                to="/signup"
-              >
-                Sign Up
+              <Link to="/signup">
+                <Button type="button" className="btn-base">
+                  Sign Up
+                </Button>
               </Link>
             </div>
           </div>

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import Button from "../components/Button/Button.component";
+
 import ImageSelect from "../components/SignUp /ImageSelect.component";
 import SingUpInfo from "../components/SignUp /SingUpInfo.component";
 
 const SignUp = () => {
   const [step, setStep] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
     userId: "",
     email: "",
@@ -13,48 +16,59 @@ const SignUp = () => {
 
   const BodyDisplay = () => {
     if (step === false) {
-      return <SingUpInfo  />;
+      return (
+        <SingUpInfo
+          formData={formData}
+          setFormData={setFormData}
+          setIsFormValid={setIsFormValid}
+        />
+      );
     }
     return <ImageSelect />;
   };
 
   const togglePageHandler = () => {
+    if (!isFormValid) {
+      return;
+    }
     setStep((step) => !step);
   };
+
+  const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
 
   const FooterDisplay = () => {
     if (step === false) {
       return (
-        <button
+        <Button
           type="button"
           onClick={togglePageHandler}
-          className="px-4 py-2 border-2 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] text-white rounded-full font-semibold hover:bg-white hover:text-[color:var(--color-primary)]"
+          className="btn-base"
+          disabled={!isFormValid}
+          title={buttonTitle}
         >
           Continue
-        </button>
+        </Button>
       );
     }
     return (
       <React.Fragment>
-        <button
+        <Button
           type="button"
           onClick={togglePageHandler}
-          className="px-4 py-2 border-2 border-[color:var(--color-primary)] bg-white text-[color:var(--color-primary)] rounded-full font-semibold hover:bg-[color:var(--color-primary)] hover:text-white"
+          className="btn-inverted"
         >
           Back
-        </button>
-        <button
-          type="submit"
-          className="px-4 py-2 border-2 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] text-white rounded-full font-semibold hover:bg-white hover:text-[color:var(--color-primary)]"
-        >
+        </Button>
+
+        <Button type="submit" className="btn-base">
           Submit
-        </button>
+        </Button>
       </React.Fragment>
     );
   };
 
   return (
-    <div className="mt-32 mx-12 md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl p-8">
+    <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl p-8">
       <form action="" className="w-4/5 mx-auto">
         <div className="header flex flex-col items-center justify-center">
           <h1 className="text-[color:var(--color-primary)] text-2xl font-semibold mb-2">
