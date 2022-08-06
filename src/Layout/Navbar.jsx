@@ -48,12 +48,12 @@ const Navbar = () => {
             </div>
             <div className="flex gap-4">
               <Link to="/login">
-                <Button type="button" className="btn-inverted">
+                <Button type="button" className="btn-inverted px-4 py-2">
                   Log In
                 </Button>
               </Link>
               <Link to="/signup">
-                <Button type="button" className="btn-base">
+                <Button type="button" className="btn-base px-4 py-2">
                   Sign Up
                 </Button>
               </Link>
@@ -96,19 +96,23 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex flex-col gap-4 ">
-            <Link
-              to="/login"
-              className="px-32 py-2 border-2 border-[color:var(--color-primary)] bg-white text-[color:var(--color-primary)] rounded-full font-semibold hover:bg-[color:var(--color-primary)] hover:text-white"
-              onClick={dropMenuHandler}
-            >
-              Log In
+            <Link to="/login">
+              <Button
+                type="button"
+                className="btn-inverted px-32 py-2"
+                onClick={dropMenuHandler}
+              >
+                Log In
+              </Button>
             </Link>
-            <Link
-              to="/signup"
-              className="px-32 py-2 border-2 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] text-white rounded-full font-semibold hover:bg-white hover:text-[color:var(--color-primary)]"
-              onClick={dropMenuHandler}
-            >
-              Sign Up
+            <Link to="/signup">
+              <Button
+                type="button"
+                className="btn-base px-32 py-2"
+                onClick={dropMenuHandler}
+              >
+                Sign Up
+              </Button>
             </Link>
           </div>
         </div>

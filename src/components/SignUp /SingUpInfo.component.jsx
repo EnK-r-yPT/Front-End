@@ -4,7 +4,10 @@ import { BiCategory } from "react-icons/bi";
 import useInput from "../../hooks/useInput.hook";
 import useSelect from "../../hooks/useSelect.hook";
 
-const categories = ["Cat", "Dog", "Lion", "Wolf", "Tiger"];
+let categories = ["Cat", "Dog", "Lion", "Wolf", "Tiger"];
+
+// const Url =
+//   "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Categories.json";
 
 const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
   const {
@@ -30,6 +33,14 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
     valueChangeHandler: categoryChangeHandler,
     inputBlurHandler: categoryBlurHandler,
   } = useSelect(formData, setFormData);
+
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     const response = await fetch(Url);
+  //     categories = await response.json();
+  //   };
+  //   fetchCategories();
+  // });
 
   useEffect(() => {
     if (

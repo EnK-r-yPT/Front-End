@@ -24,7 +24,7 @@ const SignUp = () => {
         />
       );
     }
-    return <ImageSelect />;
+    return <ImageSelect setFormData={setFormData} formData={formData} />;
   };
 
   const togglePageHandler = () => {
@@ -42,7 +42,7 @@ const SignUp = () => {
         <Button
           type="button"
           onClick={togglePageHandler}
-          className="btn-base"
+          className="btn-base px-4 py-2"
           disabled={!isFormValid}
           title={buttonTitle}
         >
@@ -55,23 +55,28 @@ const SignUp = () => {
         <Button
           type="button"
           onClick={togglePageHandler}
-          className="btn-inverted"
+          className="btn-inverted px-4 py-2"
         >
           Back
         </Button>
 
-        <Button type="submit" className="btn-base">
+        <Button type="submit" className="btn-base px-4 py-2">
           Submit
         </Button>
       </React.Fragment>
     );
   };
 
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl p-8">
-      <form action="" className="w-4/5 mx-auto">
+      <form action="" className="w-4/5 mx-auto" onSubmit={onSubmitHandler}>
         <div className="header flex flex-col items-center justify-center">
-          <h1 className="text-[color:var(--color-primary)] text-2xl font-semibold mb-2">
+          <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2">
             Create an Account
           </h1>
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>

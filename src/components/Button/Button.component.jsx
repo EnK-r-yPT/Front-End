@@ -3,7 +3,7 @@ import React from "react";
 const Button = ({ children, className, ...props }) => {
   return (
     <button
-      className={`px-4 py-2 border-2 border-[color:var(--color-primary)]  rounded-full font-semibold  ${className}`}
+      className={` border-2 border-[color:var(--color-primary)]  rounded-full font-semibold duration-500 ease-in-out  ${className}`}
       {...props}
     >
       {children}
