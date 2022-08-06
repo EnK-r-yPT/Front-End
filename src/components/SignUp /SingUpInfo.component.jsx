@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { twMerge } from "tailwind-merge";
 import { FaRegEnvelope, FaRegUser } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import useInput from "../../hooks/useInput.hook";
@@ -61,7 +62,7 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
 
   const invalidInput = "bg-red-100";
 
-  const invalidContainer = " border border-red-400 bg-red-100 py-2";
+  const invalidContainer = " border border-red-400 bg-red-100 py-[0.6rem]";
 
   const categoryList = categories.map((category) => {
     return (
@@ -75,16 +76,18 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
     <div className="flex flex-col gap-4 mt-8">
       <div>
         <div
-          className={`flex items-center bg-gray-100 px-2 py-3 ${
-            userIdInputHasError ? invalidContainer : ""
-          }`}
+          className={twMerge(
+            `flex items-center bg-gray-100 px-2 py-3`,
+            `${userIdInputHasError ? invalidContainer : ""}`
+          )}
         >
           <FaRegUser className="text-gray-400  mx-1" />
           <input
             name="userId"
-            className={` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full ${
-              userIdInputHasError ? invalidInput : ""
-            }`}
+            className={twMerge(
+              ` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`,
+              `${userIdInputHasError ? invalidInput : ""}`
+            )}
             type="text"
             placeholder="User Id"
             onChange={userIdChangeHandler}
@@ -101,16 +104,18 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
 
       <div className="">
         <div
-          className={`flex items-center bg-gray-100 px-2 py-3 ${
-            emailInputHasError ? invalidContainer : ""
-          }`}
+          className={twMerge(
+            `flex items-center bg-gray-100 px-2 py-3`,
+            ` ${emailInputHasError ? invalidContainer : ""}`
+          )}
         >
           <FaRegEnvelope className="text-gray-400 text-lg  mx-1" />
           <input
             name="userId"
-            className={` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full ${
-              emailInputHasError ? invalidInput : ""
-            }`}
+            className={twMerge(
+              ` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`,
+              ` ${emailInputHasError ? invalidInput : ""}`
+            )}
             type="text"
             placeholder="Email"
             onChange={emailChangeHandler}
@@ -127,16 +132,18 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
 
       <div className="">
         <div
-          className={`flex items-center  bg-gray-100 px-2 py-3 ${
-            selectedCategoryHasError ? invalidContainer : ""
-          }`}
+          className={twMerge(
+            `flex items-center  bg-gray-100 px-2 py-3 `,
+            `${selectedCategoryHasError ? invalidContainer : ""}`
+          )}
         >
           <BiCategory className="text-gray-400 text-lg mx-1" />
           <select
             name="category"
-            className={`text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu ${
-              selectedCategoryHasError ? invalidInput : ""
-            }`}
+            className={twMerge(
+              `text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu `,
+              `${selectedCategoryHasError ? invalidInput : ""}`
+            )}
             onChange={categoryChangeHandler}
             onBlur={categoryBlurHandler}
             value={selectedCategory}
