@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { FaRegEnvelope, FaRegUser } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import useInput from "../../hooks/useInput.hook";
 import useSelect from "../../hooks/useSelect.hook";
 
-let categories = ["Cat", "Dog", "Lion", "Wolf", "Tiger"];
+let dummyCategories = ["Cat", "Dog", "Lion", "Wolf", "Tiger"];
 
-// const Url =
-//   "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Categories.json";
+const Url =
+  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Categories.json";
 
 const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
+  const [categories, setCategories] = useState(dummyCategories);
+
   const {
     value: enteredUserId,
     isValid: enteredUserIdIsValid,
@@ -35,13 +37,14 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
     inputBlurHandler: categoryBlurHandler,
   } = useSelect(formData, setFormData);
 
-  // useEffect(() => {
-  //   const fetchCategories = async () => {
-  //     const response = await fetch(Url);
-  //     categories = await response.json();
-  //   };
-  //   fetchCategories();
-  // });
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await fetch(Url);
+      const categoriesList = await response.json();
+      setCategories(categoriesList);
+    };
+    fetchCategories();
+  },[]);
 
   useEffect(() => {
     if (

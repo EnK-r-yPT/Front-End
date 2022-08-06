@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ImageCard from "./ImageCard.component";
 
-let Url = "https://jsonplaceholder.typicode.com/users";
-
 function ImageSelect({ formData, setFormData }) {
-  const [category, setCategory] = useState([]);
-  const [selectedImage, setSelectedImage] = useState("1");
+  const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
+
+  let Url =
+    "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/CategoryImages";
+  Url += "/" + formData.category + ".json";
 
   const onChangeHandler = (event) => {
     setSelectedImage(event.target.getAttribute("data-value"));
@@ -18,22 +20,24 @@ function ImageSelect({ formData, setFormData }) {
         password: selectedImage,
       };
     });
-  }, [selectedImage,setFormData]);
+  }, [selectedImage, setFormData]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(Url);
       const data = await response.json();
-      setCategory(data);
+      setSelectedImage(data[0]);
+      setImages(data);
     };
     fetchData();
-  }, []);
+  }, [Url]);
 
-  const ImageList = category.map((cat) => {
+  const ImageList = images.map((imgUrl, index) => {
     return (
       <ImageCard
-        id={cat.id}
-        key={cat.id}
+        url={imgUrl}
+        id={index}
+        key={index}
         selectedImage={selectedImage}
         onChangeHandler={onChangeHandler}
       />
@@ -45,7 +49,7 @@ function ImageSelect({ formData, setFormData }) {
       <div className="flex justify-center items-center p-2 mb-4">
         <div className="shadow-lg rounded-md overflow-hidden border-gray-300 border-8">
           <img
-            src={`https://robohash.org/${selectedImage}?set=set2&size=180x180`}
+            src={selectedImage}
             className="w-[180px] aspect-square object-cover object-center"
             alt="password selected"
           />

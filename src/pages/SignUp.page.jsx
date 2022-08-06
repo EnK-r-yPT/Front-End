@@ -4,6 +4,9 @@ import Button from "../components/Button/Button.component";
 import ImageSelect from "../components/SignUp /ImageSelect.component";
 import SingUpInfo from "../components/SignUp /SingUpInfo.component";
 
+let Url =
+  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Users.json";
+
 const SignUp = () => {
   const [step, setStep] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -67,9 +70,26 @@ const SignUp = () => {
     );
   };
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler =async (event) => {
     event.preventDefault();
     console.log(formData);
+    const response=await fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify({
+        ...formData
+      })
+    });
+
+    if(response.ok){
+      alert("Stored In DB");
+    }
+    else
+    {
+      alert("Some Error Occured");
+    }
   };
 
   return (
