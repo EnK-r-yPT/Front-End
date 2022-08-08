@@ -6,6 +6,7 @@ import ContactUs from "./pages/ContactUs.page";
 import Home from "./pages/Home.page";
 import LogIn from "./pages/LogIn.page";
 import SignUp from "./pages/SignUp.page";
+import AccountRecovery from "./pages/AccountRecovery.page";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
+          <Route path="/accountrecovery" element={<AccountRecovery />} />
         </Routes>
       </Layout>
     </div>

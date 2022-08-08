@@ -1,35 +1,40 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Button from "../components/Button/Button.component";
+import FirstForm from "../components/AccountRecoverry/FirstForm.component";
+import SecondForm from "../components/AccountRecoverry/SecondForm.component";
 
-import ImageSelect from "../components/SignUp /ImageSelect.component";
-import SingUpInfo from "../components/SignUp /SingUpInfo.component";
+let Url = "";
 
-let Url =
-  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Users.json";
-
-const SignUp = () => {
+const AccountRecovery = () => {
   const [step, setStep] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
     userId: "",
-    email: "",
-    category: "",
-    password: "",
+    otp: "",
   });
-  const navigate = useNavigate();
+
+  const sendRequestForOTPHandler = () => {
+    console.log("Request On Backend For Otp");
+  };
 
   const BodyDisplay = () => {
     if (step === false) {
       return (
-        <SingUpInfo
+        <FirstForm
           formData={formData}
           setFormData={setFormData}
           setIsFormValid={setIsFormValid}
         />
       );
     }
-    return <ImageSelect setFormData={setFormData} formData={formData} />;
+    return (
+      <SecondForm
+        setFormData={setFormData}
+        formData={formData}
+        setIsFormValid={setIsFormValid}
+        sendRequestForOTPHandler={sendRequestForOTPHandler}
+      />
+    );
   };
 
   const togglePageHandler = () => {
@@ -46,7 +51,10 @@ const SignUp = () => {
       return (
         <Button
           type="button"
-          onClick={togglePageHandler}
+          onClick={() => {
+            togglePageHandler();
+            sendRequestForOTPHandler();
+          }}
           className="btn-base px-4 py-2"
           disabled={!isFormValid}
           title={buttonTitle}
@@ -76,20 +84,20 @@ const SignUp = () => {
     event.preventDefault();
     console.log(formData);
 
-    try {
-      const response = await fetch(Url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-        }),
-      });
-      alert("user id created");
-      navigate("/login");
-    } catch (error) {
-      alert("error");
+    const response = await fetch(Url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+      }),
+    });
+
+    if (response.ok) {
+      alert("Stored In DB");
+    } else {
+      alert("Some Error Occured");
     }
   };
 
@@ -98,7 +106,7 @@ const SignUp = () => {
       <form action="" className="w-4/5 mx-auto" onSubmit={onSubmitHandler}>
         <div className="header flex flex-col items-center justify-center">
           <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2">
-            Create an Account
+            Account Recovery
           </h1>
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         </div>
@@ -111,4 +119,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default AccountRecovery;
