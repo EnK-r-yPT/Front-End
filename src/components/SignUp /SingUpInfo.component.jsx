@@ -14,12 +14,12 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
   const [categories, setCategories] = useState(dummyCategories);
 
   const {
-    value: enteredUserId,
-    isValid: enteredUserIdIsValid,
-    hasError: userIdInputHasError,
-    valueChangeHandler: userIdChangeHandler,
-    inputBlurHandler: userIdBlurHandler,
-  } = useInput((value) => value.trim() !== "", formData, setFormData, "userId");
+    value: enteredUsername,
+    isValid: enteredUsernameIsValid,
+    hasError: usernameInputHasError,
+    valueChangeHandler: usernameChangeHandler,
+    inputBlurHandler: usernameBlurHandler,
+  } = useInput((value) => value.trim() !== "", formData, setFormData, "username");
 
   const {
     value: enteredEmail,
@@ -49,7 +49,7 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
   useEffect(() => {
     if (
       enteredEmailIsValid &&
-      enteredUserIdIsValid &&
+      enteredUsernameIsValid &&
       selectedCategoryIsValid
     ) {
       setIsFormValid(true);
@@ -58,7 +58,7 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
     }
   }, [
     enteredEmailIsValid,
-    enteredUserIdIsValid,
+    enteredUsernameIsValid,
     selectedCategoryIsValid,
     setIsFormValid,
   ]);
@@ -81,24 +81,24 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
         <div
           className={twMerge(
             `flex items-center bg-gray-100 px-2 py-3`,
-            `${userIdInputHasError ? invalidContainer : ""}`
+            `${usernameInputHasError ? invalidContainer : ""}`
           )}
         >
           <FaRegUser className="text-gray-400  mx-1" />
           <input
-            name="userId"
+            name="username"
             className={twMerge(
               ` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`,
-              `${userIdInputHasError ? invalidInput : ""}`
+              `${usernameInputHasError ? invalidInput : ""}`
             )}
             type="text"
-            placeholder="User Id"
-            onChange={userIdChangeHandler}
-            onBlur={userIdBlurHandler}
-            value={enteredUserId}
+            placeholder="Username"
+            onChange={usernameChangeHandler}
+            onBlur={usernameBlurHandler}
+            value={enteredUsername}
           />
         </div>
-        {userIdInputHasError && (
+        {usernameInputHasError && (
           <p className="text-red-400 text-sm text-left py-1">
             User Id must not be empty.
           </p>
@@ -114,7 +114,7 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
         >
           <FaRegEnvelope className="text-gray-400 text-lg  mx-1" />
           <input
-            name="userId"
+            name="email"
             className={twMerge(
               ` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`,
               ` ${emailInputHasError ? invalidInput : ""}`

@@ -4,18 +4,17 @@ import Button from "../components/Button/Button.component";
 
 import ImageSelect from "../components/SignUp /ImageSelect.component";
 import SingUpInfo from "../components/SignUp /SingUpInfo.component";
-
-let Url =
-  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Users.json";
+import LoadingSpinner from "../components/UI/LoadingSpinner.component";
 
 const SignUp = ({ notification }) => {
   const [step, setStep] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    userId: "",
+    username: "",
     email: "",
     category: "",
-    password: "",
+    pass_image: "",
   });
 
   const navigate = useNavigate();
@@ -30,26 +29,62 @@ const SignUp = ({ notification }) => {
         />
       );
     }
-    return <ImageSelect setFormData={setFormData} formData={formData} />;
+    return (
+      <ImageSelect
+        setFormData={setFormData}
+        formData={formData}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+      />
+    );
   };
 
-  const togglePageHandler = () => {
+  const togglePageHandler = async () => {
     if (!isFormValid && !step) {
       return;
     }
+    if (!step) {
+      setIsLoading(true);
+      try {
+        const response = await fetch("http://localhost:4000/signup/check", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+          }),
+        });
+        const { isExist, message } = await response.json();
+        console.log(message);
+        if (isExist) {
+          notification("error", message);
+          setIsLoading(false);
+          return;
+        }
+      } catch (error) {
+        notification("error", "Something went wrong!");
+        setIsLoading(false);
+        return;
+      }
+    }
+    setIsLoading(false);
     setStep((step) => !step);
   };
 
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
 
   const FooterDisplay = () => {
+    if (isLoading && !step) {
+      return <LoadingSpinner containerClass="" />;
+    }
     if (step === false) {
       return (
         <Button
           type="button"
           onClick={togglePageHandler}
           className="btn-base px-4 py-2"
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
           title={buttonTitle}
         >
           Continue
@@ -66,7 +101,11 @@ const SignUp = ({ notification }) => {
           Back
         </Button>
 
-        <Button type="submit" className="btn-base px-4 py-2">
+        <Button
+          type="submit"
+          className="btn-base px-4 py-2"
+          disabled={isLoading}
+        >
           Submit
         </Button>
       </React.Fragment>
@@ -78,7 +117,7 @@ const SignUp = ({ notification }) => {
     console.log(formData);
 
     try {
-      const response = await fetch(Url, {
+      const response = await fetch("http://localhost:4000/signup/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,10 +126,15 @@ const SignUp = ({ notification }) => {
           ...formData,
         }),
       });
-      notification("success","Account Created Successfully!");
-      navigate("/login");
+      const { isCreated, message } = await response.json();
+      if (isCreated) {
+        notification("success", message);
+        navigate("/login");
+      } else {
+        notification("warn", message);
+      }
     } catch (error) {
-      notification("error",error.message);
+      notification("error", "Something went wrong!");
     }
   };
 

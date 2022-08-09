@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/UI/LoadingSpinner.component";
 
 const LogIn = () => {
   return (
@@ -8,6 +9,7 @@ const LogIn = () => {
       <Link to="/accountrecovery">
         <p className="text-green-400 text-sm">Forgotten passowrd?</p>
       </Link>
+      <LoadingSpinner></LoadingSpinner>
     </div>
   );
 };
