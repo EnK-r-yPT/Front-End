@@ -8,7 +8,7 @@ import SingUpInfo from "../components/SignUp /SingUpInfo.component";
 let Url =
   "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Users.json";
 
-const SignUp = () => {
+const SignUp = ({ notification }) => {
   const [step, setStep] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,6 +17,7 @@ const SignUp = () => {
     category: "",
     password: "",
   });
+
   const navigate = useNavigate();
 
   const BodyDisplay = () => {
@@ -86,10 +87,10 @@ const SignUp = () => {
           ...formData,
         }),
       });
-      alert("user id created");
+      notification("success","Account Created Successfully!");
       navigate("/login");
     } catch (error) {
-      alert("error");
+      notification("error",error.message);
     }
   };
 
