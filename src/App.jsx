@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaCheckCircle, FaInfoCircle } from "react-icons/fa";
 import { RiErrorWarningFill } from "react-icons/ri";
 import { TiWarning } from "react-icons/ti";
+import NewPassword from "./pages/NewPassword.page";
 
 function App() {
   const notification = (messageType, textToShow) => {
@@ -39,7 +40,7 @@ function App() {
     element = (
       <div className="flex gap-3 items-center">
         {icon}
-        <p className="text-sm md:text-[1.1rem]">{textToShow}</p>
+        <p className="">{textToShow}</p>
       </div>
     );
     toast(element, {
@@ -66,6 +67,7 @@ function App() {
           />
           <Route path="/login" element={<LogIn />} />
           <Route path="/accountrecovery" element={<AccountRecovery />} />
+          <Route path="/newpassword" element={<NewPassword />} />
         </Routes>
       </Layout>
       <ToastContainer
