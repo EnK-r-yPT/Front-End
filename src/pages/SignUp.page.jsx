@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button/Button.component";
-
-import ImageSelect from "../components/SignUp /ImageSelect.component";
-import SingUpInfo from "../components/SignUp /SingUpInfo.component";
-import LoadingSpinner from "../components/UI/LoadingSpinner.component";
+import FormBody from "../components/SignUp /FormBody.component";
+import FormButtons from "../components/SignUp /FormButtons.component";
 
 const SignUp = ({ notification }) => {
   const [step, setStep] = useState(false);
@@ -18,26 +15,6 @@ const SignUp = ({ notification }) => {
   });
 
   const navigate = useNavigate();
-
-  const BodyDisplay = () => {
-    if (step === false) {
-      return (
-        <SingUpInfo
-          formData={formData}
-          setFormData={setFormData}
-          setIsFormValid={setIsFormValid}
-        />
-      );
-    }
-    return (
-      <ImageSelect
-        setFormData={setFormData}
-        formData={formData}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-      />
-    );
-  };
 
   const togglePageHandler = async () => {
     if (!isFormValid && !step) {
@@ -70,46 +47,6 @@ const SignUp = ({ notification }) => {
     }
     setIsLoading(false);
     setStep((step) => !step);
-  };
-
-  const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
-
-  const FooterDisplay = () => {
-    if (isLoading && !step) {
-      return <LoadingSpinner containerClass="" />;
-    }
-    if (step === false) {
-      return (
-        <Button
-          type="button"
-          onClick={togglePageHandler}
-          className="btn-base px-4 py-2"
-          disabled={!isFormValid || isLoading}
-          title={buttonTitle}
-        >
-          Continue
-        </Button>
-      );
-    }
-    return (
-      <React.Fragment>
-        <Button
-          type="button"
-          onClick={togglePageHandler}
-          className="btn-inverted px-4 py-2"
-        >
-          Back
-        </Button>
-
-        <Button
-          type="submit"
-          className="btn-base px-4 py-2"
-          disabled={isLoading}
-        >
-          Submit
-        </Button>
-      </React.Fragment>
-    );
   };
 
   const onSubmitHandler = async (event) => {
@@ -148,9 +85,25 @@ const SignUp = ({ notification }) => {
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         </div>
 
-        <div className="body">{BodyDisplay()}</div>
+        <div className="body">
+          <FormBody
+            formData={formData}
+            setFormData={setFormData}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            step={step}
+            setIsFormValid={setIsFormValid}
+          />
+        </div>
 
-        <div className="footer mt-8 flex justify-around">{FooterDisplay()}</div>
+        <div className="footer mt-8 flex justify-around">
+          <FormButtons
+            isLoading={isLoading}
+            step={step}
+            togglePageHandler={togglePageHandler}
+            isFormValid={isFormValid}
+          />
+        </div>
       </form>
     </div>
   );
