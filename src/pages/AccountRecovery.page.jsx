@@ -1,83 +1,64 @@
 import React, { useState } from "react";
-import Button from "../components/Button/Button.component";
-import FirstForm from "../components/AccountRecoverry/FirstForm.component";
-import SecondForm from "../components/AccountRecoverry/SecondForm.component";
+import FormBody from "../components/AccountRecoverry/FormBody.component";
+import FormButtons from "../components/AccountRecoverry/FormButtons.component";
 
 let Url = "";
 
-const AccountRecovery = () => {
-  const [step, setStep] = useState(false);
+const AccountRecovery = ({ notification }) => {
+  const [step, setStep] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     otp: "",
+    category: "",
+    pass_image: "",
   });
+
+  const heading = step < 2 ? "Account Recovery" : "New Password";
+
+  const isUserExistHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("http://localhost:4000/signup/check", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+        }),
+      });
+      const { isExist, message } = await response.json();
+      console.log(message);
+      if (!isExist) {
+        notification("error", message);
+        setIsLoading(false);
+        return;
+      }
+      nextStepHandler();
+    } catch (error) {
+      notification("error", "Something went wrong!");
+    }
+    setIsLoading(false);
+  };
 
   const sendRequestForOTPHandler = () => {
     console.log("Request On Backend For Otp");
   };
 
-  const BodyDisplay = () => {
-    if (step === false) {
-      return (
-        <FirstForm
-          formData={formData}
-          setFormData={setFormData}
-          setIsFormValid={setIsFormValid}
-        />
-      );
-    }
-    return (
-      <SecondForm
-        setFormData={setFormData}
-        formData={formData}
-        setIsFormValid={setIsFormValid}
-        sendRequestForOTPHandler={sendRequestForOTPHandler}
-      />
-    );
-  };
-
-  const togglePageHandler = () => {
-    if (!isFormValid && !step) {
+  const nextStepHandler = () => {
+    if (!isFormValid || step >= 3) {
       return;
     }
-    setStep((step) => !step);
+    setStep((step) => step + 1);
   };
 
-  const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
-
-  const FooterDisplay = () => {
-    if (step === false) {
-      return (
-        <Button
-          type="button"
-          onClick={() => {
-            togglePageHandler();
-            sendRequestForOTPHandler();
-          }}
-          className="btn-base px-4 py-2"
-          disabled={!isFormValid}
-          title={buttonTitle}
-        >
-          Continue
-        </Button>
-      );
+  const backStepHandler = () => {
+    if (step <= 0) {
+      return;
     }
-    return (
-      <React.Fragment>
-        <Button
-          type="button"
-          onClick={togglePageHandler}
-          className="btn-inverted px-4 py-2"
-        >
-          Back
-        </Button>
-
-        <Button type="submit" className="btn-base px-4 py-2">
-          Submit
-        </Button>
-      </React.Fragment>
-    );
+    setStep((step) => step - 1);
   };
 
   const onSubmitHandler = async (event) => {
@@ -106,14 +87,31 @@ const AccountRecovery = () => {
       <form action="" className="w-4/5 mx-auto" onSubmit={onSubmitHandler}>
         <div className="header flex flex-col items-center justify-center">
           <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2">
-            Account Recovery
+            {heading}
           </h1>
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         </div>
 
-        <div className="body">{BodyDisplay()}</div>
+        <div className="body">
+          <FormBody
+            formData={formData}
+            setFormData={setFormData}
+            setIsFormValid={setIsFormValid}
+            step={step}
+            sendRequestForOTPHandler={sendRequestForOTPHandler}
+          />
+        </div>
 
-        <div className="footer mt-8 flex justify-around">{FooterDisplay()}</div>
+        <div className="footer mt-8 flex justify-around">
+          <FormButtons
+            step={step}
+            nextStepHandler={nextStepHandler}
+            backStepHandler={backStepHandler}
+            isUserExistHandler={isUserExistHandler}
+            isFormValid={isFormValid}
+            isLoading={isLoading}
+          />
+        </div>
       </form>
     </div>
   );

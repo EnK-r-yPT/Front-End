@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { debounce } from "lodash";
 import Input from "../Inputs/Input.component";
 
-const SecondForm = ({
+const OTPForRecovery = ({
   formData,
   setFormData,
   setIsFormValid,
@@ -13,7 +13,7 @@ const SecondForm = ({
   });
 
   useEffect(() => {
-    setIsFormValid(isInputValid)
+    setIsFormValid(isInputValid.otp)
   }, [isInputValid, setIsFormValid]);
 
   const deb = useMemo(
@@ -59,4 +59,4 @@ const SecondForm = ({
   );
 };
 
-export default SecondForm;
+export default OTPForRecovery;

@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import CategoryInput from "../Inputs/CategoryInput.component";
 
-const CategorySelect = () => {
+const CategorySelect = ({
+  formData,
+  setFormData,
+  setIsFormValid,
+}) => {
+  const [isInputValid, setIsInputValid] = useState({
+    category: false,
+  });
+
+  useEffect(() => {
+    setIsFormValid(isInputValid.category);
+  }, [isInputValid, setIsFormValid]);
   return (
-    <div>
-        
+    <div className="mt-12">
+      <CategoryInput
+        setFormData={setFormData}
+        formData={formData}
+        setIsInputValid={setIsInputValid}
+        isInputValid={isInputValid}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default CategorySelect
+export default CategorySelect;

@@ -66,7 +66,7 @@ function App() {
             element={<SignUp notification={notification} />}
           />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/accountrecovery" element={<AccountRecovery />} />
+          <Route path="/accountrecovery" element={<AccountRecovery notification={notification} />} />
           <Route path="/newpassword" element={<NewPassword />} />
         </Routes>
       </Layout>

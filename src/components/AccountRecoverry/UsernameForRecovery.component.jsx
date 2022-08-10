@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Input from "../Inputs/Input.component";
 
-const FirstForm = ({ formData, setFormData, setIsFormValid }) => {
+const UsernameForRecovery = ({ formData, setFormData, setIsFormValid }) => {
   const [isInputValid, setIsInputValid] = useState({
     username: false,
   });
 
   useEffect(() => {
-    setIsFormValid(isInputValid);
+    setIsFormValid(isInputValid.username);
   }, [isInputValid, setIsFormValid]);
 
   return (
-    <div className="flex flex-col gap-4 mt-10">
+    <div className="mt-12">
       <Input
         setFormData={setFormData}
         formData={formData}
@@ -24,4 +24,4 @@ const FirstForm = ({ formData, setFormData, setIsFormValid }) => {
   );
 };
 
-export default FirstForm;
+export default UsernameForRecovery;
