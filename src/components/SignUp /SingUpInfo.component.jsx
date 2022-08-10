@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CategoryInput from "../Inputs/CategoryInput.cpmponent";
+import CategoryInput from "../Inputs/CategoryInput.component";
 import Input from "../Inputs/Input.component";
 
 const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
