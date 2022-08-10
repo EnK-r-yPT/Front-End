@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CategorySelect from "../Inputs/CategorySelect.cpmponent";
+import CategoryInput from "../Inputs/CategoryInput.cpmponent";
 import Input from "../Inputs/Input.component";
 
 const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
@@ -41,7 +41,7 @@ const SingUpInfo = ({ formData, setFormData, setIsFormValid }) => {
         isInputValid={isInputValid}
       />
 
-      <CategorySelect setFormData={setFormData} formData={formData} setIsInputValid={setIsInputValid} isInputValid={isInputValid} />
+      <CategoryInput setFormData={setFormData} formData={formData} setIsInputValid={setIsInputValid} isInputValid={isInputValid} />
     </div>
   );
 };

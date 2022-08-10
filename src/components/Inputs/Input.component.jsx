@@ -4,6 +4,7 @@ import useInput from "../../hooks/useInput.hook";
 
 import { FaRegEnvelope, FaRegUser } from "react-icons/fa";
 import { BsKeyboard } from "react-icons/bs";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const inputValidationFunctions = (inputName) => {
   if (inputName.toLowerCase() === "email") {
@@ -40,7 +41,7 @@ const Input = ({
         [inputFieldName.toLowerCase()]: enteredValueIsValid,
       };
     });
-  }, [enteredValueIsValid,inputFieldName,setIsInputValid]);
+  }, [enteredValueIsValid, inputFieldName, setIsInputValid]);
 
   let icon = <BsKeyboard className="text-gray-400 text-xl  mx-1" />,
     message = "Enter details correctly";
@@ -51,6 +52,9 @@ const Input = ({
   } else if (inputFieldName.toLowerCase() === "email") {
     icon = <FaRegEnvelope className="text-gray-400 text-lg  mx-1" />;
     message = "Please enter a valid email.";
+  } else if (inputFieldName.toLowerCase() === "otp") {
+    icon = <RiLockPasswordLine className="text-gray-400  mx-1 text-xl" />;
+    message = "OTP must not be empty.";
   }
 
   const invalidInput = "bg-red-100";

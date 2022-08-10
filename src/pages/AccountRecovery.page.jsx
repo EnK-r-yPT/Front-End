@@ -9,7 +9,7 @@ const AccountRecovery = () => {
   const [step, setStep] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
-    userId: "",
+    username: "",
     otp: "",
   });
 

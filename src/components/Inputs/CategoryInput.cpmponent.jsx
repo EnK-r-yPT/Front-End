@@ -8,7 +8,7 @@ let dummyCategories = ["Cat", "Dog", "Lion", "Wolf", "Tiger"];
 const Url =
   "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Categories.json";
 
-const CategorySelect = ({
+const CategoryInput = ({
   formData,
   setFormData,
   isInputValid,
@@ -87,4 +87,4 @@ const CategorySelect = ({
   );
 };
 
-export default CategorySelect;
+export default CategoryInput;
