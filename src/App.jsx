@@ -20,18 +20,26 @@ function App() {
     let element = "",
       icon = "";
     if (messageType === "success") {
-      icon = <FaCheckCircle className="text-green-400 text-[1.6rem]" />;
+      icon = (
+        <FaCheckCircle className="text-green-400 sm:text-[1.2rem] md:text-[1.6rem]" />
+      );
     } else if (messageType === "error") {
-      icon = <RiErrorWarningFill className="text-red-500 text-[1.6rem]" />;
+      icon = (
+        <RiErrorWarningFill className="text-red-500 sm:text-[1.2rem] md:text-[1.6rem]" />
+      );
     } else if (messageType === "warn") {
-      icon = <TiWarning className="text-red-400 text-[1.6rem]" />;
+      icon = (
+        <TiWarning className="text-red-400 sm:text-[1.2rem] md:text-[1.6rem]" />
+      );
     } else if (messageType === "info") {
-      icon = <FaInfoCircle className="text-cyan-400 text-[1.6rem]" />;
+      icon = (
+        <FaInfoCircle className="text-cyan-400 sm:text-[1.2rem] md:text-[1.6rem]" />
+      );
     }
     element = (
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-3 items-center">
         {icon}
-        <p>{textToShow}</p>
+        <p className="text-sm md:text-[1.1rem]">{textToShow}</p>
       </div>
     );
     toast(element, {
@@ -62,9 +70,9 @@ function App() {
       </Layout>
       <ToastContainer
         bodyClassName="text-gray-500 text-left"
-        className="Toastify__toast--default"
-        progressClassName="Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--light Toastify__progress-bar--default"
-        toastClassName="top-[5rem] right-[0.6rem]"
+        className=""
+        progressClassName=""
+        toastClassName="top-[5rem] md:right-[0.6rem]"
       />
     </div>
   );
