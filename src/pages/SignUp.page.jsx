@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormBody from "../components/SignUp /FormBody.component";
-import FormButtons from "../components/SignUp /FormButtons.component";
+import FormBody from "../components/SignUp/FormBody.component";
+import FormButtons from "../components/SignUp/FormButtons.component";
 
 const SignUp = ({ notification }) => {
   const [step, setStep] = useState(false);
@@ -54,7 +54,7 @@ const SignUp = ({ notification }) => {
     console.log(formData);
 
     try {
-      const response = await fetch("http://localhost:4000/signup/register", {
+      const response = await fetch("http://localhost:4000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

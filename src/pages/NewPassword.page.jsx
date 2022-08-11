@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormBody from "../components/SignUp /FormBody.component";
-import FormButtons from "../components/SignUp /FormButtons.component";
+import FormBody from "../components/SignUp/FormBody.component";
+import FormButtons from "../components/SignUp/FormButtons.component";
 
 const NewPassword = ({ notification }) => {
   const [step, setStep] = useState(false);
