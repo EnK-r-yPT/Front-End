@@ -65,7 +65,7 @@ function App() {
             path="/signup"
             element={<SignUp notification={notification} />}
           />
-          <Route path="/login" element={<LogIn />} />
+          <Route path="/login" element={<LogIn notification={notification} />} />
           <Route path="/accountrecovery" element={<AccountRecovery notification={notification} />} />
           <Route path="/newpassword" element={<NewPassword />} />
         </Routes>
@@ -73,7 +73,7 @@ function App() {
       <ToastContainer
         bodyClassName="text-gray-500 text-left"
         className=""
-        progressClassName=""
+        progressClassName="bg-green-400"
         toastClassName="top-[5rem] md:right-[0.6rem]"
       />
     </div>
