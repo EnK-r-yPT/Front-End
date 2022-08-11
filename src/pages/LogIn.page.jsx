@@ -109,11 +109,11 @@ const LogIn = ({ notification }) => {
   const heading = step === 0 ? "LogIn To Account" : "Password";
 
   return (
-    <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl p-8">
+    <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl p-8 relative">
       <form action="" className="w-4/5 mx-auto" onSubmit={onSubmitHandler}>
         <div className="header flex flex-col items-center justify-center">
           <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2">
-           {heading}
+            {heading}
           </h1>
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         </div>
@@ -140,11 +140,16 @@ const LogIn = ({ notification }) => {
           />
         </div>
       </form>
-      <div className="text-center mt-6">
-        <Link to="/accountrecovery">
-          <p className="text-green-400 text-sm">Forgotten passowrd?</p>
-        </Link>
-      </div>
+      {!step && (
+        <div className="text-center mt-6">
+          <Link to="/accountrecovery">
+            <p className="text-[color:var(--color-primary)] text-sm">
+              Forgotten passowrd?
+            </p>
+          </Link>
+        </div>
+      )}
+      {step!==0 && <div className=" px-3 py-1 text-white absolute z-50 top-2 right-2 text-sm font-bold bg-[color:var(--color-primary)] rounded-lg">{step}<span> / </span>{logInData.noOfList}</div>}
     </div>
   );
 };

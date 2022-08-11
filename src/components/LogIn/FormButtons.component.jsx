@@ -66,7 +66,7 @@ const FormButtons = ({
         title={buttonTitle}
         onClick={nextStepHandler}
       >
-        Submit
+        Continue
       </Button>
     </React.Fragment>
   );

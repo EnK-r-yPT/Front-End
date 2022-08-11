@@ -19,7 +19,7 @@ function Sliders() {
   };
   return (
     <div className="flex items-center justify-center mb-16 mt-4">
-      <div className="flex flex-col justify-center items-center gap-6">
+      <div className="flex flex-col justify-center items-center gap-6 w-full min-w-[8rem]">
         <SliderInput
           text="Yes"
           sliderHandler={sliderHandler}

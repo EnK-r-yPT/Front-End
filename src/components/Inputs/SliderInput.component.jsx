@@ -171,7 +171,7 @@ const SliderInput = forwardRef(
     return (
       <div
         className={twMerge(
-          "w-64 h-12 rounded-full",
+          "w-full h-12 rounded-full",
           isUnlocked ? "w-24 duration-500 ease-in-out" : ""
         )}
       >
@@ -192,7 +192,7 @@ const SliderInput = forwardRef(
         >
           <div
             className={twMerge(
-              "sliderCircle h-full aspect-square rounded-full bg-green-400 flex items-center z-10 cursor-pointer text-white ",
+              "sliderCircle h-full aspect-square rounded-full bg-[color:var(--color-primary)] flex items-center z-10 cursor-pointer text-white ",
               !isRightSlide ? "justify-start" : "justify-end"
             )}
             ref={slider}
