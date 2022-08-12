@@ -8,6 +8,7 @@ const FormBody = ({
   setIsFormValid,
   step,
   logInData,
+  nextStepHandler
 }) => {
   if (step === 0) {
     //username
@@ -20,7 +21,16 @@ const FormBody = ({
     );
   }
   console.log(logInData.imagesList);
-  return <ImagesGridShow imagesList={logInData.imagesList[step - 1]}  />;
+  return (
+    <ImagesGridShow
+      imagesList={logInData.imagesList[step - 1]}
+      formData={formData}
+      setFormData={setFormData}
+      setIsFormValid={setIsFormValid}
+      step={step}
+      nextStepHandler={nextStepHandler}
+    />
+  );
 };
 
 export default FormBody;

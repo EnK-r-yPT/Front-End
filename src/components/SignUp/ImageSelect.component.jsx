@@ -13,7 +13,14 @@ function ImageSelect({ formData, setFormData, setIsLoading, isLoading }) {
     const fetchData = async () => {
       const response = await fetch(Url);
       const data = await response.json();
-      setImages(data);
+      let listData = [];
+      for (let id in data) {
+        listData.push({
+          id: id,
+          url: data[id],
+        });
+      }
+      setImages(listData);
     };
     fetchData();
     setIsLoading(false);
@@ -23,7 +30,11 @@ function ImageSelect({ formData, setFormData, setIsLoading, isLoading }) {
     <React.Fragment>
       {isLoading && <LoadingSpinner containerClass="mt-16 mb-14" />}
       {!isLoading && (
-        <ImageInput formData={formData} setFormData={setFormData} images={images} />
+        <ImageInput
+          formData={formData}
+          setFormData={setFormData}
+          images={images}
+        />
       )}
     </React.Fragment>
   );

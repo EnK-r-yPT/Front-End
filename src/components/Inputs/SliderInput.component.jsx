@@ -16,7 +16,10 @@ import { debounce } from "lodash";
 const isTouchDevice = "ontouchstart" in document.documentElement;
 
 const SliderInput = forwardRef(
-  ({ sliderHandler, isFound, text, isRightSlide = true }, ref) => {
+  (
+    { sliderHandler, isFound, text, nextStepHandler, isRightSlide = true },
+    ref
+  ) => {
     const [isUnlocked, setIsUnlocked] = useState(false);
 
     // for selecting the slider circle to move the circle
@@ -73,12 +76,14 @@ const SliderInput = forwardRef(
         //right Yes
         if (isRightSlide && !isUnlocked) {
           deb();
+          nextStepHandler();
         }
       }
       if (event.keyCode === 37) {
         //left No
         if (!isRightSlide && !isUnlocked) {
           deb();
+          nextStepHandler();
         }
       }
     };

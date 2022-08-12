@@ -2,34 +2,32 @@ import React, { useEffect, useState } from "react";
 import ImageCard from "./ImageCard.component";
 
 const ImageInput = ({ formData, setFormData, images }) => {
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState({});
 
   useEffect(() => {
     if (images.length !== 0) {
       setSelectedImage(images[0]);
     }
   }, [images]);
-  
+
   useEffect(() => {
     setFormData((formData) => {
       return {
         ...formData,
-        pass_image: selectedImage,
+        pass_image: selectedImage.id,
       };
     });
   }, [selectedImage, setFormData]);
 
   const onChangeHandler = (event) => {
-    setSelectedImage(event.target.getAttribute("data-value"));
+    setSelectedImage({id:event.target.getAttribute("data-id"),url:event.target.getAttribute("data-url")});
   };
-
-  const ImageList = images.map((imgUrl, index) => {
+  const ImageList = images.map((img) => {
     return (
       <ImageCard
-        url={imgUrl}
-        id={index}
-        key={index}
-        selectedImage={selectedImage}
+        url={img.url}
+        id={img.id}
+        key={img.id}
         onChangeHandler={onChangeHandler}
       />
     );
@@ -40,7 +38,7 @@ const ImageInput = ({ formData, setFormData, images }) => {
       <div className="flex justify-center items-center p-2 mb-4">
         <div className="shadow-lg rounded-md overflow-hidden border-gray-300 border-8">
           <img
-            src={selectedImage}
+            src={selectedImage.url}
             className="w-[180px] aspect-square object-cover object-center"
             alt="pass_image selected"
           />

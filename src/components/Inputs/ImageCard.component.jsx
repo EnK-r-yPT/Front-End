@@ -1,6 +1,6 @@
 import React from "react";
 import "./ImageCard.component.css";
-const ImageCard = ({ url, id, onChangeHandler, selectedImage }) => {
+const ImageCard = ({ url, id, onChangeHandler }) => {
   return (
     <div className="shadow-[2px_2px_6px_rgba(0,0,0,0.2)] rounded-md hover:-translate-y-2 duration-300 ease-in-out h-fit">
       <label htmlFor={id} className="">
@@ -8,7 +8,7 @@ const ImageCard = ({ url, id, onChangeHandler, selectedImage }) => {
           type="radio"
           id={id}
           name="cat"
-          defaultChecked={id === 0}
+          defaultChecked={parseInt(id) === 0}
           value={id}
         />
         <img
@@ -16,7 +16,8 @@ const ImageCard = ({ url, id, onChangeHandler, selectedImage }) => {
           alt=""
           className="cursor-pointer object-cover object-center rounded-md w-24 aspect-square "
           onClick={onChangeHandler}
-          data-value={url}
+          data-url={url}
+          data-id={id}
         />
       </label>
     </div>

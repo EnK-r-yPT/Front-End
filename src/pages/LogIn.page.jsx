@@ -16,10 +16,12 @@ const LogIn = ({ notification }) => {
     imagesList: [],
     noOfList: 1,
   });
+
   const [formData, setFormData] = useState({
     username: "",
     password: [],
   });
+
   const [allImages, setAllImages] = useState({});
 
   const slideResponse = () => {};
@@ -63,6 +65,8 @@ const LogIn = ({ notification }) => {
         },
         body: JSON.stringify({
           username: formData.username,
+          loginId: 3332,
+          timestamp: Date.now(),
           categoriesLength: categoryLen,
         }),
       });
@@ -78,6 +82,8 @@ const LogIn = ({ notification }) => {
         return;
       }
 
+      console.log(pattern);
+      
       const categoryImage = allImages[category];
       const imagesWithUrl = [];
       for (let i = 0; i < pattern.length; i++) {
@@ -124,6 +130,7 @@ const LogIn = ({ notification }) => {
             setFormData={setFormData}
             setIsFormValid={setIsFormValid}
             step={step}
+            nextStepHandler={nextStepHandler}
             logInData={logInData}
           />
         </div>
@@ -149,7 +156,13 @@ const LogIn = ({ notification }) => {
           </Link>
         </div>
       )}
-      {step!==0 && <div className=" px-3 py-1 text-white absolute z-50 top-2 right-2 text-sm font-bold bg-[color:var(--color-primary)] rounded-lg">{step}<span> / </span>{logInData.noOfList}</div>}
+      {step !== 0 && (
+        <div className=" px-3 py-1 text-white absolute top-2 right-2 text-sm font-bold bg-[color:var(--color-primary)] rounded-lg">
+          {step}
+          <span> / </span>
+          {logInData.noOfList}
+        </div>
+      )}
     </div>
   );
 };
