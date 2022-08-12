@@ -12,10 +12,11 @@ const FormButtons = ({
   logInData,
 }) => {
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  
   if (step === 0) {
-    if (isLoading) {
-      return <LoadingSpinner />;
-    }
     return (
       <Button
         type="button"

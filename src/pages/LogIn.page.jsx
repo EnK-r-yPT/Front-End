@@ -115,7 +115,7 @@ const LogIn = ({ notification }) => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    setIsLoading(true);
     let password = "";
     for (let pass of formData["password"]) {
       password = password + pass;
@@ -137,6 +137,7 @@ const LogIn = ({ notification }) => {
       const { success, message } = await response.json();
       if (!success) {
         notification("error", message);
+        setIsLoading(false);
         return;
       }
       notification("success", message);
@@ -145,6 +146,7 @@ const LogIn = ({ notification }) => {
       console.log(error);
       notification("error", error.message);
     }
+    setIsLoading(false);
   };
 
   const heading = step === 0 ? "LogIn To Account" : "Password";
