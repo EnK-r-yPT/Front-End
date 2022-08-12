@@ -20,7 +20,7 @@ const FormBody = ({
       />
     );
   }
-  console.log(logInData.imagesList);
+
   return (
     <ImagesGridShow
       imagesList={logInData.imagesList[step - 1]}

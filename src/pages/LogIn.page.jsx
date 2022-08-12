@@ -24,7 +24,7 @@ const LogIn = ({ notification }) => {
 
   const [allImages, setAllImages] = useState({});
 
-  const slideResponse = () => {};
+  // const slideResponse = () => {};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,8 +82,6 @@ const LogIn = ({ notification }) => {
         return;
       }
 
-      console.log(pattern);
-      
       const categoryImage = allImages[category];
       const imagesWithUrl = [];
       for (let i = 0; i < pattern.length; i++) {
@@ -100,6 +98,12 @@ const LogIn = ({ notification }) => {
         category: category,
         imagesList: imagesWithUrl,
         noOfList: imagesWithUrl.length,
+      });
+      setFormData((formData)=>{
+        return {
+          ...formData,
+          password:[]
+        }
       });
     } catch (error) {
       notification("error", error);

@@ -17,7 +17,7 @@ const isTouchDevice = "ontouchstart" in document.documentElement;
 
 const SliderInput = forwardRef(
   (
-    { sliderHandler, isFound, text, nextStepHandler, isRightSlide = true },
+    { sliderHandler, isFound, text, isRightSlide = true },
     ref
   ) => {
     const [isUnlocked, setIsUnlocked] = useState(false);
@@ -76,14 +76,12 @@ const SliderInput = forwardRef(
         //right Yes
         if (isRightSlide && !isUnlocked) {
           deb();
-          nextStepHandler();
         }
       }
       if (event.keyCode === 37) {
         //left No
         if (!isRightSlide && !isUnlocked) {
           deb();
-          nextStepHandler();
         }
       }
     };
@@ -171,6 +169,13 @@ const SliderInput = forwardRef(
         }
         updateSliderStyle();
       },
+      setSlider() {
+        containerWidth = container.current.clientWidth - 50;
+        sliderLeft = containerWidth;
+        updateSliderStyle();
+        setIsUnlocked(true);
+      }
+
     }));
 
     return (

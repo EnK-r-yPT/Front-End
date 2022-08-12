@@ -1,14 +1,40 @@
 import { useState, useRef, useEffect } from "react";
 import SliderInput from "../Inputs/SliderInput.component";
 
-function Sliders({ formData, setFormData, step, nextStepHandler, setIsFormValid }) {
+function Sliders({
+  formData,
+  setFormData,
+  step,
+  nextStepHandler,
+  setIsFormValid,
+}) {
   const slideLeft = useRef(null);
   const slideRight = useRef(null);
 
   const [isFound, setIsFound] = useState(null);
 
+  useEffect(() => {
+    if (formData["password"].length + 1 === step) {
+      setIsFound(null);
+      slideLeft.current.reset();
+      slideRight.current.reset();
+    } else {
+      const isRight = formData["password"][step - 1] === 1;
+      setIsFound(isRight);
+      if (isRight) {
+        setIsFound(true);
+        slideRight.current.setSlider();
+        slideLeft.current.reset();
+      } else {
+        setIsFound(false);
+        slideLeft.current.setSlider();
+        slideRight.current.reset();
+      }
+    }
+  });
+
   const sliderHandler = (isRightSlide, isUnlocked) => {
-    if (isUnlocked)
+    if (isUnlocked) {
       if (isRightSlide) {
         setIsFound(true);
         slideLeft.current.reset();
@@ -16,11 +42,8 @@ function Sliders({ formData, setFormData, step, nextStepHandler, setIsFormValid 
         setIsFound(false);
         slideRight.current.reset();
       }
+    }
   };
-
-  useEffect(()=>{
-    setIsFound(null);
-  })
 
   useEffect(() => {
     setIsFormValid(isFound !== null);
@@ -42,7 +65,7 @@ function Sliders({ formData, setFormData, step, nextStepHandler, setIsFormValid 
     });
   }, [isFound, setFormData]);
 
-  console.log(step, formData);
+  console.log(step, isFound, formData);
 
   return (
     <div className="flex items-center justify-center mb-16 mt-4">
@@ -52,7 +75,6 @@ function Sliders({ formData, setFormData, step, nextStepHandler, setIsFormValid 
           sliderHandler={sliderHandler}
           isFound={isFound}
           ref={slideRight}
-          nextStepHandler={nextStepHandler}
         />
         <SliderInput
           text="No"
@@ -60,7 +82,6 @@ function Sliders({ formData, setFormData, step, nextStepHandler, setIsFormValid 
           sliderHandler={sliderHandler}
           isFound={isFound}
           ref={slideLeft}
-          nextStepHandler={nextStepHandler}
         />
       </div>
     </div>
