@@ -8,7 +8,7 @@ const FormBody = ({
   setIsFormValid,
   step,
   logInData,
-  nextStepHandler
+  setStep,
 }) => {
   if (step === 0) {
     //username
@@ -28,7 +28,8 @@ const FormBody = ({
       setFormData={setFormData}
       setIsFormValid={setIsFormValid}
       step={step}
-      nextStepHandler={nextStepHandler}
+      setStep={setStep}
+      noOfList={logInData.noOfList}
     />
   );
 };

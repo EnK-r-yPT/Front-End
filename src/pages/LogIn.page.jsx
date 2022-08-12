@@ -134,7 +134,7 @@ const LogIn = ({ notification }) => {
             setFormData={setFormData}
             setIsFormValid={setIsFormValid}
             step={step}
-            nextStepHandler={nextStepHandler}
+            setStep={setStep}
             logInData={logInData}
           />
         </div>

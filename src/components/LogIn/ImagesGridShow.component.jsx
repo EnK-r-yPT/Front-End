@@ -8,7 +8,8 @@ const ImagesGridShow = ({
   setFormData,
   setIsFormValid,
   step,
-  nextStepHandler,
+  setStep,
+  noOfList
 }) => {
   return (
     <div>
@@ -18,7 +19,8 @@ const ImagesGridShow = ({
         setFormData={setFormData}
         setIsFormValid={setIsFormValid}
         step={step}
-        nextStepHandler={nextStepHandler}
+        setStep={setStep}
+        noOfList={noOfList}
       />
     </div>
   );

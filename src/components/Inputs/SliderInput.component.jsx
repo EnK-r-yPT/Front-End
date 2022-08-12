@@ -4,7 +4,6 @@ import React, {
   useState,
   forwardRef,
   useImperativeHandle,
-  useCallback,
   useMemo,
 } from "react";
 
@@ -17,7 +16,7 @@ const isTouchDevice = "ontouchstart" in document.documentElement;
 
 const SliderInput = forwardRef(
   (
-    { sliderHandler, isFound, text, isRightSlide = true },
+    { sliderHandler, isFound, text, nextImageSlide, isRightSlide = true },
     ref
   ) => {
     const [isUnlocked, setIsUnlocked] = useState(false);
@@ -69,19 +68,21 @@ const SliderInput = forwardRef(
     };
 
     // Using debounce concept to remove ambiguity (that sometime both button get unlocked which is avoided by debounce)
-    const deb = useMemo(() => debounce(() => setSlider(), 100), []);
+    const deb = useMemo(() => debounce(() => setSlider(), 100),[]);
 
     const onkeydown = (event) => {
       if (event.keyCode === 39) {
         //right Yes
         if (isRightSlide && !isUnlocked) {
           deb();
+          // nextImageSlide();
         }
       }
       if (event.keyCode === 37) {
         //left No
         if (!isRightSlide && !isUnlocked) {
           deb();
+          // nextImageSlide();
         }
       }
     };
@@ -130,6 +131,7 @@ const SliderInput = forwardRef(
       if (sliderLeft > containerWidth * 0.9) {
         sliderLeft = containerWidth;
         setIsUnlocked((isUnlocked) => true);
+        // nextImageSlide();
       } else {
         sliderLeft = 0;
       }
@@ -174,8 +176,7 @@ const SliderInput = forwardRef(
         sliderLeft = containerWidth;
         updateSliderStyle();
         setIsUnlocked(true);
-      }
-
+      },
     }));
 
     return (
