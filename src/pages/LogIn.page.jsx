@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormBody from "../components/LogIn/FormBody.component";
 import FormButtons from "../components/LogIn/FormButtons.component";
 
@@ -8,6 +8,7 @@ let url =
 let categoryLen = [];
 
 const LogIn = ({ notification }) => {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +66,7 @@ const LogIn = ({ notification }) => {
         },
         body: JSON.stringify({
           username: formData.username,
-          loginId: 3332,
+          loginId: "3332",
           timestamp: Date.now(),
           categoriesLength: categoryLen,
         }),
@@ -99,11 +100,11 @@ const LogIn = ({ notification }) => {
         imagesList: imagesWithUrl,
         noOfList: imagesWithUrl.length,
       });
-      setFormData((formData)=>{
+      setFormData((formData) => {
         return {
           ...formData,
-          password:[]
-        }
+          password: [],
+        };
       });
     } catch (error) {
       notification("error", error);
@@ -112,8 +113,38 @@ const LogIn = ({ notification }) => {
     nextStepHandler();
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+    console.log(formData);
+    let password = "";
+    for (let pass of formData["password"]) {
+      password = password + pass;
+    }
+    console.log(password);
+    try {
+      const response = await fetch("http://localhost:4000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          loginId: "3332",
+          timestamp: Date.now(),
+          pattern: password,
+        }),
+      });
+      const { success, message } = await response.json();
+      if (!success) {
+        notification("error", message);
+        return;
+      }
+      notification("success", message);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      notification("error", error.message);
+    }
   };
 
   const heading = step === 0 ? "LogIn To Account" : "Password";

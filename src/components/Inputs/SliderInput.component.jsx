@@ -75,14 +75,14 @@ const SliderInput = forwardRef(
         //right Yes
         if (isRightSlide && !isUnlocked) {
           deb();
-          // nextImageSlide();
+          nextImageSlide();
         }
       }
       if (event.keyCode === 37) {
         //left No
         if (!isRightSlide && !isUnlocked) {
           deb();
-          // nextImageSlide();
+          nextImageSlide();
         }
       }
     };
@@ -131,7 +131,7 @@ const SliderInput = forwardRef(
       if (sliderLeft > containerWidth * 0.9) {
         sliderLeft = containerWidth;
         setIsUnlocked((isUnlocked) => true);
-        // nextImageSlide();
+        nextImageSlide();
       } else {
         sliderLeft = 0;
       }
