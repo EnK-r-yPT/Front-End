@@ -7,7 +7,7 @@ function Sliders({
   step,
   setStep,
   setIsFormValid,
-  noOfList
+  noOfList,
 }) {
   const slideLeft = useRef(null);
   const slideRight = useRef(null);
@@ -25,7 +25,7 @@ function Sliders({
 
   useEffect(() => {
     return () => clearTimeout(timer);
-  },[timer]);
+  }, [timer]);
 
   const sliderHandler = (isRightSlide, isUnlocked) => {
     if (isUnlocked) {
@@ -81,10 +81,9 @@ function Sliders({
     }
   });
 
-
   return (
     <div className="flex items-center justify-center mb-16 mt-4">
-      <div className="flex flex-col justify-center items-center gap-6 w-full mx-6 min-w-[8rem]">
+      <div className="flex flex-col justify-center items-center gap-6 w-full mx-6 min-w-[8rem] select-none">
         <SliderInput
           text="Yes"
           sliderHandler={sliderHandler}
