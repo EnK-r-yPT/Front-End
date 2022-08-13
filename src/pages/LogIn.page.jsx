@@ -108,6 +108,8 @@ const LogIn = ({ notification }) => {
       });
     } catch (error) {
       notification("error", error);
+      setIsLoading(false);
+      return;
     }
     setIsLoading(false);
     nextStepHandler();
@@ -137,6 +139,9 @@ const LogIn = ({ notification }) => {
       const { success, message } = await response.json();
       if (!success) {
         notification("error", message);
+        setStep(1);
+        isUserExistHandler();
+        navigate("/login");
         setIsLoading(false);
         return;
       }
@@ -152,7 +157,7 @@ const LogIn = ({ notification }) => {
   const heading = step === 0 ? "LogIn To Account" : "Password";
 
   return (
-    <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl p-8 relative">
+    <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-gray-400 rounded-xl   p-8 relative">
       <form action="" className="w-4/5 mx-auto" onSubmit={onSubmitHandler}>
         <div className="header flex flex-col items-center justify-center">
           <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2">

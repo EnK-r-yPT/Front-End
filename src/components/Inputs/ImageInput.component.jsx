@@ -36,7 +36,7 @@ const ImageInput = ({ formData, setFormData, images }) => {
   return (
     <div className="mt-8">
       <div className="flex justify-center items-center p-2 mb-4">
-        <div className="shadow-lg rounded-md overflow-hidden border-gray-300 border-8">
+        <div className="shadow-[4px_4px_12px_rgba(0,0,0,0.4)] rounded-md overflow-hidden border-white border-8">
           <img
             src={selectedImage.url}
             className="w-[180px] aspect-square object-cover object-center"
@@ -44,7 +44,7 @@ const ImageInput = ({ formData, setFormData, images }) => {
           />
         </div>
       </div>
-      <div className="list grid grid-cols-3 gap-6 overflow-y-scroll h-56 p-2">
+      <div className="list grid grid-cols-2 sm:grid-cols-3 gap-6 overflow-y-scroll h-56 p-2">
         {ImageList}
       </div>
     </div>

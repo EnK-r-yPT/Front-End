@@ -9,11 +9,14 @@ const ImagesGridShow = ({
   setIsFormValid,
   step,
   setStep,
-  noOfList
+  noOfList,
 }) => {
+
   return (
     <div>
-      <ImagesGrid imagesList={imagesList} />
+      <div className="">
+        <ImagesGrid imagesList={imagesList} step={step} />
+      </div>
       <Sliders
         formData={formData}
         setFormData={setFormData}
