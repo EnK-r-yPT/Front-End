@@ -2,10 +2,9 @@ import React, { useEffect, useRef } from "react";
 
 const ImagesGrid = ({ imagesList, step }) => {
   const ref = useRef();
-  let timer;
   useEffect(() => {
     ref.current.classList.add("scale-[20%]");
-    timer = setTimeout(() => {
+    let timer = setTimeout(() => {
       ref.current.classList.remove("scale-[20%]");
     }, 200);
     return () => clearTimeout(timer);

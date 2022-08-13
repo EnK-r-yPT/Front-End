@@ -9,6 +9,7 @@ const FormButtons = ({
   isFormValid,
   isUserExistHandler,
   isLoading,
+  sendRequestForOTPHandler
 }) => {
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
   if (step === 0) {
@@ -44,7 +45,7 @@ const FormButtons = ({
           className="btn-base px-4 py-2"
           disabled={!isFormValid}
           title={buttonTitle}
-          onClick={nextStepHandler}
+          onClick={sendRequestForOTPHandler}
         >
           Submit
         </Button>

@@ -20,7 +20,7 @@ const AccountRecovery = ({ notification }) => {
   const isUserExistHandler = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:4000/signup/check", {
+      const response = await fetch("http://localhost:4000/otp/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,13 +29,13 @@ const AccountRecovery = ({ notification }) => {
           username: formData.username,
         }),
       });
-      const { isExist, message } = await response.json();
-      console.log(message);
-      if (!isExist) {
-        notification("error", message);
-        setIsLoading(false);
-        return;
-      }
+      const { email, message } = await response.json();
+      console.log(message, email);
+      // if (!success) {
+      //   notification("error", message);
+      //   setIsLoading(false);
+      //   return;
+      // }
       nextStepHandler();
     } catch (error) {
       notification("error", "Something went wrong!");
@@ -43,8 +43,30 @@ const AccountRecovery = ({ notification }) => {
     setIsLoading(false);
   };
 
-  const sendRequestForOTPHandler = () => {
-    console.log("Request On Backend For Otp");
+  const sendRequestForOTPHandler = async () => {
+    try {
+      console.log("req");
+      const response = await fetch("http://localhost:4000/otp/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          otp: formData.otp,
+        }),
+      });
+      console.log("reqd");
+      const {success, message} = await response.json();
+      console.log(message, success);
+      if (!success) {
+        notification("error", "Something went wrong!");
+        return;
+      }
+      nextStepHandler();
+    } catch (error) {
+      notification("error", error.message);
+    }
   };
 
   const nextStepHandler = () => {
@@ -110,6 +132,7 @@ const AccountRecovery = ({ notification }) => {
             isUserExistHandler={isUserExistHandler}
             isFormValid={isFormValid}
             isLoading={isLoading}
+            sendRequestForOTPHandler={sendRequestForOTPHandler}
           />
         </div>
       </form>

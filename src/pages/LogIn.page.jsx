@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import FormBody from "../components/LogIn/FormBody.component";
 import FormButtons from "../components/LogIn/FormButtons.component";
@@ -8,6 +9,8 @@ let url =
 let categoryLen = [];
 
 const LogIn = ({ notification }) => {
+  const userUniqueId = useSelector((state) => state.auth.userUniqueId);
+
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -66,7 +69,7 @@ const LogIn = ({ notification }) => {
         },
         body: JSON.stringify({
           username: formData.username,
-          loginId: "3332",
+          loginId: userUniqueId,
           timestamp: Date.now(),
           categoriesLength: categoryLen,
         }),
@@ -131,7 +134,7 @@ const LogIn = ({ notification }) => {
         },
         body: JSON.stringify({
           username: formData.username,
-          loginId: "3332",
+          loginId: userUniqueId,
           timestamp: Date.now(),
           pattern: password,
         }),

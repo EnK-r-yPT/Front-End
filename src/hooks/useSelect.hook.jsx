@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useSelect = (formData, setFormData) => {
   const [selected, setSelected] = useState(formData.category);

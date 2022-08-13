@@ -16,10 +16,11 @@ function Sliders({
 
   let timer;
   const nextImageSlide = () => {
-    if (step === noOfList) return;
-
     timer = setTimeout(() => {
-      setStep((step) => step + 1);
+      setStep((step) => {
+        if (step === noOfList) return step;
+        return step + 1;
+      });
     }, 500);
   };
 

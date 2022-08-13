@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import FormBody from "../components/SignUp/FormBody.component";
 import FormButtons from "../components/SignUp/FormButtons.component";
 
 const SignUp = ({ notification }) => {
+  const userUniqueId = useSelector((state) => state.auth.userUniqueId);
+
   const [step, setStep] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +33,7 @@ const SignUp = ({ notification }) => {
           },
           body: JSON.stringify({
             username: formData.username,
+            userUniqueId
           }),
         });
         const { isExist, message } = await response.json();
@@ -61,6 +65,7 @@ const SignUp = ({ notification }) => {
         },
         body: JSON.stringify({
           ...formData,
+          userUniqueId
         }),
       });
       const { isCreated, message } = await response.json();
