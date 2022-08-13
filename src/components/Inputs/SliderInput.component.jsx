@@ -8,7 +8,6 @@ import React, {
 } from "react";
 
 import { FaAngleDoubleRight } from "react-icons/fa";
-import "./SliderInput.styles.css";
 import { twMerge } from "tailwind-merge";
 import { debounce } from "lodash";
 
