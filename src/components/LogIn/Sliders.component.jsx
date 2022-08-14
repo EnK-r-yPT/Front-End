@@ -1,75 +1,66 @@
 import { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  nextSetStep,
+  setIsFormValid,
+  setPassword,
+} from "../../store/reducers/logIn.Reducer";
 import SliderInput from "../Inputs/SliderInput.component";
 
-function Sliders({
-  formData,
-  setFormData,
-  step,
-  setStep,
-  setIsFormValid,
-  noOfList,
-}) {
+function Sliders() {
+  const password = useSelector((state) => state.logIn.password);
+  const step = useSelector((state) => state.logIn.step);
+
+  const dispatch = useDispatch();
   const slideLeft = useRef(null);
   const slideRight = useRef(null);
+  const calledOnce = useRef(false);
 
   const [isFound, setIsFound] = useState(null);
 
   let timer;
   const nextImageSlide = () => {
-    timer = setTimeout(() => {
-      setStep((step) => {
-        if (step === noOfList) return step;
-        return step + 1;
-      });
-    }, 500);
+    dispatch(nextSetStep());
   };
 
-  useEffect(() => {
-    return () => clearTimeout(timer);
-  }, [timer]);
+  // useEffect(() => {
+  //   return () => clearTimeout(timer);
+  // }, [timer]);
 
   const sliderHandler = (isRightSlide, isUnlocked) => {
-    if (isUnlocked) {
-      if (isRightSlide) {
-        setIsFound(true);
-        slideLeft.current.reset();
-      } else {
-        setIsFound(false);
-        slideRight.current.reset();
-      }
+    if (!isUnlocked) return;
+    if (isRightSlide) {
+      setIsFound(true);
+      slideLeft.current.reset();
+    } else {
+      setIsFound(false);
+      slideRight.current.reset();
     }
   };
 
   useEffect(() => {
-    setIsFormValid(isFound !== null);
-  }, [isFound, setIsFormValid]);
-
-  useEffect(() => {
-    if (isFound === null) return;
-    let passArray = formData["password"];
-    if (formData["password"].length + 1 === step) {
-      passArray.push(isFound === false ? 0 : 1);
-    } else {
-      passArray[step - 1] = isFound === false ? 0 : 1;
+    if (calledOnce.current) {
+      calledOnce.current = false;
+      return;
     }
-    setFormData((formData) => {
-      return {
-        ...formData,
-        password: passArray,
-      };
-    });
-  }, [isFound, setFormData]);
 
-  console.log(step, isFound, formData);
+    console.log({ isFound });
+    if (isFound === null) return;
+    let passArray = [...password];
+    passArray[step - 1] = !isFound ? 0 : 1;
+    dispatch(setPassword(passArray));
+  }, [isFound]);
 
   useEffect(() => {
-    if (formData["password"].length + 1 === step) {
+    if (password[step - 1] === null) {
       setIsFound(null);
       slideLeft.current.reset();
       slideRight.current.reset();
     } else {
-      const isRight = formData["password"][step - 1] === 1;
-      setIsFound(isRight);
+      const isRight = password[step - 1] === 1;
+      calledOnce.current = true;
+      console.log({ isRight });
+
       if (isRight) {
         setIsFound(true);
         slideRight.current.setSlider();
@@ -80,7 +71,14 @@ function Sliders({
         slideRight.current.reset();
       }
     }
+
+    return () => {
+      slideLeft.current.reset();
+      slideRight.current.reset();
+    };
   });
+
+  console.log({ step, isFound, password });
 
   return (
     <div className="flex items-center justify-center mb-16 mt-4">

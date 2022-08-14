@@ -1,26 +1,42 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { isUserExistHandler } from "../../store/actions/logIn.actions";
+import { backSetStep, nextSetStep } from "../../store/reducers/logIn.Reducer";
 import Button from "../Button/Button.component";
 import LoadingSpinner from "../UI/LoadingSpinner.component";
 
-const FormButtons = ({
-  step,
-  nextStepHandler,
-  backStepHandler,
-  isFormValid,
-  isUserExistHandler,
-  isLoading,
-  logInData,
-}) => {
+const FormButtons = () => {
+  const userUniqueId = useSelector((state) => state.auth.userUniqueId);
+  const isLoading = useSelector((state) => state.logIn.isLoading);
+  const step = useSelector((state) => state.logIn.step);
+  const isFormValid = useSelector((state) => state.logIn.isFormValid);
+  const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
+  const allImages = useSelector((state) => state.logIn.allImages);
+  const username = useSelector((state) => state.logIn.username);
+  const categoryLen = useSelector((state) => state.logIn.categoryLength);
+  const dispatch = useDispatch();
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  
+
   if (step === 0) {
     return (
       <Button
         type="button"
-        onClick={isUserExistHandler}
+        onClick={() =>
+          dispatch(
+            isUserExistHandler(
+              {
+                username,
+                timestamp: Date.now(),
+                loginId: userUniqueId,
+                categoriesLength:categoryLen,
+              },
+              allImages
+            )
+          )
+        }
         className="btn-base px-4 py-2"
         disabled={!isFormValid}
         title={buttonTitle}
@@ -29,13 +45,12 @@ const FormButtons = ({
       </Button>
     );
   }
-
-  if (step === logInData.noOfList)
+  if (step === noOfSteps)
     return (
       <React.Fragment>
         <Button
           type="button"
-          onClick={backStepHandler}
+          onClick={() => dispatch(backSetStep())}
           className="btn-inverted px-4 py-2"
         >
           Back
@@ -54,7 +69,7 @@ const FormButtons = ({
     <React.Fragment>
       <Button
         type="button"
-        onClick={backStepHandler}
+        onClick={() => dispatch(backSetStep())}
         className="btn-inverted px-4 py-2"
       >
         Back
@@ -65,7 +80,7 @@ const FormButtons = ({
         className="btn-base px-4 py-2"
         disabled={!isFormValid}
         title={buttonTitle}
-        onClick={nextStepHandler}
+        onClick={() => dispatch(nextSetStep())}
       >
         Continue
       </Button>

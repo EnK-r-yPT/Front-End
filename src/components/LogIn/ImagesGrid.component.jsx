@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
-const ImagesGrid = ({ imagesList, step }) => {
+const ImagesGrid = () => {
+  const step = useSelector((state) => state.logIn.step);
+  const imageList = useSelector((state) => state.logIn.imageList);
+
   const ref = useRef();
   useEffect(() => {
     ref.current.classList.add("scale-[20%]");
@@ -10,7 +14,7 @@ const ImagesGrid = ({ imagesList, step }) => {
     return () => clearTimeout(timer);
   }, [step]);
 
-  const grid = imagesList.map((image) => {
+  const grid = imageList[step - 1].map((image) => {
     return (
       <div
         className="border-4 border-white shadow-lg shadow-gray-400"

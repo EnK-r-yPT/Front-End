@@ -2,29 +2,13 @@ import React from "react";
 import ImagesGrid from "./ImagesGrid.component";
 import Sliders from "./Sliders.component";
 
-const ImagesGridShow = ({
-  imagesList,
-  formData,
-  setFormData,
-  setIsFormValid,
-  step,
-  setStep,
-  noOfList,
-}) => {
-
+const ImagesGridShow = () => {
   return (
     <div>
       <div className="">
-        <ImagesGrid imagesList={imagesList} step={step} />
+        <ImagesGrid />
       </div>
-      <Sliders
-        formData={formData}
-        setFormData={setFormData}
-        setIsFormValid={setIsFormValid}
-        step={step}
-        setStep={setStep}
-        noOfList={noOfList}
-      />
+      <Sliders />
     </div>
   );
 };

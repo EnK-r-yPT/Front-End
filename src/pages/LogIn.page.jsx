@@ -1,160 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import FormBody from "../components/LogIn/FormBody.component";
 import FormButtons from "../components/LogIn/FormButtons.component";
+import {
+  fetchAllImages,
+  verifyUserLogin,
+} from "../store/actions/logIn.actions";
 
-let url =
-  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/CategoryImages.json";
-let categoryLen = [];
-
-const LogIn = ({ notification }) => {
+const LogIn = () => {
   const userUniqueId = useSelector((state) => state.auth.userUniqueId);
+  const step = useSelector((state) => state.logIn.step);
+  const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
+  const password = useSelector((state) => state.logIn.password);
+  const username = useSelector((state) => state.logIn.username);
 
-  const navigate = useNavigate();
-  const [step, setStep] = useState(0);
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [logInData, setLogInData] = useState({
-    category: "",
-    imagesList: [],
-    noOfList: 1,
-  });
-
-  const [formData, setFormData] = useState({
-    username: "",
-    password: [],
-  });
-
-  const [allImages, setAllImages] = useState({});
-
-  // const slideResponse = () => {};
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      for (let cat in data) {
-        categoryLen.push({
-          category: cat,
-          length: data[cat].length,
-        });
-      }
-      setAllImages(data);
-    };
-    fetchData();
-  }, [setAllImages]);
-
-  const nextStepHandler = () => {
-    if (!isFormValid || step >= logInData.noOfList) {
-      return;
-    }
-    setStep((step) => step + 1);
-  };
-
-  const backStepHandler = () => {
-    if (step <= 0) {
-      return;
-    }
-    setStep((step) => step - 1);
-  };
-
-  const isUserExistHandler = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("http://localhost:4000/signin/check", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          loginId: userUniqueId,
-          timestamp: Date.now(),
-          categoriesLength: categoryLen,
-        }),
-      });
-      const { isExist, pattern, category } = await response.json();
-      if (!isExist) {
-        notification("error", "User Not Exist");
-        setIsLoading(false);
-        return;
-      }
-
-      if (!allImages[category]) {
-        console.log("category diff not in firebase db");
-        return;
-      }
-
-      const categoryImage = allImages[category];
-      const imagesWithUrl = [];
-      for (let i = 0; i < pattern.length; i++) {
-        const rows = [];
-        for (let j = 0; j < pattern[0].length; j++) {
-          rows.push({
-            id: pattern[i][j],
-            url: categoryImage[pattern[i][j]],
-          });
-        }
-        imagesWithUrl.push(rows);
-      }
-      setLogInData({
-        category: category,
-        imagesList: imagesWithUrl,
-        noOfList: imagesWithUrl.length,
-      });
-      setFormData((formData) => {
-        return {
-          ...formData,
-          password: [],
-        };
-      });
-    } catch (error) {
-      notification("error", error);
-      setIsLoading(false);
-      return;
-    }
-    setIsLoading(false);
-    nextStepHandler();
-  };
+    dispatch(fetchAllImages());
+  }, [dispatch]);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    let password = "";
-    for (let pass of formData["password"]) {
-      password = password + pass;
+    let stringPassword = "";
+    for (let pass of password) {
+      stringPassword = stringPassword + pass;
     }
-    console.log(password);
-    try {
-      const response = await fetch("http://localhost:4000/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          loginId: userUniqueId,
-          timestamp: Date.now(),
-          pattern: password,
-        }),
-      });
-      const { success, message } = await response.json();
-      if (!success) {
-        notification("error", message);
-        setStep(1);
-        isUserExistHandler();
-        navigate("/login");
-        setIsLoading(false);
-        return;
-      }
-      notification("success", message);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      notification("error", error.message);
-    }
-    setIsLoading(false);
+    const userInfo = {
+      username,
+      loginId: userUniqueId,
+      timestamp: Date.now(),
+      pattern: stringPassword,
+    };
+    dispatch(verifyUserLogin(userInfo));
   };
 
   const heading = step === 0 ? "LogIn To Account" : "Password";
@@ -170,26 +49,11 @@ const LogIn = ({ notification }) => {
         </div>
 
         <div className="body">
-          <FormBody
-            formData={formData}
-            setFormData={setFormData}
-            setIsFormValid={setIsFormValid}
-            step={step}
-            setStep={setStep}
-            logInData={logInData}
-          />
+          <FormBody />
         </div>
 
         <div className="footer mt-8 flex justify-around">
-          <FormButtons
-            step={step}
-            nextStepHandler={nextStepHandler}
-            backStepHandler={backStepHandler}
-            isUserExistHandler={isUserExistHandler}
-            isFormValid={isFormValid}
-            isLoading={isLoading}
-            logInData={logInData}
-          />
+          <FormButtons />
         </div>
       </form>
       {!step && (
@@ -205,7 +69,7 @@ const LogIn = ({ notification }) => {
         <div className=" px-3 py-1 text-white absolute top-2 right-2 text-sm font-bold bg-[color:var(--color-primary)] rounded-lg">
           {step}
           <span> / </span>
-          {logInData.noOfList}
+          {noOfSteps}
         </div>
       )}
     </div>

@@ -38,7 +38,7 @@ const SliderInput = forwardRef(
     }, [isUnlocked, isRightSlide, sliderHandler]);
 
     useEffect(() => {
-      document.addEventListener("keydown", onkeydown);
+      document.addEventListener("keyup", onkeyup);
       if (isTouchDevice) {
         document.addEventListener("touchmove", onDrag);
         document.addEventListener("touchend", stopDrag);
@@ -47,7 +47,7 @@ const SliderInput = forwardRef(
         document.addEventListener("mouseup", stopDrag);
       }
       return () => {
-        document.removeEventListener("keydown", onkeydown);
+        document.removeEventListener("keyup", onkeyup);
         if (isTouchDevice) {
           document.removeEventListener("touchmove", onDrag);
           document.removeEventListener("touchend", stopDrag);
@@ -69,7 +69,7 @@ const SliderInput = forwardRef(
     // Using debounce concept to remove ambiguity (that sometime both button get unlocked which is avoided by debounce)
     const deb = useMemo(() => debounce(() => setSlider(), 100),[]);
 
-    const onkeydown = (event) => {
+    const onkeyup = (event) => {
       if (event.keyCode === 39) {
         //right Yes
         if (isRightSlide && !isUnlocked) {

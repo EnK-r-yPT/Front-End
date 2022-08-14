@@ -17,7 +17,7 @@ const SignUp = () => {
     return ()=>{
       dispatch(setInitialState());
     }
-  },[]);
+  },[dispatch]);
   
   const onSubmitHandler = async (event) => {
     event.preventDefault();
