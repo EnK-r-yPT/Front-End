@@ -1,41 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchImages } from "../../store/actions/signUp.actions";
 import ImageInput from "../Inputs/ImageInput.component";
 import LoadingSpinner from "../UI/LoadingSpinner.component";
 
-function ImageSelect({ formData, setFormData, setIsLoading, isLoading }) {
-  const [images, setImages] = useState([]);
-  let Url =
-    "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/CategoryImages";
-  Url += "/" + formData.category + ".json";
-
+function ImageSelect() {
+  const isLoading = useSelector((state) => state.signUp.isLoading);
+  const category = useSelector((state) => state.signUp.category);
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    setIsLoading(true);
-    const fetchData = async () => {
-      const response = await fetch(Url);
-      const data = await response.json();
-      let listData = [];
-      for (let id in data) {
-        listData.push({
-          id: id,
-          url: data[id],
-        });
-      }
-      setImages(listData);
-    };
-    fetchData();
-    setIsLoading(false);
-  }, [Url, setIsLoading]);
+    dispatch(fetchImages(category));
+  }, [dispatch, category]);
 
   return (
     <React.Fragment>
       {isLoading && <LoadingSpinner containerClass="mt-16 mb-14" />}
-      {!isLoading && (
-        <ImageInput
-          formData={formData}
-          setFormData={setFormData}
-          images={images}
-        />
-      )}
+      {!isLoading && <ImageInput />}
     </React.Fragment>
   );
 }

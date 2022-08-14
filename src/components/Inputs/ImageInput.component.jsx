@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPassImage } from "../../store/reducers/signUp.Reducer";
 import ImageCard from "./ImageCard.component";
 
-const ImageInput = ({ formData, setFormData, images }) => {
+const ImageInput = () => {
+  const images = useSelector((state) => state.signUp.images);
+  const dispatch= useDispatch();
   const [selectedImage, setSelectedImage] = useState({});
 
   useEffect(() => {
@@ -11,17 +15,16 @@ const ImageInput = ({ formData, setFormData, images }) => {
   }, [images]);
 
   useEffect(() => {
-    setFormData((formData) => {
-      return {
-        ...formData,
-        pass_image: selectedImage.id,
-      };
-    });
-  }, [selectedImage, setFormData]);
+    dispatch(setPassImage(selectedImage));
+  }, [selectedImage,dispatch]);
 
   const onChangeHandler = (event) => {
-    setSelectedImage({id:event.target.getAttribute("data-id"),url:event.target.getAttribute("data-url")});
+    setSelectedImage({
+      id: event.target.getAttribute("data-id"),
+      url: event.target.getAttribute("data-url"),
+    });
   };
+
   const ImageList = images.map((img) => {
     return (
       <ImageCard

@@ -1,83 +1,34 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import FormBody from "../components/SignUp/FormBody.component";
 import FormButtons from "../components/SignUp/FormButtons.component";
+import { userRegistration } from "../store/actions/signUp.actions";
+import { setInitialState } from "../store/reducers/signUp.Reducer";
 
-const SignUp = ({ notification }) => {
-  const userUniqueId = useSelector((state) => state.auth.userUniqueId);
+const SignUp = () => {
+  const username = useSelector((state) => state.signUp.username);
+  const email = useSelector((state) => state.signUp.email);
+  const category = useSelector((state) => state.signUp.category);
+  const pass_image = useSelector((state) => state.signUp.pass_image);
+  const dispatch = useDispatch();
 
-  const [step, setStep] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    category: "",
-    pass_image: "",
-  });
-
-  const navigate = useNavigate();
-
-  const togglePageHandler = async () => {
-    if (!isFormValid && !step) {
-      return;
+  useEffect(()=>{
+    return ()=>{
+      dispatch(setInitialState());
     }
-    if (!step) {
-      setIsLoading(true);
-      try {
-        const response = await fetch("http://localhost:4000/signup/check", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: formData.username,
-            userUniqueId
-          }),
-        });
-        const { isExist, message } = await response.json();
-        console.log(message);
-        if (isExist) {
-          notification("error", message);
-          setIsLoading(false);
-          return;
-        }
-      } catch (error) {
-        notification("error", "Something went wrong!");
-        setIsLoading(false);
-        return;
-      }
-    }
-    setIsLoading(false);
-    setStep((step) => !step);
-  };
-
+  },[]);
+  
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(formData);
-
-    try {
-      const response = await fetch("http://localhost:4000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          userUniqueId
-        }),
-      });
-      const { isCreated, message } = await response.json();
-      if (isCreated) {
-        notification("success", message);
-        navigate("/login");
-      } else {
-        notification("warn", message);
-      }
-    } catch (error) {
-      notification("error", "Something went wrong!");
-    }
+    const userInfo = {
+      username,
+      email,
+      category,
+      pass_image:pass_image.id,
+    };
+    console.log(userInfo);
+    dispatch(userRegistration(userInfo));
   };
 
   return (
@@ -91,23 +42,11 @@ const SignUp = ({ notification }) => {
         </div>
 
         <div className="body">
-          <FormBody
-            formData={formData}
-            setFormData={setFormData}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            step={step}
-            setIsFormValid={setIsFormValid}
-          />
+          <FormBody />
         </div>
 
         <div className="footer mt-8 flex justify-around">
-          <FormButtons
-            isLoading={isLoading}
-            step={step}
-            togglePageHandler={togglePageHandler}
-            isFormValid={isFormValid}
-          />
+          <FormButtons />
         </div>
       </form>
     </div>

@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import useSelect from "../../hooks/useSelect.hook";
 import { BiCategory } from "react-icons/bi";
+import { fetchCategories } from "../../store/actions/signUp.actions";
+import { useDispatch, useSelector } from "react-redux";
 
-let dummyCategories = ["Cat", "Dog", "Lion", "Wolf", "Tiger"];
-
-const Url =
-  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/Categories.json";
-
-const CategoryInput = ({
-  formData,
-  setFormData,
-  isInputValid,
-  setIsInputValid,
-}) => {
-  const [categories, setCategories] = useState(dummyCategories);
-
+const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
+  const categoryList = useSelector((state) => state.signUp.categoryList);
+  const dispatch = useDispatch();
   const {
     optionSelected: selectedCategory,
     isValid: selectedCategoryIsValid,
     hasError: selectedCategoryHasError,
     valueChangeHandler: categoryChangeHandler,
     inputBlurHandler: categoryBlurHandler,
-  } = useSelect(formData, setFormData);
+  } = useSelect(data, setData);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const response = await fetch(Url);
-      const categoriesList = await response.json();
-      setCategories(categoriesList);
-    };
-    fetchCategories();
+    dispatch(fetchCategories());
   }, []);
 
   useEffect(() => {
@@ -40,12 +27,12 @@ const CategoryInput = ({
         category: selectedCategoryIsValid,
       };
     });
-  }, [selectedCategoryIsValid,setIsInputValid]);
+  }, [selectedCategoryIsValid, setIsInputValid]);
 
   const invalidInput = "bg-red-100";
   const invalidContainer = " border border-red-400 bg-red-100 py-[0.6rem]";
 
-  const categoryList = categories.map((category) => {
+  const categoryDisplay = categoryList.map((category) => {
     return (
       <option value={category} className="bg-gray-100" key={category}>
         {category}
@@ -75,7 +62,7 @@ const CategoryInput = ({
           <option value="" className="bg-gray-100 " key="">
             Select Category
           </option>
-          {categoryList}
+          {categoryDisplay}
         </select>
       </div>
       {selectedCategoryHasError && (

@@ -1,32 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ImageSelect from "./ImageSelect.component";
 import SingUpInfo from "./SingUpInfo.component";
 
-const FormBody = ({
-  formData,
-  setFormData,
-  setIsFormValid,
-  isLoading,
-  step,
-  setIsLoading,
-}) => {
-  if (step === false) {
-    return (
-      <SingUpInfo
-        formData={formData}
-        setFormData={setFormData}
-        setIsFormValid={setIsFormValid}
-      />
-    );
+const FormBody = () => {
+  const step = useSelector((state) => state.signUp.step);
+  if (step === 0) {
+    return <SingUpInfo />;
   }
-  return (
-    <ImageSelect
-      setFormData={setFormData}
-      formData={formData}
-      isLoading={isLoading}
-      setIsLoading={setIsLoading}
-    />
-  );
+  return <ImageSelect />;
 };
 
 export default FormBody;

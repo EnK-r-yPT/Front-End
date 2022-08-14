@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const useInput = (validateValue, formData, setFormData, name) => {
-  const [enteredValue, setEnteredValue] = useState(formData[name]);
+const useInput = (validateValue, name, data, setData) => {
+  const dispatch = useDispatch();
+
+  const [enteredValue, setEnteredValue] = useState(data);
   const [isTouched, setIsTouched] = useState(false);
 
   const valueIsValid = validateValue(enteredValue);
   const hasError = !valueIsValid && isTouched;
 
   useEffect(() => {
-    setFormData((formData) => {
-      return {
-        ...formData,
-        [name]: enteredValue,
-      };
-    });
-  }, [enteredValue,name,setFormData]);
+    dispatch(setData(enteredValue));
+  }, [enteredValue, dispatch,setData]);
 
   const valueChangeHandler = (event) => {
     setEnteredValue(event.target.value);

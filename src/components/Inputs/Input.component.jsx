@@ -14,12 +14,12 @@ const inputValidationFunctions = (inputName) => {
 };
 
 const Input = ({
-  formData,
-  setFormData,
   inputFieldName,
   type,
   setIsInputValid,
   isInputValid,
+  data,
+  setData,
 }) => {
   const {
     value: enteredValue,
@@ -29,9 +29,9 @@ const Input = ({
     inputBlurHandler: valueBlurHandler,
   } = useInput(
     inputValidationFunctions(inputFieldName),
-    formData,
-    setFormData,
-    inputFieldName.toLowerCase()
+    inputFieldName.toLowerCase(),
+    data,
+    setData
   );
 
   useEffect(() => {

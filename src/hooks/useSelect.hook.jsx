@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const useSelect = (formData, setFormData) => {
-  const [selected, setSelected] = useState(formData.category);
+const useSelect = (data, setData) => {
+  const dispatch = useDispatch();
+  const [selected, setSelected] = useState(data);
   const [isTouched, setIsTouched] = useState(false);
 
   useEffect(() => {
-    setFormData((formData) => {
-      return {
-        ...formData,
-        category: selected,
-      };
-    });
-  }, [selected, setFormData]);
+    dispatch(setData(selected));
+  }, [selected, dispatch]);
 
   let valueIsValid = true;
 
