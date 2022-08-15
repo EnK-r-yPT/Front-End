@@ -20,6 +20,13 @@ const FormButtons = () => {
     return <LoadingSpinner />;
   }
 
+  const onClickNextHandler=()=>{
+    dispatch(nextSetStep());
+  }
+  const onClickBackHandler=()=>{
+    dispatch(backSetStep());
+  }
+
   if (step === 0) {
     return (
       <Button
@@ -31,7 +38,7 @@ const FormButtons = () => {
                 username,
                 timestamp: Date.now(),
                 loginId: userUniqueId,
-                categoriesLength:categoryLen,
+                categoriesLength: categoryLen,
               },
               allImages
             )
@@ -45,12 +52,13 @@ const FormButtons = () => {
       </Button>
     );
   }
+  
   if (step === noOfSteps)
     return (
       <React.Fragment>
         <Button
           type="button"
-          onClick={() => dispatch(backSetStep())}
+          onClick={onClickBackHandler}
           className="btn-inverted px-4 py-2"
         >
           Back
@@ -66,10 +74,10 @@ const FormButtons = () => {
     );
 
   return (
-    <React.Fragment>
+    <div className="flex items-center justify-around w-full">
       <Button
         type="button"
-        onClick={() => dispatch(backSetStep())}
+        onClick={onClickBackHandler}
         className="btn-inverted px-4 py-2"
       >
         Back
@@ -80,11 +88,11 @@ const FormButtons = () => {
         className="btn-base px-4 py-2"
         disabled={!isFormValid}
         title={buttonTitle}
-        onClick={() => dispatch(nextSetStep())}
+        onClick={onClickNextHandler}
       >
         Continue
       </Button>
-    </React.Fragment>
+    </div>
   );
 };
 

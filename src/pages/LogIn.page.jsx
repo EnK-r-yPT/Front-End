@@ -21,7 +21,7 @@ const LogIn = () => {
     dispatch(fetchAllImages());
   }, [dispatch]);
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
     let stringPassword = "";
     for (let pass of password) {

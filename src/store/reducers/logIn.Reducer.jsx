@@ -42,7 +42,7 @@ const logInSlice = createSlice({
       state.isFormValid = action.payload;
     },
     nextSetStep(state) {
-      if (state.step === state.noOfSteps) return;
+      if (state.step === state.noOfSteps || !state.isFormValid) return;
       state.step++;
     },
     backSetStep(state) {
@@ -66,7 +66,7 @@ export const {
   setIsFormValid,
   nextSetStep,
   backSetStep,
-  setCategoryLength
+  setCategoryLength,
 } = logInSlice.actions;
 
 export default logInSlice.reducer;

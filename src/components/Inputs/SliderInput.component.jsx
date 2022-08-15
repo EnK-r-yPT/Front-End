@@ -38,7 +38,7 @@ const SliderInput = forwardRef(
     }, [isUnlocked, isRightSlide, sliderHandler]);
 
     useEffect(() => {
-      document.addEventListener("keyup", onkeyup);
+      document.addEventListener("keydown", onkeydown);
       if (isTouchDevice) {
         document.addEventListener("touchmove", onDrag);
         document.addEventListener("touchend", stopDrag);
@@ -47,7 +47,7 @@ const SliderInput = forwardRef(
         document.addEventListener("mouseup", stopDrag);
       }
       return () => {
-        document.removeEventListener("keyup", onkeyup);
+        document.removeEventListener("keydown", onkeydown);
         if (isTouchDevice) {
           document.removeEventListener("touchmove", onDrag);
           document.removeEventListener("touchend", stopDrag);
@@ -57,34 +57,6 @@ const SliderInput = forwardRef(
         }
       };
     });
-
-    // Unlocked the slider
-    const setSlider = () => {
-      containerWidth = container.current.clientWidth - 50;
-      sliderLeft = containerWidth;
-      updateSliderStyle();
-      setIsUnlocked(true);
-    };
-
-    // Using debounce concept to remove ambiguity (that sometime both button get unlocked which is avoided by debounce)
-    const deb = useMemo(() => debounce(() => setSlider(), 100),[]);
-
-    const onkeyup = (event) => {
-      if (event.keyCode === 39) {
-        //right Yes
-        if (isRightSlide && !isUnlocked) {
-          deb();
-          nextImageSlide();
-        }
-      }
-      if (event.keyCode === 37) {
-        //left No
-        if (!isRightSlide && !isUnlocked) {
-          deb();
-          nextImageSlide();
-        }
-      }
-    };
 
     const updateSliderStyle = () => {
       slider.current.style.width = sliderLeft + 32 + "px";
@@ -129,7 +101,7 @@ const SliderInput = forwardRef(
       }
       if (sliderLeft > containerWidth * 0.9) {
         sliderLeft = containerWidth;
-        setIsUnlocked((isUnlocked) => true);
+        setIsUnlocked(true);
         nextImageSlide();
       } else {
         sliderLeft = 0;
@@ -165,8 +137,7 @@ const SliderInput = forwardRef(
         setIsUnlocked((isUnlocked) => false);
         sliderLeft = 0;
         if (slider.current.classList.contains("duration-500")) {
-          slider.current.classList.remove("duration-500");
-          slider.current.classList.remove("ease-in-out");
+          slider.current.classList.remove("duration-500", "ease-in-out");
         }
         updateSliderStyle();
       },
@@ -177,6 +148,33 @@ const SliderInput = forwardRef(
         setIsUnlocked(true);
       },
     }));
+
+    // Unlocked the slider
+    const setSlider = () => {
+      containerWidth = container.current.clientWidth - 50;
+      sliderLeft = containerWidth;
+      updateSliderStyle();
+      setIsUnlocked(true);
+    };
+    // Using debounce concept to remove ambiguity (that sometime both button get unlocked which is avoided by debounce)
+    const deb = useMemo(() => debounce(() => setSlider(), 200), []);
+
+    const onkeydown = (event) => {
+      if (event.keyCode === 39) {
+        //right Yes
+        if (isRightSlide && !isUnlocked) {
+          deb();
+          nextImageSlide();
+        }
+      }
+      if (event.keyCode === 37) {
+        //left No
+        if (!isRightSlide && !isUnlocked) {
+          deb();
+          nextImageSlide();
+        }
+      }
+    };
 
     return (
       <div

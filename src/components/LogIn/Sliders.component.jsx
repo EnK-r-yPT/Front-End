@@ -14,21 +14,28 @@ function Sliders() {
   const dispatch = useDispatch();
   const slideLeft = useRef(null);
   const slideRight = useRef(null);
-  const calledOnce = useRef(false);
+  const isValid = useRef(false);
 
   const [isFound, setIsFound] = useState(null);
-
   let timer;
   const nextImageSlide = () => {
-    dispatch(nextSetStep());
+    timer = setTimeout(() => {
+      if (!isValid.current) return;
+      dispatch(nextSetStep());
+    }, 400);
   };
 
-  // useEffect(() => {
-  //   return () => clearTimeout(timer);
-  // }, [timer]);
+  useEffect(() => {
+    return () => clearTimeout(timer);
+  }, [timer]);
+
+  useEffect(() => {
+    dispatch(setIsFormValid(isFound !== null));
+  }, [isFound, dispatch]);
 
   const sliderHandler = (isRightSlide, isUnlocked) => {
     if (!isUnlocked) return;
+    isValid.current = true;
     if (isRightSlide) {
       setIsFound(true);
       slideLeft.current.reset();
@@ -39,28 +46,22 @@ function Sliders() {
   };
 
   useEffect(() => {
-    if (calledOnce.current) {
-      calledOnce.current = false;
-      return;
-    }
-
-    console.log({ isFound });
+    isValid.current = isFound;
     if (isFound === null) return;
     let passArray = [...password];
     passArray[step - 1] = !isFound ? 0 : 1;
     dispatch(setPassword(passArray));
-  }, [isFound]);
+  }, [isFound, dispatch]);
 
   useEffect(() => {
     if (password[step - 1] === null) {
       setIsFound(null);
+      isValid.current = false;
       slideLeft.current.reset();
       slideRight.current.reset();
     } else {
       const isRight = password[step - 1] === 1;
-      calledOnce.current = true;
-      console.log({ isRight });
-
+      isValid.current = true;
       if (isRight) {
         setIsFound(true);
         slideRight.current.setSlider();
@@ -71,14 +72,9 @@ function Sliders() {
         slideRight.current.reset();
       }
     }
+  }, [step]);
 
-    return () => {
-      slideLeft.current.reset();
-      slideRight.current.reset();
-    };
-  });
-
-  console.log({ step, isFound, password });
+  console.log(step, isFound, password);
 
   return (
     <div className="flex items-center justify-center mb-16 mt-4">
