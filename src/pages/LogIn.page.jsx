@@ -12,8 +12,8 @@ const LogIn = () => {
   const userUniqueId = useSelector((state) => state.auth.userUniqueId);
   const step = useSelector((state) => state.logIn.step);
   const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
-  const password = useSelector((state) => state.logIn.password);
-  const username = useSelector((state) => state.logIn.username);
+  const password = useSelector((state) => state.form.password);
+  const username = useSelector((state) => state.form.username);
 
   const dispatch = useDispatch();
 

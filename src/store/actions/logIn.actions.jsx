@@ -4,14 +4,18 @@ import { toast } from "react-toastify";
 import {
   nextSetStep,
   setAllImages,
-  setCategory,
   setCategoryLength,
   setImageList,
-  setInitialState,
-  setIsLoading,
+  setLogInInitialState,
   setNoOfSteps,
-  setPassword,
 } from "../reducers/logIn.Reducer";
+
+import { setIsLoading } from "../reducers/ui.Reducer";
+import {
+  setCategory,
+  setFormInitialState,
+  setPassword,
+} from "../reducers/form.Reducer";
 
 const URL_OF_ALL_CATEGORY_IMAGES =
   "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/CategoryImages.json";
@@ -87,7 +91,8 @@ export const verifyUserLogin = (userInfo) => {
       const data = response.data;
       console.log(data);
       toast.success(data.message);
-      dispatch(setInitialState());
+      dispatch(setLogInInitialState());
+      dispatch(setFormInitialState());
     } catch (error) {
       console.log(error);
     }

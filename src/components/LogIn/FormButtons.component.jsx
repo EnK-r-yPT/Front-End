@@ -6,15 +6,16 @@ import Button from "../Button/Button.component";
 import LoadingSpinner from "../UI/LoadingSpinner.component";
 
 const FormButtons = () => {
-  const userUniqueId = useSelector((state) => state.auth.userUniqueId);
-  const isLoading = useSelector((state) => state.logIn.isLoading);
   const step = useSelector((state) => state.logIn.step);
-  const isFormValid = useSelector((state) => state.logIn.isFormValid);
   const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
   const allImages = useSelector((state) => state.logIn.allImages);
-  const username = useSelector((state) => state.logIn.username);
   const categoryLen = useSelector((state) => state.logIn.categoryLength);
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  const userUniqueId = useSelector((state) => state.auth.userUniqueId);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
+  const username = useSelector((state) => state.form.username);
   const dispatch = useDispatch();
+  
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
   if (isLoading) {
     return <LoadingSpinner />;
