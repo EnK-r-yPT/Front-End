@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import useSelect from "../../hooks/useSelect.hook";
 import { BiCategory } from "react-icons/bi";
-import { fetchCategories } from "../../store/actions/signUp.actions";
+import { fetchCategories } from "../../store/actions/category.actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
-  const categoryList = useSelector((state) => state.signUp.categoryList);
+  const categoryList = useSelector((state) => state.category.categoryList);
   const dispatch = useDispatch();
   const {
     optionSelected: selectedCategory,
@@ -18,7 +18,7 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
 
   useEffect(() => {
     dispatch(fetchCategories());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setIsInputValid((isInputValid) => {

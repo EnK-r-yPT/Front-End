@@ -52,6 +52,18 @@ const logInSlice = createSlice({
     setCategoryLength(state, action) {
       state.categoryLength = action.payload;
     },
+    setInitialState(state) {
+      state.username = logInSliceInitialState.username;
+      state.category = logInSliceInitialState.category;
+      state.password = logInSliceInitialState.password;
+      state.imageList = logInSliceInitialState.imageList;
+      state.noOfSteps = logInSliceInitialState.noOfSteps;
+      state.step = logInSliceInitialState.step;
+      state.isFormValid = logInSliceInitialState.isFormValid;
+      state.isLoading = logInSliceInitialState.isLoading;
+      state.allImages = logInSliceInitialState.allImages;
+      state.categoryLength = logInSliceInitialState.categoryLength;
+    },
   },
 });
 
@@ -67,6 +79,7 @@ export const {
   nextSetStep,
   backSetStep,
   setCategoryLength,
+  setInitialState,
 } = logInSlice.actions;
 
 export default logInSlice.reducer;

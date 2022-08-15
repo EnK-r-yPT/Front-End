@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPassImage } from "../../store/reducers/signUp.Reducer";
+import { setPassImage } from "../../store/reducers/form.Reducer";
 import ImageCard from "./ImageCard.component";
 
 const ImageInput = () => {
-  const images = useSelector((state) => state.signUp.images);
+  const images = useSelector((state) => state.category.images);
+  console.log(images);
   const dispatch= useDispatch();
   const [selectedImage, setSelectedImage] = useState({});
 

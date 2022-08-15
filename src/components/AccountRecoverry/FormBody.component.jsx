@@ -3,47 +3,25 @@ import OTPForRecovery from "./OTPForRecovery.component";
 import UsernameForRecovery from "../AccountRecoverry/UsernameForRecovery.component";
 import CategorySelect from "../NewPassword/CategorySelect.component";
 import ImageSelect from "../NewPassword/ImageSelect.component";
+import { useSelector } from "react-redux";
 
-const FormBody = ({
-  formData,
-  setFormData,
-  setIsFormValid,
-  step,
-  sendRequestForOTPHandler,
-}) => {
+const FormBody = () => {
+  const step = useSelector((state) => state.accountRecovery.step);
+
   if (step === 0) {
     //username
-    return (
-      <UsernameForRecovery
-        formData={formData}
-        setFormData={setFormData}
-        setIsFormValid={setIsFormValid}
-      />
-    );
+    return <UsernameForRecovery />;
   }
 
   if (step === 1) {
-    return (
-      <OTPForRecovery
-        setFormData={setFormData}
-        formData={formData}
-        setIsFormValid={setIsFormValid}
-        sendRequestForOTPHandler={sendRequestForOTPHandler}
-      />
-    );
+    return <OTPForRecovery />;
   }
 
   if (step === 2) {
-    return (
-      <CategorySelect
-        formData={formData}
-        setFormData={setFormData}
-        setIsFormValid={setIsFormValid}
-      />
-    );
+    return <CategorySelect />;
   }
 
-  return <ImageSelect setFormData={setFormData} formData={formData} />;
+  return <ImageSelect />;
 };
 
 export default FormBody;

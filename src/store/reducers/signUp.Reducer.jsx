@@ -34,7 +34,7 @@ const signUpSlice = createSlice({
       state.isFormValid = action.payload;
     },
     nextSetStep(state) {
-      if (state.step === NO_OF_STEPS_IN_SIGN_IN) return;
+      if (state.step === NO_OF_STEPS_IN_SIGN_IN || !state.isFormValid) return;
       state.step++;
     },
     backSetStep(state) {

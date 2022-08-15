@@ -7,6 +7,7 @@ import {
   setCategory,
   setCategoryLength,
   setImageList,
+  setInitialState,
   setIsLoading,
   setNoOfSteps,
   setPassword,
@@ -86,6 +87,7 @@ export const verifyUserLogin = (userInfo) => {
       const data = response.data;
       console.log(data);
       toast.success(data.message);
+      dispatch(setInitialState());
     } catch (error) {
       console.log(error);
     }

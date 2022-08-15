@@ -1,107 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import FormBody from "../components/AccountRecoverry/FormBody.component";
 import FormButtons from "../components/AccountRecoverry/FormButtons.component";
 
-let Url = "";
+import { passwordResetRequest } from "../store/actions/accoutRecovery.actions";
 
-const AccountRecovery = ({ notification }) => {
-  const [step, setStep] = useState(0);
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    username: "",
-    otp: "",
-    category: "",
-    pass_image: "",
-  });
+const AccountRecovery = () => {
+  const dispatch = useDispatch();
+  const username = useSelector((state) => state.form.username);
+  const category = useSelector((state) => state.form.category);
+  const pass_image = useSelector((state) => state.form.pass_image);
+  const step = useSelector((state) => state.accountRecovery.step);
 
   const heading = step < 2 ? "Account Recovery" : "New Password";
 
-  const isUserExistHandler = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("http://localhost:4000/otp/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-        }),
-      });
-      const { email, message } = await response.json();
-      console.log(message, email);
-      // if (!success) {
-      //   notification("error", message);
-      //   setIsLoading(false);
-      //   return;
-      // }
-      nextStepHandler();
-    } catch (error) {
-      notification("error", "Something went wrong!");
-    }
-    setIsLoading(false);
-  };
-
-  const sendRequestForOTPHandler = async () => {
-    try {
-      console.log("req");
-      const response = await fetch("http://localhost:4000/otp/verify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          otp: formData.otp,
-        }),
-      });
-      console.log("reqd");
-      const {success, message} = await response.json();
-      console.log(message, success);
-      if (!success) {
-        notification("error", "Something went wrong!");
-        return;
-      }
-      nextStepHandler();
-    } catch (error) {
-      notification("error", error.message);
-    }
-  };
-
-  const nextStepHandler = () => {
-    if (!isFormValid || step >= 3) {
-      return;
-    }
-    setStep((step) => step + 1);
-  };
-
-  const backStepHandler = () => {
-    if (step <= 0) {
-      return;
-    }
-    setStep((step) => step - 1);
-  };
-
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(formData);
 
-    const response = await fetch(Url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...formData,
-      }),
-    });
+    const userInfo = {
+      username,
+      category,
+      pass_image:pass_image.id
+    };
 
-    if (response.ok) {
-      alert("Stored In DB");
-    } else {
-      alert("Some Error Occured");
-    }
+    console.log(userInfo);
+
+    dispatch(passwordResetRequest(userInfo));
   };
 
   return (
@@ -115,25 +39,11 @@ const AccountRecovery = ({ notification }) => {
         </div>
 
         <div className="body">
-          <FormBody
-            formData={formData}
-            setFormData={setFormData}
-            setIsFormValid={setIsFormValid}
-            step={step}
-            sendRequestForOTPHandler={sendRequestForOTPHandler}
-          />
+          <FormBody />
         </div>
 
         <div className="footer mt-8 flex justify-around">
-          <FormButtons
-            step={step}
-            nextStepHandler={nextStepHandler}
-            backStepHandler={backStepHandler}
-            isUserExistHandler={isUserExistHandler}
-            isFormValid={isFormValid}
-            isLoading={isLoading}
-            sendRequestForOTPHandler={sendRequestForOTPHandler}
-          />
+          <FormButtons />
         </div>
       </form>
     </div>

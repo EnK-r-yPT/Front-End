@@ -1,16 +1,25 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  isUserExistHandler,
+  sendRequestForOTPVerification,
+} from "../../store/actions/accoutRecovery.actions";
+import {
+  backSetStep,
+  nextSetStep,
+} from "../../store/reducers/accountRecovery.Reducer";
+
 import Button from "../Button/Button.component";
 import LoadingSpinner from "../UI/LoadingSpinner.component";
 
-const FormButtons = ({
-  step,
-  nextStepHandler,
-  backStepHandler,
-  isFormValid,
-  isUserExistHandler,
-  isLoading,
-  sendRequestForOTPHandler
-}) => {
+const FormButtons = () => {
+  const step = useSelector((state) => state.accountRecovery.step);
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
+  const username = useSelector((state) => state.form.username);
+  const otp = useSelector((state) => state.form.otp);
+
+  const dispatch = useDispatch();
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
   if (step === 0) {
     if (isLoading) {
@@ -19,7 +28,13 @@ const FormButtons = ({
     return (
       <Button
         type="button"
-        onClick={isUserExistHandler}
+        onClick={() => {
+          dispatch(
+            isUserExistHandler({
+              username,
+            })
+          );
+        }}
         className="btn-base px-4 py-2"
         disabled={!isFormValid}
         title={buttonTitle}
@@ -34,7 +49,7 @@ const FormButtons = ({
       <React.Fragment>
         <Button
           type="button"
-          onClick={backStepHandler}
+          onClick={() => dispatch(backSetStep())}
           className="btn-inverted px-4 py-2"
         >
           Back
@@ -45,7 +60,14 @@ const FormButtons = ({
           className="btn-base px-4 py-2"
           disabled={!isFormValid}
           title={buttonTitle}
-          onClick={sendRequestForOTPHandler}
+          onClick={() => {
+            dispatch(
+              sendRequestForOTPVerification({
+                username,
+                otp,
+              })
+            );
+          }}
         >
           Submit
         </Button>
@@ -57,7 +79,7 @@ const FormButtons = ({
       <Button
         type="button"
         className="btn-base px-4 py-2"
-        onClick={nextStepHandler}
+        onClick={() => dispatch(nextSetStep())}
         disabled={!isFormValid}
         title={buttonTitle}
       >
@@ -70,7 +92,7 @@ const FormButtons = ({
     <React.Fragment>
       <Button
         type="button"
-        onClick={backStepHandler}
+        onClick={() => dispatch(backSetStep())}
         className="btn-inverted px-4 py-2"
       >
         Back

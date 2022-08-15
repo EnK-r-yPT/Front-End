@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory, setIsFormValid } from "../../store/reducers/form.Reducer";
 import CategoryInput from "../Inputs/CategoryInput.component";
 
-const CategorySelect = ({
-  formData,
-  setFormData,
-  setIsFormValid,
-}) => {
+const CategorySelect = () => {
+  const category = useSelector((state) => state.form.category);
+  const dispatch = useDispatch();
+
   const [isInputValid, setIsInputValid] = useState({
     category: false,
   });
 
   useEffect(() => {
-    setIsFormValid(isInputValid.category);
-  }, [isInputValid, setIsFormValid]);
+    dispatch(setIsFormValid(isInputValid.category));
+  }, [isInputValid, dispatch]);
   return (
     <div className="mt-12">
       <CategoryInput
-        setFormData={setFormData}
-        formData={formData}
+        setData={setCategory}
+        data={category}
         setIsInputValid={setIsInputValid}
         isInputValid={isInputValid}
       />
