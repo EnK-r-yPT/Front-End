@@ -1,11 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { setCategoryList, setImages } from "../reducers/category.Reducer";
 import {
   nextSetStep,
-  setIsLoading,
-  setImages,
-  setCategoryList,
 } from "../reducers/signUp.Reducer";
+import { setIsLoading } from "../reducers/ui.Reducer";
 
 let URL_FOR_USER_CHECK = "http://localhost:4000/signup/check";
 let URL_FOR_USER_REGISTRATION = "http://localhost:4000/signup";

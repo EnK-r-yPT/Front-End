@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchImages } from "../../store/actions/signUp.actions";
+import { fetchImages } from "../../store/actions/category.actions";
 import ImageInput from "../Inputs/ImageInput.component";
 import LoadingSpinner from "../UI/LoadingSpinner.component";
 
 function ImageSelect() {
-  const isLoading = useSelector((state) => state.signUp.isLoading);
-  const category = useSelector((state) => state.signUp.category);
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  const category = useSelector((state) => state.form.category);
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(fetchImages(category));
-  }, [dispatch, category]);
+  }, [dispatch,category]);
 
   return (
     <React.Fragment>

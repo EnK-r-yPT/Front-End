@@ -6,10 +6,10 @@ import Button from "../Button/Button.component";
 import LoadingSpinner from "../UI/LoadingSpinner.component";
 
 const FormButtons = () => {
-  const isFormValid = useSelector((state) => state.signUp.isFormValid);
-  const isLoading = useSelector((state) => state.signUp.isLoading);
   const step = useSelector((state) => state.signUp.step);
-  const username = useSelector((state) => state.signUp.username);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
+  const username = useSelector((state) => state.form.username);
+  const isLoading = useSelector((state) => state.ui.isLoading);
 
   const dispatch = useDispatch();
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";

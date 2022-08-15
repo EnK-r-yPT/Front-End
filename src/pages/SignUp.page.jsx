@@ -1,23 +1,15 @@
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormBody from "../components/SignUp/FormBody.component";
 import FormButtons from "../components/SignUp/FormButtons.component";
 import { userRegistration } from "../store/actions/signUp.actions";
-import { setInitialState } from "../store/reducers/signUp.Reducer";
 
 const SignUp = () => {
-  const username = useSelector((state) => state.signUp.username);
-  const email = useSelector((state) => state.signUp.email);
-  const category = useSelector((state) => state.signUp.category);
-  const pass_image = useSelector((state) => state.signUp.pass_image);
+  const username = useSelector((state) => state.form.username);
+  const email = useSelector((state) => state.form.email);
+  const category = useSelector((state) => state.form.category);
+  const pass_image = useSelector((state) => state.form.pass_image);
   const dispatch = useDispatch();
-
-  useEffect(()=>{
-    return ()=>{
-      dispatch(setInitialState());
-    }
-  },[dispatch]);
   
   const onSubmitHandler = async (event) => {
     event.preventDefault();
