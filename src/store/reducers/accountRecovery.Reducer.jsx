@@ -14,7 +14,7 @@ const accountRecoverySlice = createSlice({
     setEmailOtp(state, action) {
       state.emailOtp = action.payload;
     },
-    nextSetStep(state,{isFormValid}) {
+    nextSetStep(state,) {
       if (state.step === NO_OF_STEPS_IN_ACCOUNT_RECOVERY)
         return;
       state.step++;

@@ -13,9 +13,8 @@ import { setIsLoading } from "../reducers/ui.Reducer";
 const URL_FOR_OTP_GENERATION = "http://localhost:4000/otp/generate";
 const URL_FOR_OTP_VERIFICATION = "http://localhost:4000/otp/verify";
 const URL_FOR_RESET_PASSWORD = "http://localhost:4000/otp/resetpass";
-const URL_FOR_OTP_RESEND = "http://localhost:4000/otp/resend";
 
-export const isUserExistHandler = (userInfo) => {
+export const isUserExistHandler = (userInfo, isResend = false) => {
   return async (dispatch) => {
     dispatch(setIsLoading(true));
 
@@ -25,30 +24,11 @@ export const isUserExistHandler = (userInfo) => {
       console.log(data);
       const { email } = data;
       dispatch(setEmailOtp(email));
-
-      dispatch(nextSetStep());
+      if (!isResend) dispatch(nextSetStep());
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response.data);
-    }
-    dispatch(setIsLoading(false));
-  };
-};
-
-export const sendAnotherOtp = (userInfo) => {
-  return async (dispatch) => {
-    dispatch(setIsLoading(true));
-
-    try {
-      const response = await axios.post(URL_FOR_OTP_RESEND, userInfo);
-      const data = response.data;
-      console.log("otp resend : ", data);
-      const email = { data };
-      dispatch(setEmailOtp(email));
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response.data);
+      if (error.response.data.message) toast.error(error.response.data.message);
+      else toast.error("Something went wrong!");
+      console.log(error.response);
     }
     dispatch(setIsLoading(false));
   };
@@ -62,8 +42,9 @@ export const sendRequestForOTPVerification = (userInfo) => {
       console.log(data);
       dispatch(nextSetStep());
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response.data);
+      if (error.response.data.message) toast.error(error.response.data.message);
+      else toast.error("Something went wrong!");
+      console.log(error.response);
     }
   };
 };
@@ -76,9 +57,13 @@ export const passwordResetRequest = (userInfo) => {
       console.log(data);
       dispatch(setAccountRecoveryInitialState());
       dispatch(setCateogryInitialState());
+      toast.success("Password reset successfully!");
+      return true;
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response.data);
+      if (error.response.data.message) toast.error(error.response.data.message);
+      else toast.error("Something went wrong!");
+      console.log(error.response);
+      return false;
     }
   };
 };

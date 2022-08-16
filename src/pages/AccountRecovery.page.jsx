@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import FormBody from "../components/AccountRecoverry/FormBody.component";
 import FormButtons from "../components/AccountRecoverry/FormButtons.component";
 
@@ -13,6 +14,7 @@ const AccountRecovery = () => {
   const category = useSelector((state) => state.form.category);
   const pass_image = useSelector((state) => state.form.pass_image);
   const step = useSelector((state) => state.accountRecovery.step);
+  const navigate = useNavigate();
 
   const heading = step < 2 ? "Account Recovery" : "New Password";
 
@@ -21,7 +23,7 @@ const AccountRecovery = () => {
     dispatch(setFormInitialState());
   }, [dispatch]);
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     const userInfo = {
@@ -32,7 +34,10 @@ const AccountRecovery = () => {
 
     console.log(userInfo);
 
-    dispatch(passwordResetRequest(userInfo));
+    const isSuccess = await dispatch(passwordResetRequest(userInfo));
+    if (isSuccess) {
+      navigate("/login");
+    }
   };
 
   return (
