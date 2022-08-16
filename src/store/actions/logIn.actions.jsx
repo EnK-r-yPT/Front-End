@@ -6,14 +6,12 @@ import {
   setAllImages,
   setCategoryLength,
   setImageList,
-  setLogInInitialState,
   setNoOfSteps,
 } from "../reducers/logIn.Reducer";
 
 import { setIsLoading } from "../reducers/ui.Reducer";
 import {
   setCategory,
-  setFormInitialState,
   setPassword,
 } from "../reducers/form.Reducer";
 
@@ -39,8 +37,8 @@ export const fetchAllImages = () => {
       dispatch(setCategoryLength(categoryLen));
       dispatch(setAllImages(data));
     } catch (error) {
-      console.log(error.message);
       toast.error(error.message);
+      console.log(error);
     }
   };
 };
@@ -53,7 +51,7 @@ export const isUserExistHandler = (userInfo, allImages) => {
       const { pattern, category } = response.data;
 
       if (!allImages[category]) {
-        throw new Error("category diff not in firebase db");
+        throw new Error("Category diff not in firebase db");
       }
 
       const categoryImage = allImages[category];
@@ -76,8 +74,9 @@ export const isUserExistHandler = (userInfo, allImages) => {
       dispatch(setPassword(Array(imagesWithUrl.length).fill(null)));
       dispatch(nextSetStep());
     } catch (error) {
-      console.log(error.message);
-      toast.error(error);
+      if (error.response.data.message) toast.error(error.response.data.message);
+      else toast.error("Something went wrong!");
+      console.log(error);
     }
     dispatch(setIsLoading(false));
   };
@@ -90,13 +89,16 @@ export const verifyUserLogin = (userInfo) => {
       const response = await axios.post(URL_FOR_USER_VERIFICATION, userInfo);
       const data = response.data;
       console.log(data);
-      toast.success(data.message);
-      dispatch(setLogInInitialState());
-      dispatch(setFormInitialState());
+      dispatch(setIsLoading(false));
+      toast.success("Loged in successfully!");
+      return true;
     } catch (error) {
+      if (error.response.data.message) toast.error(error.response.data.message);
+      else toast.error("Some error occurred while logging in!");
+      dispatch(setIsLoading(false));
       console.log(error);
+      return false;
     }
-    dispatch(setIsLoading(false));
   };
 };
 

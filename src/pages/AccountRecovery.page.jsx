@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormBody from "../components/AccountRecoverry/FormBody.component";
 import FormButtons from "../components/AccountRecoverry/FormButtons.component";
 
 import { passwordResetRequest } from "../store/actions/accoutRecovery.actions";
+import { setAccountRecoveryInitialState } from "../store/reducers/accountRecovery.Reducer";
+import { setFormInitialState } from "../store/reducers/form.Reducer";
 
 const AccountRecovery = () => {
   const dispatch = useDispatch();
@@ -14,13 +16,18 @@ const AccountRecovery = () => {
 
   const heading = step < 2 ? "Account Recovery" : "New Password";
 
+  useEffect(() => {
+    dispatch(setAccountRecoveryInitialState());
+    dispatch(setFormInitialState());
+  }, [dispatch]);
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
     const userInfo = {
       username,
       category,
-      pass_image:pass_image.id
+      pass_image: pass_image.id,
     };
 
     console.log(userInfo);

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import FormBody from "../components/SignUp/FormBody.component";
 import FormButtons from "../components/SignUp/FormButtons.component";
 import { userRegistration } from "../store/actions/signUp.actions";
+import { setFormInitialState } from "../store/reducers/form.Reducer";
+import { setSignUpInitialState } from "../store/reducers/signUp.Reducer";
 
 const SignUp = () => {
   const username = useSelector((state) => state.form.username);
@@ -10,17 +13,26 @@ const SignUp = () => {
   const category = useSelector((state) => state.form.category);
   const pass_image = useSelector((state) => state.form.pass_image);
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(setSignUpInitialState());
+    dispatch(setFormInitialState());
+  }, [dispatch]);
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     const userInfo = {
       username,
       email,
       category,
-      pass_image:pass_image.id,
+      pass_image: pass_image.id,
     };
     console.log(userInfo);
-    dispatch(userRegistration(userInfo));
+    const isSuccess = await dispatch(userRegistration(userInfo));
+    if (isSuccess) {
+      navigate("/login");
+    }
   };
 
   return (

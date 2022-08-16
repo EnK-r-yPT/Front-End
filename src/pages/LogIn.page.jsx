@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormBody from "../components/LogIn/FormBody.component";
 import FormButtons from "../components/LogIn/FormButtons.component";
 import {
   fetchAllImages,
+  isUserExistHandler,
   verifyUserLogin,
 } from "../store/actions/logIn.actions";
+import { setFormInitialState } from "../store/reducers/form.Reducer";
+import { setLogInInitialState, setStep } from "../store/reducers/logIn.Reducer";
+import { setIsLoading } from "../store/reducers/ui.Reducer";
 
 const LogIn = () => {
   const userUniqueId = useSelector((state) => state.auth.userUniqueId);
@@ -14,14 +18,23 @@ const LogIn = () => {
   const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
   const password = useSelector((state) => state.form.password);
   const username = useSelector((state) => state.form.username);
+  const allImages = useSelector((state) => state.logIn.allImages);
+  const categoryLen = useSelector((state) => state.logIn.categoryLength);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setLogInInitialState());
+    dispatch(setFormInitialState());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchAllImages());
   }, [dispatch]);
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     let stringPassword = "";
     for (let pass of password) {
@@ -33,7 +46,22 @@ const LogIn = () => {
       timestamp: Date.now(),
       pattern: stringPassword,
     };
-    dispatch(verifyUserLogin(userInfo));
+    const isSuccess = await dispatch(verifyUserLogin(userInfo));
+    if (isSuccess) {
+      navigate("/");
+    } else {
+      const userInfo = {
+        username,
+        timestamp: Date.now(),
+        loginId: userUniqueId,
+        categoriesLength: categoryLen,
+      };
+      dispatch(setIsLoading(true));
+      dispatch(setStep(1));
+      dispatch(isUserExistHandler());
+      dispatch(isUserExistHandler(userInfo, allImages));
+      dispatch(setIsLoading(false));
+    }
   };
 
   const heading = step === 0 ? "LogIn To Account" : "Password";

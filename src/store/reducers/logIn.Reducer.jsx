@@ -32,6 +32,10 @@ const logInSlice = createSlice({
     setCategoryLength(state, action) {
       state.categoryLength = action.payload;
     },
+    setStep(state, action) {
+      if (action.payload < 0 || action.payload > state.noOfSteps) return;
+      state.step = action.payload;
+    },
     setLogInInitialState(state) {
       state.imageList = logInSliceInitialState.imageList;
       state.noOfSteps = logInSliceInitialState.noOfSteps;
@@ -48,6 +52,7 @@ export const {
   setAllImages,
   nextSetStep,
   backSetStep,
+  setStep,
   setCategoryLength,
   setLogInInitialState,
 } = logInSlice.actions;
