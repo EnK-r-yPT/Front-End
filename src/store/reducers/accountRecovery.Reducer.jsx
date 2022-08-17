@@ -35,7 +35,8 @@ const accountRecoverySlice = createSlice({
       state.pass_image = action.payload;
     },
     nextSetStep(state) {
-      if (state.step === NO_OF_STEPS_IN_ACCOUNT_RECOVERY) return;
+      if (state.step === NO_OF_STEPS_IN_ACCOUNT_RECOVERY || !state.isFormValid)
+        return;
       state.step++;
     },
     backSetStep(state) {

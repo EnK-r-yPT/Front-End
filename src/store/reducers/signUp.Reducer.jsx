@@ -24,7 +24,7 @@ const signUpSlice = createSlice({
     setCategory(state, action) {
       state.category = action.payload;
     },
-    setIsFormValid(state, action) { 
+    setIsFormValid(state, action) {
       state.isFormValid = action.payload;
     },
     setPassImage(state, action) {
@@ -39,11 +39,12 @@ const signUpSlice = createSlice({
       state.step--;
     },
     setSignUpInitialState(state) {
-      state.step = signUpSliceInitialState.step;
+      state.username = signUpSliceInitialState.username;
       state.category = signUpSliceInitialState.category;
-      state.pass_image = signUpSliceInitialState.pass_image;
-      state.isFormValid = signUpSliceInitialState.isFormValid;
       state.email = signUpSliceInitialState.email;
+      state.isFormValid = signUpSliceInitialState.isFormValid;
+      state.pass_image = signUpSliceInitialState.pass_image;
+      state.step = signUpSliceInitialState.step;
     },
   },
 });

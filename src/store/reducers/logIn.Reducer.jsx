@@ -38,7 +38,7 @@ const logInSlice = createSlice({
       state.allImages = action.payload;
     },
     nextSetStep(state) {
-      if (state.step === state.noOfSteps) return;
+      if (state.step === state.noOfSteps|| !state.isFormValid) return;
       state.step++;
     },
     backSetStep(state) {
@@ -53,10 +53,14 @@ const logInSlice = createSlice({
       state.step = action.payload;
     },
     setLogInInitialState(state) {
-      state.imageList = logInSliceInitialState.imageList;
+      state.username = logInSliceInitialState.username;
+      state.category= logInSliceInitialState.category;
+      state.isFormValid=logInSliceInitialState.isFormValid;
+      state.password=logInSliceInitialState.password;
       state.noOfSteps = logInSliceInitialState.noOfSteps;
-      state.step = logInSliceInitialState.step;
+      state.imageList = logInSliceInitialState.imageList;
       state.allImages = logInSliceInitialState.allImages;
+      state.step = logInSliceInitialState.step;
       state.categoryLength = logInSliceInitialState.categoryLength;
     },
   },

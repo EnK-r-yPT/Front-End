@@ -24,7 +24,6 @@ const SignUp = () => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     if (!isFormValid) return;
-
     const userInfo = {
       username,
       email,
