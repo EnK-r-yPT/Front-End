@@ -12,16 +12,21 @@ const SignUp = () => {
   const email = useSelector((state) => state.form.email);
   const category = useSelector((state) => state.form.category);
   const pass_image = useSelector((state) => state.form.pass_image);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(setSignUpInitialState());
-    dispatch(setFormInitialState());
+    return () => {
+      dispatch(setFormInitialState());
+      dispatch(setSignUpInitialState());
+    };
   }, [dispatch]);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    if (!isFormValid) return;
+
     const userInfo = {
       username,
       email,
@@ -33,6 +38,7 @@ const SignUp = () => {
     if (isSuccess) {
       navigate("/login");
     }
+    
   };
 
   return (

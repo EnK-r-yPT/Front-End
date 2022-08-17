@@ -21,6 +21,11 @@ const FormButtons = () => {
 
   const dispatch = useDispatch();
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
+
+  const userExistHandler = () => {
+    if (!isFormValid) return;
+    dispatch(isUserExistHandler({ username }));
+  };
   if (step === 0) {
     if (isLoading) {
       return <LoadingSpinner />;
@@ -28,13 +33,7 @@ const FormButtons = () => {
     return (
       <Button
         type="button"
-        onClick={() => {
-          dispatch(
-            isUserExistHandler({
-              username,
-            })
-          );
-        }}
+        onClick={userExistHandler}
         className="btn-base px-4 py-2"
         disabled={!isFormValid}
         title={buttonTitle}

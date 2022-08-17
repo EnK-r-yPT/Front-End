@@ -18,11 +18,20 @@ const FormButtons = () => {
     return <LoadingSpinner containerClass="" />;
   }
 
+  const userExistHandler = () => {
+    if (!isFormValid) return;
+    dispatch(isUserExistHandler({ username }));
+  };
+
+  const onClickBackHandler = () => {
+    dispatch(backSetStep());
+  };
+
   if (step === 0) {
     return (
       <Button
         type="button"
-        onClick={() => dispatch(isUserExistHandler({ username }))}
+        onClick={userExistHandler}
         className="btn-base px-4 py-2"
         disabled={!isFormValid || isLoading}
         title={buttonTitle}
@@ -36,7 +45,7 @@ const FormButtons = () => {
     <React.Fragment>
       <Button
         type="button"
-        onClick={() => dispatch(backSetStep())}
+        onClick={onClickBackHandler}
         className="btn-inverted px-4 py-2"
       >
         Back

@@ -20,14 +20,17 @@ const LogIn = () => {
   const username = useSelector((state) => state.form.username);
   const allImages = useSelector((state) => state.logIn.allImages);
   const categoryLen = useSelector((state) => state.logIn.categoryLength);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLogInInitialState());
-    dispatch(setFormInitialState());
+    return () => {
+      dispatch(setLogInInitialState());
+      dispatch(setFormInitialState());
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -36,6 +39,7 @@ const LogIn = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (!isFormValid) return;
     let stringPassword = "";
     for (let pass of password) {
       stringPassword = stringPassword + pass;

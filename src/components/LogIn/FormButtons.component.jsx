@@ -15,36 +15,34 @@ const FormButtons = () => {
   const isFormValid = useSelector((state) => state.form.isFormValid);
   const username = useSelector((state) => state.form.username);
   const dispatch = useDispatch();
-  
+
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  const onClickNextHandler=()=>{
+  const onClickNextHandler = () => {
+    if (!isFormValid) return;
     dispatch(nextSetStep());
-  }
-  const onClickBackHandler=()=>{
+  };
+  const onClickBackHandler = () => {
     dispatch(backSetStep());
-  }
+  };
+  const userExistHandler = () => {
+    if (!isFormValid) return;
+    const userInfo = {
+      username,
+      loginId: userUniqueId,
+      categoriesLength: categoryLen,
+    };
+    dispatch(isUserExistHandler(userInfo, allImages));
+  };
 
   if (step === 0) {
     return (
       <Button
         type="button"
-        onClick={() =>
-          dispatch(
-            isUserExistHandler(
-              {
-                username,
-                timestamp: Date.now(),
-                loginId: userUniqueId,
-                categoriesLength: categoryLen,
-              },
-              allImages
-            )
-          )
-        }
+        onClick={userExistHandler}
         className="btn-base px-4 py-2"
         disabled={!isFormValid}
         title={buttonTitle}
@@ -53,7 +51,7 @@ const FormButtons = () => {
       </Button>
     );
   }
-  
+
   if (step === noOfSteps)
     return (
       <React.Fragment>

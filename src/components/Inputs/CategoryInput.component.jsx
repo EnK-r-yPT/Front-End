@@ -29,8 +29,7 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
     });
   }, [selectedCategoryIsValid, setIsInputValid]);
 
-  const invalidInput = "bg-red-100";
-  const invalidContainer = " border border-red-400 bg-red-100 py-[0.6rem]";
+  const invalidContainer = " border border-red-400 py-[0.6rem]";
 
   const categoryDisplay = categoryList.map((category) => {
     return (
@@ -44,17 +43,14 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
     <div className="">
       <div
         className={twMerge(
-          `flex items-center  bg-gray-100 px-2 py-3 `,
+          `flex items-center  bg-gray-100 px-2 py-3 focus-within:border focus-within:border-[color:var(--color-primary)] `,
           `${selectedCategoryHasError ? invalidContainer : ""}`
         )}
       >
-        <BiCategory className="text-gray-400 text-lg mx-1" />
+        <BiCategory className="text-[color:var(--color-primary)] text-lg mx-1" />
         <select
           name="category"
-          className={twMerge(
-            `text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu `,
-            `${selectedCategoryHasError ? invalidInput : ""}`
-          )}
+          className={`text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu `}
           onChange={categoryChangeHandler}
           onBlur={categoryBlurHandler}
           value={selectedCategory}

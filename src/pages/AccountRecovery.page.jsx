@@ -13,27 +13,29 @@ const AccountRecovery = () => {
   const username = useSelector((state) => state.form.username);
   const category = useSelector((state) => state.form.category);
   const pass_image = useSelector((state) => state.form.pass_image);
+  const isFormValid = useSelector((state) => state.form.isFormValid);
   const step = useSelector((state) => state.accountRecovery.step);
   const navigate = useNavigate();
 
   const heading = step < 2 ? "Account Recovery" : "New Password";
 
   useEffect(() => {
-    dispatch(setAccountRecoveryInitialState());
-    dispatch(setFormInitialState());
+    return () => {
+      dispatch(setFormInitialState());
+      dispatch(setAccountRecoveryInitialState());
+    };
   }, [dispatch]);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    if (!isFormValid) return;
 
     const userInfo = {
       username,
       category,
       pass_image: pass_image.id,
     };
-
     console.log(userInfo);
-
     const isSuccess = await dispatch(passwordResetRequest(userInfo));
     if (isSuccess) {
       navigate("/login");

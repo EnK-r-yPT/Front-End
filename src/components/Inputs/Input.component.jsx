@@ -43,38 +43,34 @@ const Input = ({
     });
   }, [enteredValueIsValid, inputFieldName, setIsInputValid]);
 
-  let icon = <BsKeyboard className="text-gray-400 text-xl  mx-1" />,
+  let icon = <BsKeyboard className="text-[color:var(--color-primary)] text-xl  mx-1" />,
     message = "Enter details correctly";
 
   if (inputFieldName.toLowerCase() === "username") {
-    icon = <FaRegUser className="text-gray-400  mx-1" />;
+    icon = <FaRegUser className="text-[color:var(--color-primary)]  mx-1 text-md" />;
     message = "Username must not be empty.";
   } else if (inputFieldName.toLowerCase() === "email") {
-    icon = <FaRegEnvelope className="text-gray-400 text-lg  mx-1" />;
+    icon = <FaRegEnvelope className="text-[color:var(--color-primary)] text-lg  mx-1" />;
     message = "Please enter a valid email.";
   } else if (inputFieldName.toLowerCase() === "otp") {
-    icon = <RiLockPasswordLine className="text-gray-400  mx-1 text-xl" />;
+    icon = <RiLockPasswordLine className="text-[color:var(--color-primary)]  mx-1 text-xl" />;
     message = "OTP must not be empty.";
   }
 
-  const invalidInput = "bg-red-100";
-  const invalidContainer = " border border-red-400 bg-red-100 py-[0.6rem]";
+  const invalidContainer = " border-[0.12rem] border-red-400 py-[0.6rem]";
 
   return (
-    <div>
+    <div className="">
       <div
         className={twMerge(
-          `flex items-center bg-gray-100 px-2 py-3`,
+          `flex items-center bg-gray-100 px-2 py-3 focus-within:border-[0.12rem] focus-within:border-[color:var(--color-primary)]`,
           `${valueInputHasError ? invalidContainer : ""}`
         )}
       >
         {icon}
         <input
           name={inputFieldName}
-          className={twMerge(
-            ` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`,
-            `${valueInputHasError ? invalidInput : ""}`
-          )}
+          className={` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`}
           type={type}
           placeholder={inputFieldName}
           onChange={valueChangeHandler}
