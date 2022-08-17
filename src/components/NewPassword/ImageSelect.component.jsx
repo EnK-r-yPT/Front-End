@@ -6,7 +6,7 @@ import LoadingSpinner from "../UI/LoadingSpinner.component";
 
 function ImageSelect() {
   const isLoading = useSelector((state) => state.ui.isLoading);
-  const category = useSelector((state) => state.form.category);
+  const category = useSelector((state) => state.accountRecovery.category);
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -16,7 +16,7 @@ function ImageSelect() {
   return (
     <React.Fragment>
       {isLoading && <LoadingSpinner containerClass="mt-16 mb-14" />}
-      {!isLoading && <ImageInput />}
+      {!isLoading && <ImageInput isSignUp={false} />}
     </React.Fragment>
   );
 }

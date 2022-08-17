@@ -8,7 +8,6 @@ import {
   isUserExistHandler,
   verifyUserLogin,
 } from "../store/actions/logIn.actions";
-import { setFormInitialState } from "../store/reducers/form.Reducer";
 import { setLogInInitialState, setStep } from "../store/reducers/logIn.Reducer";
 import { setIsLoading } from "../store/reducers/ui.Reducer";
 
@@ -16,11 +15,11 @@ const LogIn = () => {
   const userUniqueId = useSelector((state) => state.auth.userUniqueId);
   const step = useSelector((state) => state.logIn.step);
   const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
-  const password = useSelector((state) => state.form.password);
-  const username = useSelector((state) => state.form.username);
+  const password = useSelector((state) => state.logIn.password);
+  const username = useSelector((state) => state.logIn.username);
   const allImages = useSelector((state) => state.logIn.allImages);
   const categoryLen = useSelector((state) => state.logIn.categoryLength);
-  const isFormValid = useSelector((state) => state.form.isFormValid);
+  const isFormValid = useSelector((state) => state.logIn.isFormValid);
 
   const navigate = useNavigate();
 
@@ -29,7 +28,6 @@ const LogIn = () => {
   useEffect(() => {
     return () => {
       dispatch(setLogInInitialState());
-      dispatch(setFormInitialState());
     };
   }, [dispatch]);
 

@@ -6,14 +6,13 @@ import FormButtons from "../components/AccountRecoverry/FormButtons.component";
 
 import { passwordResetRequest } from "../store/actions/accoutRecovery.actions";
 import { setAccountRecoveryInitialState } from "../store/reducers/accountRecovery.Reducer";
-import { setFormInitialState } from "../store/reducers/form.Reducer";
 
 const AccountRecovery = () => {
   const dispatch = useDispatch();
-  const username = useSelector((state) => state.form.username);
-  const category = useSelector((state) => state.form.category);
-  const pass_image = useSelector((state) => state.form.pass_image);
-  const isFormValid = useSelector((state) => state.form.isFormValid);
+  const username = useSelector((state) => state.accountRecovery.username);
+  const category = useSelector((state) => state.accountRecovery.category);
+  const pass_image = useSelector((state) => state.accountRecovery.pass_image);
+  const isFormValid = useSelector((state) => state.accountRecovery.isFormValid);
   const step = useSelector((state) => state.accountRecovery.step);
   const navigate = useNavigate();
 
@@ -21,7 +20,6 @@ const AccountRecovery = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(setFormInitialState());
       dispatch(setAccountRecoveryInitialState());
     };
   }, [dispatch]);

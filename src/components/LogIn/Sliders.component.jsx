@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsFormValid, setPassword } from "../../store/reducers/form.Reducer";
+import { setIsFormValid, setPassword } from "../../store/reducers/logIn.Reducer";
 import {
   nextSetStep,
 } from "../../store/reducers/logIn.Reducer";
@@ -8,7 +8,7 @@ import SliderInput from "../Inputs/SliderInput.component";
 
 function Sliders() {
   const step = useSelector((state) => state.logIn.step);
-  const password = useSelector((state) => state.form.password);
+  const password = useSelector((state) => state.logIn.password);
 
   const dispatch = useDispatch();
   const slideLeft = useRef(null);

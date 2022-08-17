@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const logInSliceInitialState = {
+  username: "",
+  password: [],
+  category: "",
+  isFormValid: false,
   imageList: [],
   step: 0,
   noOfSteps: 0,
@@ -12,6 +16,18 @@ const logInSlice = createSlice({
   name: "logIn",
   initialState: logInSliceInitialState,
   reducers: {
+    setUsername(state, action) {
+      state.username = action.payload;
+    },
+    setCategory(state, action) {
+      state.category = action.payload;
+    },
+    setIsFormValid(state, action) {
+      state.isFormValid = action.payload;
+    },
+    setPassword(state, action) {
+      state.password = action.payload;
+    },
     setImageList(state, action) {
       state.imageList = action.payload;
     },
@@ -47,6 +63,10 @@ const logInSlice = createSlice({
 });
 
 export const {
+  setUsername,
+  setCategory,
+  setIsFormValid,
+  setPassword,
   setImageList,
   setNoOfSteps,
   setAllImages,

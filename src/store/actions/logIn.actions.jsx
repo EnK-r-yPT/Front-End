@@ -13,7 +13,7 @@ import { setIsLoading } from "../reducers/ui.Reducer";
 import {
   setCategory,
   setPassword,
-} from "../reducers/form.Reducer";
+} from "../reducers/logIn.Reducer";
 
 const URL_OF_ALL_CATEGORY_IMAGES =
   "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/CategoryImages.json";

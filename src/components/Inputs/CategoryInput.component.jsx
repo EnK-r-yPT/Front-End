@@ -29,7 +29,7 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
     });
   }, [selectedCategoryIsValid, setIsInputValid]);
 
-  const invalidContainer = " border border-red-400 py-[0.6rem]";
+  const invalidContainer = " border-[0.12rem] border-red-400";
 
   const categoryDisplay = categoryList.map((category) => {
     return (
@@ -43,19 +43,19 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
     <div className="">
       <div
         className={twMerge(
-          `flex items-center  bg-gray-100 px-2 py-3 focus-within:border focus-within:border-[color:var(--color-primary)] `,
+          `flex items-center  bg-gray-100 px-2 focus-within:border-[0.12rem] focus-within:border-[color:var(--color-primary)] `,
           `${selectedCategoryHasError ? invalidContainer : ""}`
         )}
       >
         <BiCategory className="text-[color:var(--color-primary)] text-lg mx-1" />
         <select
           name="category"
-          className={`text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu `}
+          className={`text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu py-3`}
           onChange={categoryChangeHandler}
           onBlur={categoryBlurHandler}
           value={selectedCategory}
         >
-          <option value="" className="bg-gray-100 " key="">
+          <option value="" className="text-white" key="" >
             Select Category
           </option>
           {categoryDisplay}

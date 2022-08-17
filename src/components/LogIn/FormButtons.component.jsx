@@ -12,8 +12,8 @@ const FormButtons = () => {
   const categoryLen = useSelector((state) => state.logIn.categoryLength);
   const isLoading = useSelector((state) => state.ui.isLoading);
   const userUniqueId = useSelector((state) => state.auth.userUniqueId);
-  const isFormValid = useSelector((state) => state.form.isFormValid);
-  const username = useSelector((state) => state.form.username);
+  const isFormValid = useSelector((state) => state.logIn.isFormValid);
+  const username = useSelector((state) => state.logIn.username);
   const dispatch = useDispatch();
 
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";

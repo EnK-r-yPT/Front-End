@@ -3,20 +3,39 @@ import { createSlice } from "@reduxjs/toolkit";
 const NO_OF_STEPS_IN_ACCOUNT_RECOVERY = 3;
 
 const accountRecoveryInitialState = {
+  username: "",
+  category: "",
+  otp: "",
+  pass_image: "",
   step: 0,
   emailOtp: "",
+  isFormValid: false,
 };
 
 const accountRecoverySlice = createSlice({
   name: "accountRecovery",
   initialState: accountRecoveryInitialState,
   reducers: {
+    setUsername(state, action) {
+      state.username = action.payload;
+    },
+    setCategory(state, action) {
+      state.category = action.payload;
+    },
+    setIsFormValid(state, action) {
+      state.isFormValid = action.payload;
+    },
     setEmailOtp(state, action) {
       state.emailOtp = action.payload;
     },
-    nextSetStep(state,) {
-      if (state.step === NO_OF_STEPS_IN_ACCOUNT_RECOVERY)
-        return;
+    setOtp(state, action) {
+      state.otp = action.payload;
+    },
+    setPassImage(state, action) {
+      state.pass_image = action.payload;
+    },
+    nextSetStep(state) {
+      if (state.step === NO_OF_STEPS_IN_ACCOUNT_RECOVERY) return;
       state.step++;
     },
     backSetStep(state) {
@@ -24,13 +43,27 @@ const accountRecoverySlice = createSlice({
       state.step--;
     },
     setAccountRecoveryInitialState(state) {
+      state.username = accountRecoveryInitialState.username;
+      state.otp = accountRecoveryInitialState.otp;
+      state.category = accountRecoveryInitialState.category;
+      state.pass_image = accountRecoveryInitialState.pass_image;
+      state.isFormValid = accountRecoveryInitialState.isFormValid;
       state.step = accountRecoveryInitialState.step;
       state.emailOtp = accountRecoveryInitialState.emailOtp;
     },
   },
 });
 
-export const { nextSetStep, backSetStep, setAccountRecoveryInitialState, setEmailOtp } =
-  accountRecoverySlice.actions;
+export const {
+  setUsername,
+  setIsFormValid,
+  setCategory,
+  setOtp,
+  setPassImage,
+  nextSetStep,
+  backSetStep,
+  setAccountRecoveryInitialState,
+  setEmailOtp,
+} = accountRecoverySlice.actions;
 
 export default accountRecoverySlice.reducer;

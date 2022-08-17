@@ -3,11 +3,11 @@ import { debounce } from "lodash";
 import Input from "../Inputs/Input.component";
 import { useDispatch, useSelector } from "react-redux";
 import { isUserExistHandler } from "../../store/actions/accoutRecovery.actions";
-import { setIsFormValid, setOtp } from "../../store/reducers/form.Reducer";
+import { setIsFormValid, setOtp } from "../../store/reducers/accountRecovery.Reducer";
 
 const OTPForRecovery = () => {
-  const otp = useSelector((state) => state.form.otp);
-  const username = useSelector((state) => state.form.username);
+  const otp = useSelector((state) => state.accountRecovery.otp);
+  const username = useSelector((state) => state.accountRecovery.username);
   const email = useSelector((state) => state.accountRecovery.emailOtp);
   const dispatch = useDispatch();
   const [isInputValid, setIsInputValid] = useState({

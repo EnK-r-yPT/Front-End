@@ -7,8 +7,8 @@ import LoadingSpinner from "../UI/LoadingSpinner.component";
 
 const FormButtons = () => {
   const step = useSelector((state) => state.signUp.step);
-  const isFormValid = useSelector((state) => state.form.isFormValid);
-  const username = useSelector((state) => state.form.username);
+  const isFormValid = useSelector((state) => state.signUp.isFormValid);
+  const username = useSelector((state) => state.signUp.username);
   const isLoading = useSelector((state) => state.ui.isLoading);
 
   const dispatch = useDispatch();

@@ -5,14 +5,14 @@ import {
   setEmail,
   setIsFormValid,
   setUsername,
-} from "../../store/reducers/form.Reducer";
+} from "../../store/reducers/signUp.Reducer";
 import CategoryInput from "../Inputs/CategoryInput.component";
 import Input from "../Inputs/Input.component";
 
 const SingUpInfo = () => {
-  const username = useSelector((state) => state.form.username);
-  const email = useSelector((state) => state.form.email);
-  const category = useSelector((state) => state.form.category);
+  const username = useSelector((state) => state.signUp.username);
+  const email = useSelector((state) => state.signUp.email);
+  const category = useSelector((state) => state.signUp.category);
 
   const dispatch = useDispatch();
   const [isInputValid, setIsInputValid] = useState({

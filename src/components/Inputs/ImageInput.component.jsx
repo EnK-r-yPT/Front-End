@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPassImage } from "../../store/reducers/form.Reducer";
+import { setPassImage as setPassImageSignUp } from "../../store/reducers/signUp.Reducer";
+import { setPassImage as setPassImageAccountRecovery } from "../../store/reducers/accountRecovery.Reducer";
 import ImageCard from "./ImageCard.component";
 
-const ImageInput = () => {
+const ImageInput = ({ isSignUp }) => {
   const images = useSelector((state) => state.category.images);
   console.log(images);
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState({});
 
   useEffect(() => {
@@ -16,8 +17,9 @@ const ImageInput = () => {
   }, [images]);
 
   useEffect(() => {
-    dispatch(setPassImage(selectedImage));
-  }, [selectedImage,dispatch]);
+    if (isSignUp) dispatch(setPassImageSignUp(selectedImage));
+    else dispatch(setPassImageAccountRecovery(selectedImage));
+  }, [selectedImage,isSignUp, dispatch]);
 
   const onChangeHandler = (event) => {
     setSelectedImage({

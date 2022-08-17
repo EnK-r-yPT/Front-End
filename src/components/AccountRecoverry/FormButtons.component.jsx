@@ -15,9 +15,9 @@ import LoadingSpinner from "../UI/LoadingSpinner.component";
 const FormButtons = () => {
   const step = useSelector((state) => state.accountRecovery.step);
   const isLoading = useSelector((state) => state.ui.isLoading);
-  const isFormValid = useSelector((state) => state.form.isFormValid);
-  const username = useSelector((state) => state.form.username);
-  const otp = useSelector((state) => state.form.otp);
+  const isFormValid = useSelector((state) => state.accountRecovery.isFormValid);
+  const username = useSelector((state) => state.accountRecovery.username);
+  const otp = useSelector((state) => state.accountRecovery.otp);
 
   const dispatch = useDispatch();
   const buttonTitle = !isFormValid ? "Fill The Form Correctly!" : "";
