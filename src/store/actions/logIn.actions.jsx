@@ -10,13 +10,8 @@ import {
 } from "../reducers/logIn.Reducer";
 
 import { setIsLoading } from "../reducers/ui.Reducer";
-import {
-  setCategory,
-  setPassword,
-} from "../reducers/logIn.Reducer";
-
-const URL_OF_ALL_CATEGORY_IMAGES =
-  "https://react-prac-bc8db-default-rtdb.asia-southeast1.firebasedatabase.app/CategoryImages.json";
+import { setCategory, setPassword } from "../reducers/logIn.Reducer";
+import { fetchAllCategoryImages } from "../../firebase/firebase";
 
 const URL_FOR_USER_EXIST = "http://localhost:4000/signin/check";
 
@@ -25,17 +20,24 @@ const URL_FOR_USER_VERIFICATION = "http://localhost:4000/signin";
 export const fetchAllImages = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(URL_OF_ALL_CATEGORY_IMAGES);
-      let categoryLen = [];
-      let data = response.data;
-      for (let cat in data) {
+      const data = await fetchAllCategoryImages();
+      if (data.length === 0) {
+        throw new Error("Something went wrong!");
+      }
+      const categoryLen = [];
+      const categoryUrls = [];
+      for (let name of data) {
         categoryLen.push({
-          category: cat,
-          length: data[cat].length,
+          category: name.category,
+          length: name.url.length,
         });
       }
+      for (let name of data) {
+        categoryUrls[name.category.toLowerCase()] = name.url;
+      }
+
       dispatch(setCategoryLength(categoryLen));
-      dispatch(setAllImages(data));
+      dispatch(setAllImages(categoryUrls));
     } catch (error) {
       toast.error(error.message);
       console.log(error);
@@ -53,9 +55,10 @@ export const isUserExistHandler = (userInfo, allImages) => {
       if (!allImages[category]) {
         throw new Error("Category diff not in firebase db");
       }
-
+      
       const categoryImage = allImages[category];
       const imagesWithUrl = [];
+      console.log(categoryImage, allImages);
 
       for (let i = 0; i < pattern.length; i++) {
         const rows = [];
@@ -74,7 +77,7 @@ export const isUserExistHandler = (userInfo, allImages) => {
       dispatch(setPassword(Array(imagesWithUrl.length).fill(null)));
       dispatch(nextSetStep());
     } catch (error) {
-      if (error.response.data.message) toast.error(error.response.data.message);
+      if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Something went wrong!");
       console.log(error);
     }

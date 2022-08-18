@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const categoryInitialState = {
   images: [],
-  categoryList: ["cat", "dog", "girraffe"],
+  categoryList: [
+    { category: "cat", id: 0 },
+    { category: "dog", id: 1 },
+    { category: "girraffe", id: 2 },
+  ],
 };
 
 const categorySlice = createSlice({
