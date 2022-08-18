@@ -5,7 +5,6 @@ import FormBody from "../components/LogIn/FormBody.component";
 import FormButtons from "../components/LogIn/FormButtons.component";
 import {
   fetchAllImages,
-  isUserExistHandler,
   verifyUserLogin,
 } from "../store/actions/logIn.actions";
 import { setLogInInitialState, setStep } from "../store/reducers/logIn.Reducer";
@@ -17,8 +16,6 @@ const LogIn = () => {
   const noOfSteps = useSelector((state) => state.logIn.noOfSteps);
   const password = useSelector((state) => state.logIn.password);
   const username = useSelector((state) => state.logIn.username);
-  const allImages = useSelector((state) => state.logIn.allImages);
-  const categoryLen = useSelector((state) => state.logIn.categoryLength);
   const isFormValid = useSelector((state) => state.logIn.isFormValid);
 
   const navigate = useNavigate();
@@ -52,16 +49,8 @@ const LogIn = () => {
     if (isSuccess) {
       navigate("/");
     } else {
-      const userInfo = {
-        username,
-        timestamp: Date.now(),
-        loginId: userUniqueId,
-        categoriesLength: categoryLen,
-      };
       dispatch(setIsLoading(true));
-      dispatch(setStep(1));
-      dispatch(isUserExistHandler());
-      dispatch(isUserExistHandler(userInfo, allImages));
+      dispatch(setStep(0));
       dispatch(setIsLoading(false));
     }
   };

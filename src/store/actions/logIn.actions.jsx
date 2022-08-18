@@ -55,7 +55,7 @@ export const isUserExistHandler = (userInfo, allImages) => {
       if (!allImages[category]) {
         throw new Error("Category diff not in firebase db");
       }
-      
+
       const categoryImage = allImages[category];
       const imagesWithUrl = [];
       console.log(categoryImage, allImages);
@@ -96,7 +96,7 @@ export const verifyUserLogin = (userInfo) => {
       toast.success("Loged in successfully!");
       return true;
     } catch (error) {
-      if (error.response.data.message) toast.error(error.response.data.message);
+      if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Some error occurred while logging in!");
       dispatch(setIsLoading(false));
       console.log(error);

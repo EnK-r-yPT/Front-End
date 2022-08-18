@@ -14,6 +14,8 @@ const ImagesGrid = () => {
     return () => clearTimeout(timer);
   }, [step]);
 
+  console.log(imageList);
+
   const grid = imageList[step - 1].map((image) => {
     return (
       <div
