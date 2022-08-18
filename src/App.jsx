@@ -28,7 +28,7 @@ function App() {
         </Routes>
       </Layout>
       <ToastContainer
-        bodyClassName="text-gray-500 text-left"
+        bodyClassName="text-gray-500 text-left text-center"
         className="top-[5.6rem]"
         progressClassName="bg-green-400"
         toastClassName=""

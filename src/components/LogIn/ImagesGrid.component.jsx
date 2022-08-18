@@ -30,12 +30,18 @@ const ImagesGrid = () => {
       </div>
     );
   });
+
+  const noOfImages = imageList[step - 1].length;
+  const gridCols = Math.floor(Math.sqrt(noOfImages));
+
   return (
     <div
       className="flex justify-center mt-8 items-center duration-200 ease-in-out"
       ref={ref}
     >
-      <div className="grid grid-cols-2 justify-center gap-4 items-center w-fit">
+      <div
+        className={`grid grid-cols-${gridCols} justify-center gap-4 items-center w-fit`}
+      >
         {grid}
       </div>
     </div>

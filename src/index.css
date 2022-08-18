@@ -11,20 +11,20 @@
 }
 
 .btn-base {
-  @apply bg-[color:var(--color-primary)] text-white hover:bg-white hover:text-[color:var(--color-primary)];
+  @apply bg-[color:var(--color-primary)] text-white hover:bg-white hover:text-[color:var(--color-primary)] active:bg-[color:var(--color-primary)] active:text-white active:scale-95;
 }
 
 .btn-inverted {
-  @apply bg-white text-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] hover:text-white;
+  @apply bg-white text-[color:var(--color-primary)] hover:bg-[color:var(--color-primary)] hover:text-white active:bg-white active:text-[color:var(--color-primary)] active:scale-95;
 }
 
-button:disabled{
+button:disabled {
   background: hsla(153, 73%, 61%, 0.871);
   border-color: hsla(153, 73%, 61%, 0.871);
   cursor: not-allowed;
 }
 
-button:disabled:hover{
+button:disabled:hover {
   background: hsla(153, 73%, 61%, 0.871);
   color: white;
 }
