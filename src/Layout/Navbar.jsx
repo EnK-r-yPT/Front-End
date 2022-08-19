@@ -69,8 +69,8 @@ const Navbar = () => {
         </div>
       </nav>
       {dropMenu && (
-        <div className="flex flex-col items-center justify-center gap-8 md:hidden absolute z-10 top-12 left-0 bg-white w-full py-8 shadow-lg shadow-gray-200">
-          <div className="">
+        <div className="flex flex-col items-center justify-center gap-8 md:hidden fixed z-10 top-16 left-0 bg-white w-full py-8 shadow-lg shadow-gray-200">
+          <div className="text-center">
             <ul className="flex flex-col font-semibold text-lg gap-4">
               <Link
                 to="/"
@@ -99,7 +99,7 @@ const Navbar = () => {
             <Link to="/login">
               <Button
                 type="button"
-                className="btn-inverted px-32 py-2"
+                className="btn-inverted w-full py-2"
                 onClick={dropMenuHandler}
               >
                 Log In
@@ -108,7 +108,7 @@ const Navbar = () => {
             <Link to="/signup">
               <Button
                 type="button"
-                className="btn-base px-32 py-2"
+                className=" btn-base px-12 sm:px-32 py-2"
                 onClick={dropMenuHandler}
               >
                 Sign Up

@@ -104,14 +104,3 @@ export const verifyUserLogin = (userInfo) => {
     }
   };
 };
-
-/*
- if (!success) {
-        notification("error", message);
-        setStep(1);
-        isUserExistHandler();
-        navigate("/login");
-        setIsLoading(false);
-        return;
-      }
-*/

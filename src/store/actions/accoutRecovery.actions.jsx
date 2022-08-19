@@ -26,7 +26,7 @@ export const isUserExistHandler = (userInfo, isResend = false) => {
       dispatch(setEmailOtp(email));
       if (!isResend) dispatch(nextSetStep());
     } catch (error) {
-      if (error.response.data.message) toast.error(error.response.data.message);
+      if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Something went wrong!");
       console.log(error.response);
     }
@@ -42,7 +42,7 @@ export const sendRequestForOTPVerification = (userInfo) => {
       console.log(data);
       dispatch(nextSetStep());
     } catch (error) {
-      if (error.response.data.message) toast.error(error.response.data.message);
+      if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Something went wrong!");
       console.log(error.response);
     }
@@ -60,7 +60,7 @@ export const passwordResetRequest = (userInfo) => {
       toast.success("Password reset successfully!");
       return true;
     } catch (error) {
-      if (error.response.data.message) toast.error(error.response.data.message);
+      if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Something went wrong!");
       console.log(error.response);
       return false;
