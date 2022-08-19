@@ -28,11 +28,12 @@ function App() {
         </Routes>
       </Layout>
       <ToastContainer
-        bodyClassName="text-gray-500 text-left text-center"
-        className="top-[5.6rem]"
+      style={{zIndex:1}}
+        bodyClassName="text-gray-500 text-left"
+        className=""
         progressClassName="bg-green-400"
-        toastClassName=""
-        position="bottom-right"
+        toastClassName="top-[4.8rem]"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop
