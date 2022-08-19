@@ -19,7 +19,7 @@ const ImagesGrid = () => {
   const grid = imageList[step - 1].map((image) => {
     return (
       <div
-        className="border-4 border-white shadow-lg shadow-gray-400"
+        className="border-4 border-white shadow-lg shadow-gray-600"
         key={image.id}
       >
         <img

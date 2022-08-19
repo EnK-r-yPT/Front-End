@@ -70,7 +70,7 @@ const Input = ({
         {icon}
         <input
           name={inputFieldName}
-          className={` bg-gray-100 ml-1 outline-none text-gray-500 text-sm w-full`}
+          className={` bg-gray-100 ml-1 outline-none text-[color:var(--secondary-text-color)] text-sm w-full`}
           type={type}
           placeholder={inputFieldName}
           onChange={valueChangeHandler}

@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <nav className=" p-4 md:p-3 bg-white  shadow-lg shadow-gray-300 border-b-4 fixed top-0 left-0 w-full z-50">
+      <nav className=" p-4 md:p-3 bg-[color:var(--main-color)]  shadow-lg shadow-[color:var(--background-color)] border-b-4 border-[color:var(--background-color)] fixed top-0 left-0 w-full z-50">
         <div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
           <div className="logo">
             <h1 className="font-bold text-2xl">
@@ -24,7 +24,7 @@ const Navbar = () => {
 
           {/* Vissble When Screen Is Greater than 768 pixels */}
           <div className="hidden md:flex items-center gap-6 lg:gap-12">
-            <div className="">
+            <div className="text-[color:var(--tertiary-text-color)] ">
               <ul className="flex gap-6 lg:gap-8 font-semibold text-md">
                 <Link
                   to="/"
@@ -36,13 +36,13 @@ const Navbar = () => {
                   to="/aboutus"
                   className="hover:text-[color:var(--color-primary)]"
                 >
-                  About Us
+                  About
                 </Link>
                 <Link
                   to="/contactus"
                   className="hover:text-[color:var(--color-primary)]"
                 >
-                  Contact Us
+                  Contact 
                 </Link>
               </ul>
             </div>
@@ -62,15 +62,15 @@ const Navbar = () => {
           {/* Burger Menu For Smaller Screen Sizes */}
           <div className="flex items-center justify-center md:hidden">
             <button className="" onClick={dropMenuHandler}>
-              {!dropMenu && <FaBars className="text-2xl" />}
-              {dropMenu && <ImCross className="text-2xl" />}
+              {!dropMenu && <FaBars className="text-2xl text-[color:var(--tertiary-text-color)]" />}
+              {dropMenu && <ImCross className="text-2xl text-[color:var(--tertiary-text-color)]" />}
             </button>
           </div>
         </div>
       </nav>
       {dropMenu && (
-        <div className="flex flex-col items-center justify-center gap-8 md:hidden fixed z-10 top-16 left-0 bg-white w-full py-8 shadow-lg shadow-gray-200">
-          <div className="text-center">
+        <div className="flex flex-col items-center justify-center gap-8 md:hidden fixed z-10 top-16 left-0 bg-[color:var(--main-color)] w-full py-8 shadow-lg shadow-[color:var(--background-color)]">
+          <div className="text-center text-[color:var(--tertiary-text-color)]">
             <ul className="flex flex-col font-semibold text-lg gap-4">
               <Link
                 to="/"
@@ -84,14 +84,14 @@ const Navbar = () => {
                 className="hover:text-[color:var(--color-primary)]"
                 onClick={dropMenuHandler}
               >
-                About Us
+                About
               </Link>
               <Link
                 to="/contactus"
                 className="hover:text-[color:var(--color-primary)]"
                 onClick={dropMenuHandler}
               >
-                Contact Us
+                Contact
               </Link>
             </ul>
           </div>

@@ -50,7 +50,7 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
         <BiCategory className="text-[color:var(--color-primary)] text-lg mx-1" />
         <select
           name="category"
-          className={`text-gray-500 bg-gray-100 text-sm w-full outline-none cursor-context-menu py-3`}
+          className={`text-[color:var(--secondary-text-color)] bg-gray-100 text-sm w-full outline-none cursor-context-menu py-3`}
           onChange={categoryChangeHandler}
           onBlur={categoryBlurHandler}
           value={selectedCategory}

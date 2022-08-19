@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchImages } from "../../store/actions/category.actions";
 import ImageInput from "../Inputs/ImageInput.component";
-import LoadingSpinner from "../UI/LoadingSpinner.component";
 
 function ImageSelect() {
-  const isLoading = useSelector((state) => state.ui.isLoading);
   const category = useSelector((state) => state.signUp.category);
   const dispatch = useDispatch();
 
@@ -15,8 +13,7 @@ function ImageSelect() {
 
   return (
     <React.Fragment>
-      {isLoading && <LoadingSpinner containerClass="mt-16 mb-14" />}
-      {!isLoading && <ImageInput isSignUp={true} />}
+      <ImageInput isSignUp={true} />
     </React.Fragment>
   );
 }

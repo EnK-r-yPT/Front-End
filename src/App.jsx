@@ -28,7 +28,7 @@ function App() {
         </Routes>
       </Layout>
       <ToastContainer
-      style={{zIndex:1}}
+        style={{ zIndex: 1 }}
         bodyClassName="text-gray-500 text-left"
         className=""
         progressClassName="bg-green-400"
