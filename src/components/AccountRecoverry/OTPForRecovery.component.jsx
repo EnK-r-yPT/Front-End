@@ -34,7 +34,7 @@ const OTPForRecovery = () => {
         setCounter(120);
         dispatch(isUserExistHandler({ username }, true));
       }, 200),
-    []
+    [username,dispatch]
   );
 
   const onResendHandler = () => {
@@ -44,7 +44,7 @@ const OTPForRecovery = () => {
   return (
     <div className="flex flex-col gap-4 mt-10">
       <div>
-        <h3 className="text-sm text-gray-400 mb-4 ">
+        <h3 className="text-sm text-gray-400 mb-1 ">
           One Time Password (OTP) has been sent to your registered email address{" "}
           <span className="text-[color:var(--color-primary)]">{email}</span>
         </h3>
@@ -59,7 +59,7 @@ const OTPForRecovery = () => {
         setIsInputValid={setIsInputValid}
       />
 
-      <div className="flex gap-2 items-center justify-center">
+      <div className="flex gap-2 items-center justify-center mt-1">
         <h3 className="text-sm text-gray-400">Didn't recieve the OTP ?</h3>
         {counter === 0 && (
           <button

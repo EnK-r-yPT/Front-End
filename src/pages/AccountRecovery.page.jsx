@@ -14,6 +14,7 @@ const AccountRecovery = () => {
   const pass_image = useSelector((state) => state.accountRecovery.pass_image);
   const isFormValid = useSelector((state) => state.accountRecovery.isFormValid);
   const step = useSelector((state) => state.accountRecovery.step);
+  const otp = useSelector((state) => state.accountRecovery.otp);
   const navigate = useNavigate();
 
   const heading = step < 2 ? "Account Recovery" : "New Password";
@@ -32,6 +33,7 @@ const AccountRecovery = () => {
       username,
       category,
       pass_image: pass_image.id,
+      otp,
     };
     console.log(userInfo);
     const isSuccess = await dispatch(passwordResetRequest(userInfo));

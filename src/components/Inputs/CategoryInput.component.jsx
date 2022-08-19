@@ -40,10 +40,10 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
   });
 
   return (
-    <div className="">
+    <div className="relative">
       <div
         className={twMerge(
-          `flex items-center  bg-gray-100 px-2 focus-within:border-[0.12rem] focus-within:border-[color:var(--color-primary)] `,
+          `flex items-center  bg-gray-100 px-2 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)] `,
           `${selectedCategoryHasError ? invalidContainer : ""}`
         )}
       >
@@ -62,7 +62,7 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
         </select>
       </div>
       {selectedCategoryHasError && (
-        <p className="text-red-400 text-sm text-left py-1">
+        <p className="text-red-400 text-xs absolute text-left mt-[0.1rem] ">
           Please select a category.
         </p>
       )}

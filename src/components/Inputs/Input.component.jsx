@@ -57,13 +57,13 @@ const Input = ({
     message = "OTP must not be empty.";
   }
 
-  const invalidContainer = " border-[0.12rem] border-red-400 py-[0.6rem]";
+  const invalidContainer = " border-[0.12rem] border-red-400 ";
 
   return (
-    <div className="">
+    <div className="relative">
       <div
         className={twMerge(
-          `flex items-center bg-gray-100 px-2 py-3 focus-within:border-[0.12rem] focus-within:border-[color:var(--color-primary)]`,
+          `flex items-center bg-gray-100 px-2 py-3 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)]`,
           `${valueInputHasError ? invalidContainer : ""}`
         )}
       >
@@ -79,7 +79,7 @@ const Input = ({
         />
       </div>
       {valueInputHasError && (
-        <p className="text-red-400 text-sm text-left py-1">{message}</p>
+        <p className="text-red-400 text-xs text-left absolute mt-[0.1rem]">{message}</p>
       )}
     </div>
   );

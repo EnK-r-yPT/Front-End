@@ -30,7 +30,7 @@ const SingUpInfo = () => {
   }, [isInputValid,dispatch]);
 
   return (
-    <div className="flex flex-col gap-4 mt-8">
+    <div className="flex flex-col gap-8 mt-10">
       <Input
         inputFieldName={"Username"}
         data={username}
