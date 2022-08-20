@@ -1,68 +1,149 @@
-import React from "react";
+import Input from "../components/Inputs/Input.component";
+import React, { useEffect, useState } from "react";
 
+import {
+  BsFacebook,
+  BsFillTelephoneFill,
+  BsInstagram,
+  BsLinkedin,
+  BsTwitter,
+} from "react-icons/bs";
+import { ImLocation } from "react-icons/im";
+import { MdEmail } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setEmail,
+  setIsFormValid,
+  setMessage,
+  setUsername,
+} from "../store/reducers/contactUs.Reducer";
+import TextArea from "../components/Inputs/TextArea.component";
 import Button from "../components/Button/Button.component";
+import { contactUsFormSubmit } from "../store/actions/contactUs.actions";
+import LoadingSpinner from "../components/UI/LoadingSpinner.component";
 
 const ContactUs = () => {
+  const username = useSelector((state) => state.contactUs.username);
+  const email = useSelector((state) => state.contactUs.email);
+  const message = useSelector((state) => state.contactUs.message);
+  const isFormValid = useSelector((state) => state.contactUs.isFormValid);
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  const dispatch = useDispatch();
+  const [isInputValid, setIsInputValid] = useState({
+    username: false,
+    email: false,
+    message: false,
+  });
+
+  useEffect(() => {
+    if (isInputValid.username && isInputValid.email && isInputValid.message) {
+      dispatch(setIsFormValid(true));
+    } else {
+      dispatch(setIsFormValid(false));
+    }
+  }, [isInputValid, dispatch]);
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    const userInfo = {
+      name: username,
+      email,
+      message,
+    };
+    console.log(userInfo);
+    dispatch(contactUsFormSubmit(userInfo));
+  };
+
   return (
-    <div className="mt-32 mx-auto md:mt-36 bg-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[560px] md:mx-auto shadow-gray-400 rounded-xl p-8">
-      <form action="" />
+    <div className="mt-24 mx-auto">
       <div className="header flex flex-col items-center justify-center">
-        <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2">
+        <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           Contact Us
         </h1>
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
-
-        <br />
-        <h2 className="lg:w-2/3 mx-auto leading-relaxed text-base">
-          Any queries? Get in touch!
-        </h2>
-        <br />
+        <p className="mt-4 text-gray-400 text-sm">
+          Any question and remarks? Just write us a message!
+        </p>
       </div>
-      <div className="lg:w-1/2 md:w-2/3 mx-auto">
-        <div className="flex flex-wrap -m-2">
-          <div className="p-2 w-1/2">
-            <div className="relative">
-              <label for="name" className="leading-7 text-sm text-gray-600">
-                Name
-              </label>
-              <input
+      <div className="mt-6 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[780px] md:mx-auto shadow-gray-400 rounded-xl p-4  flex flex-col-reverse sm:flex-row ">
+        <div className="bg-gradient-to-r from-[color:var(--color-primary)] to-teal-300 right-half p-8 basis-1/2 flex flex-col  rounded-xl justify-between">
+          <div className="text-gray-700 ">
+            <h3 className="text-2xl">Contact Information</h3>
+            <p className="mt-2 text-sm">
+              Fill up the form and our Team will get back to you within 24
+              hours.
+            </p>
+          </div>
+          <div className="mt-12 text-slate-700">
+            <ul className="flex items-start justify-center flex-col gap-6 text-sm">
+              <li className="flex items-center justify-center gap-1">
+                <BsFillTelephoneFill /> +0123 4567 8910
+              </li>
+              <li className="flex items-center justify-center gap-1">
+                <MdEmail className="text-lg" /> help@bookdrive.com
+              </li>
+              <li className="flex items-center justify-center gap-1">
+                <ImLocation className="text-lg" /> 102 Lajpat Nagar New Delhi
+              </li>
+            </ul>
+          </div>
+          <div className="flex items-ceter justify-between text-white text-2xl mt-12">
+            <button className="hover:scale-110 duration-500 ease-in-out">
+              <BsFacebook />
+            </button>
+            <button className="hover:scale-110 duration-500 ease-in-out">
+              <BsInstagram />
+            </button>
+            <button className="hover:scale-110 duration-500 ease-in-out">
+              <BsTwitter />
+            </button>
+            <button className="hover:scale-110 duration-500 ease-in-out">
+              <BsLinkedin />
+            </button>
+          </div>
+        </div>
+        <div className="basis-1/2 p-8">
+          <form action="" className="mx-auto" onSubmit={onSubmitHandler}>
+            <div className="body flex flex-col gap-8">
+              <Input
+                data={username}
+                setData={setUsername}
+                inputFieldName="Username"
                 type="text"
-                id="name"
-                name="name"
-                className="w-full bg-gray-100 border border-gray-300 focus:border-green-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                setIsInputValid={setIsInputValid}
+                isInputValid={isInputValid}
+              />
+              <Input
+                data={email}
+                setData={setEmail}
+                inputFieldName="Email"
+                type="text"
+                setIsInputValid={setIsInputValid}
+                isInputValid={isInputValid}
+              />
+              <TextArea
+                data={message}
+                setData={setMessage}
+                inputFieldName="Message"
+                type="text"
+                setIsInputValid={setIsInputValid}
+                isInputValid={isInputValid}
               />
             </div>
-          </div>
-          <div className="p-2 w-1/2">
-            <div className="relative">
-              <label for="email" className="leading-7 text-sm text-gray-600">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="w-full bg-gray-100 rounded border border-gray-300 focus:border-green -500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
+
+            <div className="footer mt-8 flex justify-around">
+              {isLoading && <LoadingSpinner />}
+              {!isLoading && (
+                <Button
+                  type="submit"
+                  className="btn-base px-4 py-2"
+                  disabled={!isFormValid || isLoading}
+                >
+                  Submit
+                </Button>
+              )}
             </div>
-          </div>
-          <div className="p-2 w-full">
-            <div className="relative">
-              <label for="message" className="leading-7 text-sm text-gray-600">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                className="w-full bg-gray-100 rounded border border-gray-300 focus:border-green-500 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-              ></textarea>
-            </div>
-          </div>
-          <div className="p-2 w-full">
-            <Button type="button" className="btn-base px-6 py-2">
-              Send
-            </Button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const Layout = (props) => {
       <div className="w-11/12 md:w-10/12  lg:w-4/5 max-w-[1440px] m-24 mx-auto">
         <main className=" justify-center items-center">{props.children}</main>
       </div>
-      <div class="button absolute bottom-8 bg-[color:var(--color-primary)] shadow-lg shadow-[color:var(--main-color)] w-16 h-10 rounded-r-full flex justify-end items-center">
+      <div className="button absolute bottom-8 bg-[color:var(--color-primary)] shadow-lg shadow-[color:var(--main-color)] w-16 h-10 rounded-r-full flex justify-end items-center">
         <button className="p-2" onClick={darkModeChangeHandler}>
           {isDarkMode && (
             <MdDarkMode className="text-3xl text-[color:var(--main-color)]" />

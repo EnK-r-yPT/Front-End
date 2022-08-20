@@ -65,7 +65,7 @@ const AboutUs = () => {
     );
   });
   return (
-    <div className="mt-24 sm:mt-28 mx-auto md:mt-32">
+    <div className="mt-24 mx-auto">
       <div className="header flex flex-col items-center justify-center">
         <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           About Us
