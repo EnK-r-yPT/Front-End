@@ -12,8 +12,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import NewPassword from "./pages/NewPassword.page";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
   return (
     <div className="App">
       <Layout>
@@ -33,6 +35,7 @@ function App() {
         className=""
         progressClassName="bg-green-400"
         toastClassName="top-[4.8rem]"
+        theme={isDarkMode?"dark":""}
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

@@ -4,12 +4,21 @@ import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import logo from "../assets/logo/logo.png";
 import Button from "../components/Button/Button.component";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/reducers/auth.Reducer";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(false);
-
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   const dropMenuHandler = () => {
     setDropMenu((dropMenu) => !dropMenu);
+  };
+
+  const onLogOutHandler = () => {
+    dispatch(logout());
+    toast.success("Logged out successfully!");
   };
 
   return (
@@ -18,7 +27,7 @@ const Navbar = () => {
         <div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
           <div className="logo">
             <h1 className="font-bold text-2xl">
-              <img src={logo} className="h-8" alt="" />
+              <img src={logo} className="h-12 scale-110" alt="" />
               {/* <span className="text-black">The</span>{" "}
               <span className="text-[color:var(--color-primary)]">Enkrypt</span> */}
             </h1>
@@ -49,16 +58,29 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="flex gap-4">
-              <Link to="/login">
-                <Button type="button" className="btn-inverted px-4 py-2">
-                  Log In
+              {!isLoggedIn && (
+                <>
+                  <Link to="/login">
+                    <Button type="button" className="btn-inverted px-4 py-2">
+                      Log In
+                    </Button>
+                  </Link>
+                  <Link to="/signup">
+                    <Button type="button" className="btn-base px-4 py-2">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )}
+              {isLoggedIn && (
+                <Button
+                  type="button"
+                  onClick={onLogOutHandler}
+                  className="btn-base px-4 py-2"
+                >
+                  Log Out
                 </Button>
-              </Link>
-              <Link to="/signup">
-                <Button type="button" className="btn-base px-4 py-2">
-                  Sign Up
-                </Button>
-              </Link>
+              )}
             </div>
           </div>
           {/* Burger Menu For Smaller Screen Sizes */}
@@ -102,24 +124,37 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="flex flex-col gap-4 ">
-            <Link to="/login">
+            {!isLoggedIn && (
+              <>
+                <Link to="/login">
+                  <Button
+                    type="button"
+                    className="btn-inverted w-full py-2"
+                    onClick={dropMenuHandler}
+                  >
+                    Log In
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button
+                    type="button"
+                    className=" btn-base px-16 sm:px-32 py-2"
+                    onClick={dropMenuHandler}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              </>
+            )}
+            {isLoggedIn && (
               <Button
                 type="button"
-                className="btn-inverted w-full py-2"
-                onClick={dropMenuHandler}
+                className=" btn-base px-16 sm:px-32 py-2"
+                onClick={onLogOutHandler}
               >
-                Log In
+                Log Out
               </Button>
-            </Link>
-            <Link to="/signup">
-              <Button
-                type="button"
-                className=" btn-base px-12 sm:px-32 py-2"
-                onClick={dropMenuHandler}
-              >
-                Sign Up
-              </Button>
-            </Link>
+            )}
           </div>
         </div>
       )}

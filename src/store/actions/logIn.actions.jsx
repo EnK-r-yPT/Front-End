@@ -12,6 +12,7 @@ import {
 import { setIsLoading } from "../reducers/ui.Reducer";
 import { setCategory, setPassword } from "../reducers/logIn.Reducer";
 import { fetchAllCategoryImages } from "../../firebase/firebase";
+import { login } from "../reducers/auth.Reducer";
 
 const URL_FOR_USER_EXIST = "http://localhost:4000/signin/check";
 
@@ -94,6 +95,7 @@ export const verifyUserLogin = (userInfo) => {
       console.log(data);
       dispatch(setIsLoading(false));
       toast.success("Loged in successfully!");
+      dispatch(login("12345")); // auth token
       return true;
     } catch (error) {
       if (error.response.data) toast.error(error.response.data.message);
