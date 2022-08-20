@@ -1,4 +1,6 @@
 import React from "react";
+import Ijlal from "../assets/members/ijlal.jpg";
+import Ankur from "../assets/members/Ankur.jpeg";
 
 import { FiTarget } from "react-icons/fi";
 import { FaServicestack } from "react-icons/fa";
@@ -15,7 +17,7 @@ const members = [
     id: 1,
     name: "Ankur Mishra",
     education: "B.Tech CSE",
-    url: "",
+    url: Ankur,
   },
   {
     id: 2,
@@ -33,7 +35,7 @@ const members = [
     id: 4,
     name: "Ijlal Ahmed",
     education: "B.Tech CSE",
-    url: "",
+    url: Ijlal,
   },
   {
     id: 5,

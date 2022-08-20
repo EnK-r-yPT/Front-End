@@ -12,6 +12,7 @@ import { ImLocation } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  setContactUsInitialState,
   setEmail,
   setIsFormValid,
   setMessage,
@@ -34,6 +35,12 @@ const ContactUs = () => {
     email: false,
     message: false,
   });
+
+  useEffect(() => {
+    return () => {
+      dispatch(setContactUsInitialState());
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     if (isInputValid.username && isInputValid.email && isInputValid.message) {

@@ -23,10 +23,21 @@ const contactUsSlice = createSlice({
     setIsFormValid(state, action) {
       state.isFormValid = action.payload;
     },
+    setContactUsInitialState(state, action) {
+      state.username = contactUsInitialState.username;
+      state.email = contactUsInitialState.email;
+      state.message = contactUsInitialState.message;
+      state.isFormValid = contactUsInitialState.isFormValid;
+    },
   },
 });
 
-export const { setUsername, setEmail, setMessage, setIsFormValid } =
-  contactUsSlice.actions;
+export const {
+  setUsername,
+  setEmail,
+  setMessage,
+  setIsFormValid,
+  setContactUsInitialState,
+} = contactUsSlice.actions;
 
 export default contactUsSlice.reducer;
