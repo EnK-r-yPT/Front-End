@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import logo from "../assets/logo/logo.png";
 import Button from "../components/Button/Button.component";
 
 const Navbar = () => {
@@ -17,8 +18,9 @@ const Navbar = () => {
         <div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
           <div className="logo">
             <h1 className="font-bold text-2xl">
-              <span className="text-black">The</span>{" "}
-              <span className="text-[color:var(--color-primary)]">Enkrypt</span>
+              <img src={logo} className="h-8" alt="" />
+              {/* <span className="text-black">The</span>{" "}
+              <span className="text-[color:var(--color-primary)]">Enkrypt</span> */}
             </h1>
           </div>
 
@@ -42,7 +44,7 @@ const Navbar = () => {
                   to="/contactus"
                   className="hover:text-[color:var(--color-primary)]"
                 >
-                  Contact 
+                  Contact
                 </Link>
               </ul>
             </div>
@@ -62,8 +64,12 @@ const Navbar = () => {
           {/* Burger Menu For Smaller Screen Sizes */}
           <div className="flex items-center justify-center md:hidden">
             <button className="" onClick={dropMenuHandler}>
-              {!dropMenu && <FaBars className="text-2xl text-[color:var(--tertiary-text-color)]" />}
-              {dropMenu && <ImCross className="text-2xl text-[color:var(--tertiary-text-color)]" />}
+              {!dropMenu && (
+                <FaBars className="text-2xl text-[color:var(--tertiary-text-color)]" />
+              )}
+              {dropMenu && (
+                <ImCross className="text-2xl text-[color:var(--tertiary-text-color)]" />
+              )}
             </button>
           </div>
         </div>

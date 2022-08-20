@@ -1,6 +1,7 @@
 import React from "react";
 import Ijlal from "../assets/members/ijlal.jpg";
 import Ankur from "../assets/members/Ankur.jpeg";
+import Vicky from "../assets/members/Vicky.jpg";
 
 import { FiTarget } from "react-icons/fi";
 import { FaServicestack } from "react-icons/fa";
@@ -41,7 +42,7 @@ const members = [
     id: 5,
     name: "Vicky Gupta",
     education: "B.Tech CSE",
-    url: "",
+    url: Vicky,
   },
 ];
 
@@ -124,7 +125,7 @@ const AboutUs = () => {
         </div>
       </div>
       <div className="mt-16 header flex flex-col items-center justify-center">
-        <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2 text-center">
+        <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           Our Team
         </h1>
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
