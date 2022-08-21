@@ -2,6 +2,7 @@ import React from "react";
 import Ijlal from "../assets/members/ijlal.jpg";
 import Ankur from "../assets/members/Ankur.jpeg";
 import Vicky from "../assets/members/Vicky.jpg";
+import Kovid from "../assets/members/Kovid.jpeg";
 
 import { FiTarget } from "react-icons/fi";
 import { FaServicestack } from "react-icons/fa";
@@ -14,9 +15,9 @@ const members = [
     name: "Shairin Meraj",
     education: "B.Tech ECE",
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pierre-Person.jpg/682px-Pierre-Person.jpg",
-    linkedInUrl: "https://www.google.com",
+    linkedInUrl: "",
     githubUrl: "",
-    facebookUrl: "",
+    facebookUrl: "https://www.facebook.com/",
   },
   {
     id: 1,
@@ -25,7 +26,7 @@ const members = [
     url: Ankur,
     linkedInUrl: "",
     githubUrl: "",
-    facebookUrl: "",
+    facebookUrl: "https://www.facebook.com/",
   },
   {
     id: 2,
@@ -34,25 +35,25 @@ const members = [
     url: "",
     linkedInUrl: "",
     githubUrl: "",
-    facebookUrl: "",
+    facebookUrl: "https://www.facebook.com/",
   },
   {
     id: 3,
     name: "Kovid Sharma",
     education: "B.Tech CSE",
-    url: "",
-    linkedInUrl: "",
-    githubUrl: "",
-    facebookUrl: "",
+    url: Kovid,
+    linkedInUrl: "https://www.linkedin.com/in/kovid-sharma-469580201",
+    githubUrl: "https://github.com/kovid-sharma",
+    facebookUrl: "https://www.facebook.com/",
   },
   {
     id: 4,
     name: "Ijlal Ahmed",
     education: "B.Tech CSE",
     url: Ijlal,
-    linkedInUrl: "",
-    githubUrl: "",
-    facebookUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/ijlal-ahmad-14aa35202/",
+    githubUrl: "https://github.com/Thre4dripper",
+    facebookUrl: "https://www.facebook.com/",
   },
   {
     id: 5,
