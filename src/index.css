@@ -9,6 +9,7 @@
   --tertiary-text-color: #141f1d;
   --background-color: #e3e6ea;
   --main-color: #fff;
+  --shadow-color: #d1d5db;
 }
 
 .btn-base {
@@ -33,5 +34,6 @@ button:disabled:hover {
 .dark-mode {
   --tertiary-text-color: #f7f7f7;
   --background-color: #64748b;
-  --main-color: #1F2123;
+  --main-color: #1f2123;
+  --shadow-color:#334155;
 }

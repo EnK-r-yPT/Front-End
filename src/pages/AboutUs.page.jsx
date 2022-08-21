@@ -50,13 +50,13 @@ const AboutUs = () => {
   const allMembers = members.map((member) => {
     return (
       <div
-        className=" bg-[color:var(--main-color)] mx-6 mb-12 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] rounded-xl overflow-hidden hover:-translate-y-8 duration-700"
+        className=" bg-[color:var(--main-color)] mx-6 mb-12 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] rounded-xl overflow-hidden hover:-translate-y-4 duration-700"
         key={member.id}
       >
         <div className=" border-8 border-[color:var(--color-primary)] bg-[color:var(--color-primary)] rounded-br-[90px] overflow-hidden">
           <img
             src={member.url}
-            className="w-56 h-64 object-cover object-top hover:scale-125 duration-[3s] ease-in-out "
+            className="w-56 h-64 object-cover object-top hover:scale-125 duration-[6s] ease-linear"
             alt=""
           />
         </div>
@@ -72,7 +72,7 @@ const AboutUs = () => {
     );
   });
   return (
-    <div className="mt-24 mx-auto">
+    <div className="mt-28 mx-auto">
       <div className="header flex flex-col items-center justify-center">
         <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           About Us
@@ -87,7 +87,7 @@ const AboutUs = () => {
       </p>
 
       <div className="mt-12 flex items-center justify-evenly flex-wrap">
-        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-lg shadow-gray-400 hover:scale-110 duration-700 ease-in-out">
+        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
           <div className="bg-[color:var(--color-primary)] px-4 py-3 text-white text-lg flex items-center gap-2">
             <FiTarget className="text-2xl" />
             <h3 className="">Mission</h3>
@@ -99,7 +99,7 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
-        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-lg shadow-gray-400 hover:scale-110 duration-700 ease-in-out">
+        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
           <div className="bg-[color:var(--color-primary)] px-4 py-3 text-white text-lg flex items-center gap-2">
             <FaServicestack className="text-2xl" />
             <h3 className="">Service</h3>
@@ -111,7 +111,7 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
-        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-lg shadow-gray-400 hover:scale-110 duration-700 ease-in-out">
+        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
           <div className="bg-[color:var(--color-primary)] px-4 py-3 text-white text-lg flex items-center gap-2">
             <RiMessage3Fill className="text-2xl" />
             <h3 className="">Message</h3>
@@ -130,7 +130,7 @@ const AboutUs = () => {
         </h1>
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
       </div>
-      <div className="flex justify-evenly items-center flex-wrap mt-16">
+      <div className="flex justify-evenly items-center flex-wrap mt-12">
         {allMembers}
       </div>
     </div>

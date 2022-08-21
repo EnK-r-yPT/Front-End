@@ -62,7 +62,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="mt-24 mx-auto">
+    <div className="mt-28 mx-auto">
       <div className="header flex flex-col items-center justify-center">
         <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           Contact Us
@@ -72,7 +72,7 @@ const ContactUs = () => {
           Any question and remarks? Just write us a message!
         </p>
       </div>
-      <div className="mt-6 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[780px] md:mx-auto shadow-gray-400 rounded-xl p-4  flex flex-col-reverse sm:flex-row ">
+      <div className="mt-6 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[780px] md:mx-auto shadow-[color:var(--shadow-color)] rounded-xl p-4  flex flex-col-reverse sm:flex-row ">
         <div className="bg-gradient-to-r from-[color:var(--color-primary)] to-teal-300 right-half p-8 basis-1/2 flex flex-col  rounded-xl justify-between">
           <div className="text-gray-700 ">
             <h3 className="text-2xl">Contact Information</h3>

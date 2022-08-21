@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
   const categoryList = useSelector((state) => state.category.categoryList);
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
   const dispatch = useDispatch();
   const {
     optionSelected: selectedCategory,
@@ -43,14 +44,19 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
     <div className="relative">
       <div
         className={twMerge(
-          `flex items-center  bg-gray-100 px-2 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)] `,
+          `flex items-center  ${
+            isDarkMode ? "" : "bg-gray-100"
+          } px-2 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)] `,
           `${selectedCategoryHasError ? invalidContainer : ""}`
         )}
       >
         <BiCategory className="text-[color:var(--color-primary)] text-lg mx-1" />
         <select
           name="category"
-          className={`text-[color:var(--secondary-text-color)] bg-gray-100 text-sm w-full outline-none cursor-context-menu py-3`}
+          className={twMerge(
+            `text-[color:var(--secondary-text-color)] text-sm w-full outline-none cursor-context-menu py-3`,
+            isDarkMode ? "bg-transparent text-white" : "bg-gray-100"
+          )}
           onChange={categoryChangeHandler}
           onBlur={categoryBlurHandler}
           value={selectedCategory}

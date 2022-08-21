@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import useInput from "../../hooks/useInput.hook";
 
 import { AiOutlineMessage } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const inputValidationFunctions = () => {
   return (value) => value.trim() !== "";
@@ -28,6 +29,7 @@ const TextArea = ({
     data,
     setData
   );
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
 
   useEffect(() => {
     setIsInputValid((isInputValid) => {
@@ -44,21 +46,25 @@ const TextArea = ({
     <div className="relative">
       <div
         className={twMerge(
-          `flex  bg-gray-100 px-2 py-3 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)]`,
+          `flex  ${
+            isDarkMode ? "" : "bg-gray-100"
+          } px-2 py-3 border-[0.12rem] border-gray-100 rounded-md focus-within:border-[color:var(--color-primary)]`,
           `${valueInputHasError ? invalidContainer : ""}`
         )}
       >
         <AiOutlineMessage className=" text-xl text-[color:var(--color-primary)]" />
         <textarea
           name={inputFieldName}
-          className={` bg-gray-100 ml-1 outline-none text-[color:var(--secondary-text-color)] text-sm w-full resize-none`}
+          className={twMerge(
+            `ml-1 outline-none text-[color:var(--secondary-text-color)] text-sm w-full resize-none`,
+            isDarkMode ? "bg-transparent text-white" : "bg-gray-100"
+          )}
           type={type}
           placeholder={inputFieldName}
           onChange={valueChangeHandler}
           onBlur={valueBlurHandler}
           value={enteredValue}
           rows={6}
-          
         ></textarea>
       </div>
       {valueInputHasError && (

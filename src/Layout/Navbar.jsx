@@ -7,6 +7,7 @@ import Button from "../components/Button/Button.component";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/reducers/auth.Reducer";
 import { toast } from "react-toastify";
+import { twMerge } from "tailwind-merge";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -16,6 +17,8 @@ const Navbar = () => {
     setDropMenu((dropMenu) => !dropMenu);
   };
 
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
+
   const onLogOutHandler = () => {
     dispatch(logout());
     toast.success("Logged out successfully!");
@@ -23,7 +26,14 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <nav className=" p-4 md:p-3 bg-[color:var(--main-color)]  shadow-lg shadow-[color:var(--background-color)] border-b-4 border-[color:var(--background-color)] fixed top-0 left-0 w-full z-50">
+      <nav
+        className={twMerge(
+          " p-4 md:p-3 bg-[color:var(--main-color)]  shadow-lg border-b-[0.3rem] border-[color:var(--background-color)] fixed top-0 left-0 w-full z-50",
+          isDarkMode
+            ? "shadow-slate-800"
+            : "shadow-[color:var(--shadow-color)] "
+        )}
+      >
         <div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
           <div className="logo">
             <h1 className="font-bold text-2xl">
@@ -97,8 +107,15 @@ const Navbar = () => {
         </div>
       </nav>
       {dropMenu && (
-        <div className="flex flex-col items-center justify-center gap-8 md:hidden fixed z-10 top-16 left-0 bg-[color:var(--main-color)] w-full py-8 shadow-lg shadow-[color:var(--background-color)]">
-          <div className="text-center text-[color:var(--tertiary-text-color)]">
+        <div
+          className={twMerge(
+            "flex flex-col items-center justify-center gap-6 md:hidden fixed z-10 top-20 left-0 bg-[color:var(--main-color)] w-full py-8 shadow-lg",
+            isDarkMode
+              ? "shadow-gray-800"
+              : "shadow-[color:var(--shadow-color)]"
+          )}
+        >
+          <div className="text-center text-[color:var(--tertiary-text-color)] ">
             <ul className="flex flex-col font-semibold text-lg gap-4">
               <Link
                 to="/"
