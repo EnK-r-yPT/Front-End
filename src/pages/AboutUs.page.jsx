@@ -6,6 +6,7 @@ import Vicky from "../assets/members/Vicky.jpg";
 import { FiTarget } from "react-icons/fi";
 import { FaServicestack } from "react-icons/fa";
 import { RiMessage3Fill } from "react-icons/ri";
+import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
 
 const members = [
   {
@@ -13,36 +14,54 @@ const members = [
     name: "Shairin Meraj",
     education: "B.Tech ECE",
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pierre-Person.jpg/682px-Pierre-Person.jpg",
+    linkedInUrl: "https://www.google.com",
+    githubUrl: "",
+    facebookUrl: "",
   },
   {
     id: 1,
     name: "Ankur Mishra",
     education: "B.Tech CSE",
     url: Ankur,
+    linkedInUrl: "",
+    githubUrl: "",
+    facebookUrl: "",
   },
   {
     id: 2,
     name: "Priyanshu",
     education: "B.Tech ECE",
     url: "",
+    linkedInUrl: "",
+    githubUrl: "",
+    facebookUrl: "",
   },
   {
     id: 3,
     name: "Kovid Sharma",
     education: "B.Tech CSE",
     url: "",
+    linkedInUrl: "",
+    githubUrl: "",
+    facebookUrl: "",
   },
   {
     id: 4,
     name: "Ijlal Ahmed",
     education: "B.Tech CSE",
     url: Ijlal,
+    linkedInUrl: "",
+    githubUrl: "",
+    facebookUrl: "",
   },
   {
     id: 5,
     name: "Vicky Gupta",
     education: "B.Tech CSE",
     url: Vicky,
+    linkedInUrl: "https://www.linkedin.com/in/vicky-gupta-61a418175/",
+    githubUrl: "https://github.com/Vicky-Guptaa",
+    facebookUrl: "https://www.facebook.com/",
   },
 ];
 
@@ -67,6 +86,17 @@ const AboutUs = () => {
           <h4 className="text-left mt-1 text-[color:var(--color-primary)] text-md font-bold">
             {member.education}
           </h4>
+          <div className="flex mt-4 gap-4 text-lg text-[color:var(--tertiary-text-color)]">
+            <a href={member.facebookUrl} target="_blank" rel="noreferrer">
+              <BsFacebook />
+            </a>
+            <a href={member.linkedInUrl} target="_blank" rel="noreferrer">
+              <BsLinkedin />
+            </a>
+            <a href={member.githubUrl} target="_blank" rel="noreferrer">
+              <BsGithub />
+            </a>
+          </div>
         </div>
       </div>
     );

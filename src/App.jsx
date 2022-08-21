@@ -30,13 +30,13 @@ function App() {
         </Routes>
       </Layout>
       <ToastContainer
-        style={{ zIndex: 1 }}
+        style={{ zIndex: 1, marginBottom: "20px", alignItems: "end" }}
         bodyClassName="text-gray-500 text-left"
         className=""
         progressClassName="bg-green-400"
-        toastClassName="top-[4.8rem]"
+        toastClassName="right-[3rem]"
         theme={isDarkMode ? "dark" : "light"}
-        position="top-right"
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop
