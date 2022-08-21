@@ -32,6 +32,6 @@ button:disabled:hover {
 
 .dark-mode {
   --tertiary-text-color: #f7f7f7;
-  --background-color: #6a7280;
+  --background-color: #64748b;
   --main-color: #1F2123;
 }

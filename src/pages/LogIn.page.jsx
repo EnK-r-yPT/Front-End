@@ -42,7 +42,6 @@ const LogIn = () => {
     const userInfo = {
       username,
       loginId: userUniqueId,
-      timestamp: Date.now(),
       pattern: stringPassword,
     };
     const isSuccess = await dispatch(verifyUserLogin(userInfo));

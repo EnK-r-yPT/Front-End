@@ -93,9 +93,10 @@ export const verifyUserLogin = (userInfo) => {
       const response = await axios.post(URL_FOR_USER_VERIFICATION, userInfo);
       const data = response.data;
       console.log(data);
+      const { token } = data;
       dispatch(setIsLoading(false));
       toast.success("Loged in successfully!");
-      dispatch(login("12345")); // auth token
+      dispatch(login(token)); // auth token
       return true;
     } catch (error) {
       if (error.response.data) toast.error(error.response.data.message);

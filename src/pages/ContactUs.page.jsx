@@ -83,14 +83,14 @@ const ContactUs = () => {
           </div>
           <div className="mt-12 text-slate-700">
             <ul className="flex items-start justify-center flex-col gap-6 text-sm">
-              <li className="flex items-center justify-center gap-1">
-                <BsFillTelephoneFill /> +0123 4567 8910
+              <li className="flex items-center justify-center gap-2">
+                <BsFillTelephoneFill /> 011 1124567
               </li>
               <li className="flex items-center justify-center gap-1">
-                <MdEmail className="text-lg" /> help@bookdrive.com
+                <MdEmail className="text-lg" /> sih.enkrypt@gmail.com
               </li>
               <li className="flex items-center justify-center gap-1">
-                <ImLocation className="text-lg" /> 102 Lajpat Nagar New Delhi
+                <ImLocation className="text-lg" /> Jamia Nagar New Delhi
               </li>
             </ul>
           </div>
