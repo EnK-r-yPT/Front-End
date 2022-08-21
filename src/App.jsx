@@ -35,7 +35,7 @@ function App() {
         className=""
         progressClassName="bg-green-400"
         toastClassName="top-[4.8rem]"
-        theme={isDarkMode?"dark":"light"}
+        theme={isDarkMode ? "dark" : "light"}
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

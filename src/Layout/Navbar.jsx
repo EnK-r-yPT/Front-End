@@ -167,7 +167,10 @@ const Navbar = () => {
               <Button
                 type="button"
                 className=" btn-base px-16 sm:px-32 py-2"
-                onClick={onLogOutHandler}
+                onClick={(event) => {
+                  onLogOutHandler();
+                  dropMenuHandler();
+                }}
               >
                 Log Out
               </Button>
