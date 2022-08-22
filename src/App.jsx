@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout/Layout";
 import AboutUs from "./pages/AboutUs.page";
@@ -8,14 +8,31 @@ import LogIn from "./pages/LogIn.page";
 import SignUp from "./pages/SignUp.page";
 import AccountRecovery from "./pages/AccountRecovery.page";
 
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import NewPassword from "./pages/NewPassword.page";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { jwtVerficationRequest } from "./store/actions/auth.actions";
 
 function App() {
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
+  const isLoggedIn = useSelector((state) => state.ui.isLoggedIn);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.authToken);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    const isSuccess = dispatch(jwtVerficationRequest(token));
+    if (isSuccess) {
+      navigate("/");
+    } else {
+      toast.info("Session Expired!");
+      navigate("/login");
+    }
+  }, []);
   return (
     <div className="App">
       <Layout>

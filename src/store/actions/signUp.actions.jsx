@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import { nextSetStep } from "../reducers/signUp.Reducer";
 import { setIsLoading } from "../reducers/ui.Reducer";
 
-let URL_FOR_USER_CHECK = "http://localhost:4000/signup/check";
-let URL_FOR_USER_REGISTRATION = "http://localhost:4000/signup";
+let URL_FOR_USER_CHECK = "https://sih-enkrypt.herokuapp.com/signup/check";
+let URL_FOR_USER_REGISTRATION = "https://sih-enkrypt.herokuapp.com/signup";
 
 export const isUserExistHandler = (userInfo) => {
   return async (dispatch) => {

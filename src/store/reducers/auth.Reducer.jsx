@@ -8,9 +8,15 @@ const checkForLoggedIn = () => {
   return false;
 };
 
+const checkForAuthToken = () => {
+  if (localStorage.getItem("AUTH_TOKEN_ENKRYPT"))
+    return localStorage.getItem("AUTH_TOKEN_ENKRYPT");
+  else return "";
+};
+
 const authSliceInitialState = {
   isLoggedIn: checkForLoggedIn(),
-  authToken: "",
+  authToken: checkForAuthToken(),
   userUniqueId: uuidv4(),
 };
 
