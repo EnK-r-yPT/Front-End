@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { logout } from "../reducers/auth.Reducer";
 
 const URL_FOR_JWT_TOKEN_VERIFICATION =
   "https://sih-enkrypt.herokuapp.com/authentication";
@@ -19,6 +20,7 @@ export const jwtVerficationRequest = (token) => {
     } catch (error) {
       if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Something went wrong!");
+      dispatch(logout());
       return false;
     }
   };

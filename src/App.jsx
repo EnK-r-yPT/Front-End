@@ -15,23 +15,25 @@ import NewPassword from "./pages/NewPassword.page";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { jwtVerficationRequest } from "./store/actions/auth.actions";
+import { async } from "@firebase/util";
 
 function App() {
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
-  const isLoggedIn = useSelector((state) => state.ui.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.authToken);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    const isSuccess = dispatch(jwtVerficationRequest(token));
-    if (isSuccess) {
-      navigate("/");
-    } else {
-      toast.info("Session Expired!");
-      navigate("/login");
-    }
+    const verifyJWT = async () => {
+      const isSuccess = await dispatch(jwtVerficationRequest(token));
+      if (!isSuccess) {
+        toast.info("Session Expired!");
+        navigate("/login");
+      }
+    };
+    verifyJWT();
   }, []);
   return (
     <div className="App">
