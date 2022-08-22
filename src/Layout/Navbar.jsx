@@ -37,7 +37,9 @@ const Navbar = () => {
         <div className="w-11/12 md:w-[85%]  lg:w-4/5 mx-auto max-w-[1440px] flex justify-between items-center">
           <div className="logo">
             <h1 className="font-bold text-2xl">
-              <img src={logo} className="h-12 scale-110" alt="" />
+              <Link to="/">
+                <img src={logo} className="h-12 scale-110" alt="" />
+              </Link>
               {/* <span className="text-black">The</span>{" "}
               <span className="text-[color:var(--color-primary)]">Enkrypt</span> */}
             </h1>

@@ -22,8 +22,10 @@ import TextArea from "../components/Inputs/TextArea.component";
 import Button from "../components/Button/Button.component";
 import { contactUsFormSubmit } from "../store/actions/contactUs.actions";
 import LoadingSpinner from "../components/UI/LoadingSpinner.component";
+import { twMerge } from "tailwind-merge";
 
 const ContactUs = () => {
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
   const username = useSelector((state) => state.contactUs.username);
   const email = useSelector((state) => state.contactUs.email);
   const message = useSelector((state) => state.contactUs.message);
@@ -68,7 +70,12 @@ const ContactUs = () => {
           Contact Us
         </h1>
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
-        <p className="mt-4 text-gray-400 text-sm">
+        <p
+          className={twMerge(
+            "mt-4 text-sm",
+            isDarkMode ? "text-gray-300" : "text-gray-400"
+          )}
+        >
           Any question and remarks? Just write us a message!
         </p>
       </div>

@@ -10,6 +10,8 @@ import { FiTarget } from "react-icons/fi";
 import { FaServicestack } from "react-icons/fa";
 import { RiMessage3Fill } from "react-icons/ri";
 import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
+import { twMerge } from "tailwind-merge";
+import { useSelector } from "react-redux";
 
 const members = [
   {
@@ -69,6 +71,7 @@ const members = [
 ];
 
 const AboutUs = () => {
+  const isDarkMode = useSelector((state) => state.ui.isDarkMode);
   const allMembers = members.map((member) => {
     return (
       <div
@@ -112,53 +115,80 @@ const AboutUs = () => {
         </h1>
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
       </div>
-      <p className="mt-6 text-center text-gray-400">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga vitae
-        dolorum suscipit esse neque quibusdam est atque non iusto ipsam, nihil,
-        provident voluptatem tempora, odit facilis consequatur dolore. Fugit
-        quam adipisci quia.
+      <p
+        className={twMerge(
+          "tracking-wider mt-6 text-center ",
+          isDarkMode ? "text-gray-300" : "text-gray-400"
+        )}
+      >
+        Team ENKRYPT is an organisation with the belief in making better out of
+        today. We are here to analyse the existing problems of the conventional
+        and graphical passwords. To Build something beautiful with a unique
+        design, creative modelling and our top most priorty data safety.
       </p>
 
       <div className="mt-12 flex items-center justify-evenly flex-wrap">
-        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
+        <div className="rounded-xl overflow-hidden w-80 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
           <div className="bg-[color:var(--color-primary)] px-4 py-3 text-white text-lg flex items-center gap-2">
             <FiTarget className="text-2xl" />
             <h3 className="">Mission</h3>
           </div>
           <div className="bg-[color:var(--main-color)] p-4">
-            <p className="text-[color:var(--tertiary-text-color)]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque,
-              dignissimos. Quo sequi natus eaque fugit commodi.
+            <p
+              className={twMerge(
+                "tracking-wider text-[color:var(--tertiary-text-color)] text-sm ",
+                isDarkMode ? "text-gray-300" : "text-gray-400"
+              )}
+            >
+              To provide a simple, feasible and flexible graphical
+              authentication infrastructure. Overcome the challenges faced by
+              the existing techniques by building on the fundamental process and
+              designing a unique way to ENKRYPT your choices.
             </p>
           </div>
         </div>
-        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
+        <div className="rounded-xl overflow-hidden w-80 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
           <div className="bg-[color:var(--color-primary)] px-4 py-3 text-white text-lg flex items-center gap-2">
             <FaServicestack className="text-2xl" />
             <h3 className="">Service</h3>
           </div>
           <div className="bg-[color:var(--main-color)] p-4">
-            <p className="text-[color:var(--tertiary-text-color)]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque,
-              dignissimos. Quo sequi natus eaque fugit commodi.
+            <p
+              className={twMerge(
+                "tracking-wider text-[color:var(--tertiary-text-color)] text-sm ",
+                isDarkMode ? "text-gray-300" : "text-gray-400"
+              )}
+            >
+              We here at ENKRYPT facilitates our user with User friendly
+              experience which makes them forget their conventional passwords
+              much easily. Our service includes high security, unique
+              functionalty and high end user experience with keeping the safety
+              always the top priorty.
             </p>
           </div>
         </div>
-        <div className="rounded-xl overflow-hidden w-72 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
+        <div className="rounded-xl overflow-hidden w-80 mx-4 mb-8 shadow-[0px_0px_10px_rgba(0,0,0,0.4)] hover:scale-110 duration-700 ease-in-out">
           <div className="bg-[color:var(--color-primary)] px-4 py-3 text-white text-lg flex items-center gap-2">
             <RiMessage3Fill className="text-2xl" />
             <h3 className="">Message</h3>
           </div>
           <div className="bg-[color:var(--main-color)] p-4">
-            <p className="text-[color:var(--tertiary-text-color)]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque,
-              dignissimos. Quo sequi natus eaque fugit commodi.
+            <p
+              className={twMerge(
+                "tracking-wider  text-[color:var(--tertiary-text-color)] text-sm ",
+                isDarkMode ? "text-gray-300" : "text-gray-400"
+              )}
+            >
+              We at ENKRYPT knows the importance of privacy and it is the need
+              of the hour in this high tech world. We hereby designed a process
+              which can compete with all of these challenges so our users can
+              relax while their choices are in safest hands.
             </p>
           </div>
         </div>
       </div>
-      <div className="mt-16 header flex flex-col items-center justify-center">
-        <h1 className="text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
+      <div className="mt-6 header flex flex-col items-center justify-center">
+        <h1 className=" text-[color:var(--color-primary)] text-4xl font-semibold mb-2 text-center">
           Our Team
         </h1>
         <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
