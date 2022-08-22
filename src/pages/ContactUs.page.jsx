@@ -107,7 +107,12 @@ const ContactUs = () => {
             </ul>
           </div>
           <div className="flex items-ceter justify-between text-2xl mt-12">
-            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+            <button
+              className={twMerge(
+                "hover:scale-110  duration-500 ease-in-out",
+                isDarkMode ? "hover:text-white" : "hover:text-black"
+              )}
+            >
               <a
                 href="https://www.facebook.com/"
                 target="_blank"
@@ -116,7 +121,12 @@ const ContactUs = () => {
                 <BsFacebook />
               </a>
             </button>
-            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+            <button
+              className={twMerge(
+                "hover:scale-110  duration-500 ease-in-out",
+                isDarkMode ? "hover:text-white" : "hover:text-black"
+              )}
+            >
               <a
                 href="https://www.instagram.com/"
                 target="_blank"
@@ -125,12 +135,22 @@ const ContactUs = () => {
                 <BsInstagram />
               </a>
             </button>
-            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+            <button
+              className={twMerge(
+                "hover:scale-110  duration-500 ease-in-out",
+                isDarkMode ? "hover:text-white" : "hover:text-black"
+              )}
+            >
               <a href="https://twitter.com/" target="_blank" rel="noreferrer">
                 <BsTwitter />
               </a>
             </button>
-            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+            <button
+              className={twMerge(
+                "hover:scale-110  duration-500 ease-in-out",
+                isDarkMode ? "hover:text-white" : "hover:text-black"
+              )}
+            >
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
