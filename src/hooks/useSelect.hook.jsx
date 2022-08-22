@@ -8,6 +8,7 @@ const useSelect = (data, setData) => {
 
   useEffect(() => {
     dispatch(setData(selected));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected, dispatch]);
 
   let valueIsValid = true;

@@ -157,7 +157,11 @@ const SliderInput = forwardRef(
       setIsUnlocked(true);
     };
     // Using debounce concept to remove ambiguity (that sometime both button get unlocked which is avoided by debounce)
-    const deb = useMemo(() => debounce(() => setSlider(), 200), []);
+    const deb = useMemo(
+      () => debounce(() => setSlider(), 200),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      []
+    );
 
     const onkeydown = (event) => {
       if (event.keyCode === 39) {

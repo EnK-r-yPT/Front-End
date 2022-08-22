@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsFormValid, setPassword } from "../../store/reducers/logIn.Reducer";
 import {
-  nextSetStep,
+  setIsFormValid,
+  setPassword,
 } from "../../store/reducers/logIn.Reducer";
+import { nextSetStep } from "../../store/reducers/logIn.Reducer";
 import SliderInput from "../Inputs/SliderInput.component";
 
 function Sliders() {
@@ -50,6 +51,7 @@ function Sliders() {
     let passArray = [...password];
     passArray[step - 1] = !isFound ? 0 : 1;
     dispatch(setPassword(passArray));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFound, dispatch]);
 
   useEffect(() => {
@@ -71,6 +73,7 @@ function Sliders() {
         slideRight.current.reset();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   console.log(step, isFound, password);
