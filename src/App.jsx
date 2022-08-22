@@ -15,7 +15,6 @@ import NewPassword from "./pages/NewPassword.page";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { jwtVerficationRequest } from "./store/actions/auth.actions";
-import { async } from "@firebase/util";
 
 function App() {
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
