@@ -120,13 +120,13 @@ const ContactUs = () => {
               <a
                 href="https://www.instagram.com/"
                 target="_blank"
-                rel="nonreferer"
+                rel="noreferrer"
               >
                 <BsInstagram />
               </a>
             </button>
             <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
-              <a href="https://twitter.com/" target="_blank" rel="nonreferer">
+              <a href="https://twitter.com/" target="_blank" rel="noreferrer">
                 <BsTwitter />
               </a>
             </button>
@@ -134,7 +134,7 @@ const ContactUs = () => {
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
-                rel="nonreferer"
+                rel="noreferrer"
               >
                 <BsLinkedin />
               </a>

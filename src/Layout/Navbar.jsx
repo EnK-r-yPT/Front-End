@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
 import logo from "../assets/logo/logo.png";
@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/reducers/auth.Reducer";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
+
+import "./navbar.css";
 
 const Navbar = () => {
   const [dropMenu, setDropMenu] = useState(false);
@@ -49,24 +51,24 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-6 lg:gap-12">
             <div className="text-[color:var(--tertiary-text-color)] ">
               <ul className="flex gap-6 lg:gap-8 font-semibold text-md">
-                <Link
+                <NavLink
                   to="/"
                   className="hover:text-[color:var(--color-primary)]"
                 >
                   Home
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/aboutus"
                   className="hover:text-[color:var(--color-primary)]"
                 >
                   About
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/contactus"
                   className="hover:text-[color:var(--color-primary)]"
                 >
                   Contact
-                </Link>
+                </NavLink>
               </ul>
             </div>
             <div className="flex gap-4">
