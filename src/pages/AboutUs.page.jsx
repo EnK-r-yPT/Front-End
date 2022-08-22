@@ -3,6 +3,8 @@ import Ijlal from "../assets/members/ijlal.jpg";
 import Ankur from "../assets/members/Ankur.jpeg";
 import Vicky from "../assets/members/Vicky.jpg";
 import Kovid from "../assets/members/Kovid.jpeg";
+import Priyanshu from "../assets/members/Priyanshu.jpeg";
+import Shairin from "../assets/members/Shairin.jpg";
 
 import { FiTarget } from "react-icons/fi";
 import { FaServicestack } from "react-icons/fa";
@@ -14,9 +16,9 @@ const members = [
     id: 0,
     name: "Shairin Meraj",
     education: "B.Tech ECE",
-    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pierre-Person.jpg/682px-Pierre-Person.jpg",
-    linkedInUrl: "",
-    githubUrl: "",
+    url: Shairin,
+    linkedInUrl: "https://www.linkedin.com/in/shairin-meraj-451524202",
+    githubUrl: "https://github.com/ShairinMeraj",
     facebookUrl: "https://www.facebook.com/",
   },
   {
@@ -24,17 +26,17 @@ const members = [
     name: "Ankur Mishra",
     education: "B.Tech CSE",
     url: Ankur,
-    linkedInUrl: "",
-    githubUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/ankur-mishra-374304235/",
+    githubUrl: "https://github.com/qmigo",
     facebookUrl: "https://www.facebook.com/",
   },
   {
     id: 2,
     name: "Priyanshu",
     education: "B.Tech ECE",
-    url: "",
-    linkedInUrl: "",
-    githubUrl: "",
+    url: Priyanshu,
+    linkedInUrl: "https://www.linkedin.com/in/priyanshu-pathak-34843220b/",
+    githubUrl: "https://github.com/Pr1y4nshu",
     facebookUrl: "https://www.facebook.com/",
   },
   {
@@ -89,13 +91,13 @@ const AboutUs = () => {
           </h4>
           <div className="flex mt-4 gap-4 text-lg text-[color:var(--tertiary-text-color)]">
             <a href={member.facebookUrl} target="_blank" rel="noreferrer">
-              <BsFacebook />
+              <BsFacebook className="hover:text-[color:var(--color-primary)] hover:scale-110 duration-300  ease-in-out" />
             </a>
             <a href={member.linkedInUrl} target="_blank" rel="noreferrer">
-              <BsLinkedin />
+              <BsLinkedin className="hover:text-[color:var(--color-primary)] hover:scale-110 duration-300  ease-in-out" />
             </a>
             <a href={member.githubUrl} target="_blank" rel="noreferrer">
-              <BsGithub />
+              <BsGithub className="hover:text-[color:var(--color-primary)] hover:scale-110 duration-300  ease-in-out" />
             </a>
           </div>
         </div>

@@ -28,7 +28,7 @@ const Navbar = () => {
     <React.Fragment>
       <nav
         className={twMerge(
-          " p-4 md:p-3 bg-[color:var(--main-color)]  shadow-lg border-b-[0.3rem] border-[color:var(--background-color)] fixed top-0 left-0 w-full z-50",
+          " p-4 md:p-3 bg-[color:var(--main-color)]  shadow-lg border-b-[0.3rem] border-[color:var(--color-primary)] fixed top-0 left-0 w-full z-50",
           isDarkMode
             ? "shadow-slate-800"
             : "shadow-[color:var(--shadow-color)] "
