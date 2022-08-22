@@ -117,7 +117,7 @@ const AboutUs = () => {
       </div>
       <p
         className={twMerge(
-          "tracking-wider mt-6 text-center ",
+          "tracking-wider mt-6 text-center text-[0.95rem] ",
           isDarkMode ? "text-gray-300" : "text-gray-400"
         )}
       >

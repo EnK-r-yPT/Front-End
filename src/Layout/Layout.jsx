@@ -6,6 +6,7 @@ import { RiSunFill } from "react-icons/ri";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setIsDarkMode } from "../store/reducers/ui.Reducer";
+import { twMerge } from "tailwind-merge";
 
 const Layout = (props) => {
   const dispatch = useDispatch();
@@ -30,13 +31,15 @@ const Layout = (props) => {
         <main className=" justify-center items-center">{props.children}</main>
       </div>
       <div className="button fixed bottom-8 bg-[color:var(--color-primary)] shadow-lg shadow-[color:var(--shadow-color)] w-16 h-10 rounded-r-full flex justify-end items-center">
-        <button className="p-2" onClick={darkModeChangeHandler}>
-          {isDarkMode && (
-            <MdDarkMode className="text-2xl text-[color:var(--main-color)]" />
+        <button
+          className={twMerge(
+            "p-2 text-[color:var(--main-color)]",
+            isDarkMode ? "hover:text-white" : "hover:text-black"
           )}
-          {!isDarkMode && (
-            <RiSunFill className="text-2xl text-[color:var(--main-color)] " />
-          )}
+          onClick={darkModeChangeHandler}
+        >
+          {isDarkMode && <MdDarkMode className="text-2xl " />}
+          {!isDarkMode && <RiSunFill className="text-2xl " />}
         </button>
       </div>
     </React.Fragment>

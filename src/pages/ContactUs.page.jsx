@@ -80,15 +80,20 @@ const ContactUs = () => {
         </p>
       </div>
       <div className="mt-6 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[780px] md:mx-auto shadow-[color:var(--shadow-color)] rounded-xl p-4  flex flex-col-reverse sm:flex-row ">
-        <div className="bg-gradient-to-r from-[color:var(--color-primary)] to-teal-300 right-half p-8 basis-1/2 flex flex-col  rounded-xl justify-between">
-          <div className="text-gray-800 ">
+        <div
+          className={twMerge(
+            "bg-gradient-to-r from-[color:var(--color-primary)] to-teal-300 right-half p-8 basis-1/2 flex flex-col  rounded-xl justify-between",
+            isDarkMode ? "text-black" : "text-white"
+          )}
+        >
+          <div>
             <h3 className="text-2xl">Contact Information</h3>
             <p className="mt-2 text-sm">
               Fill up the form and our Team will get back to you within 24
               hours.
             </p>
           </div>
-          <div className="mt-12 text-slate-700">
+          <div className="mt-12 ">
             <ul className="flex items-start justify-center flex-col gap-6 text-sm">
               <li className="flex items-center justify-center gap-2">
                 <BsFillTelephoneFill /> 011 1124567
@@ -101,18 +106,38 @@ const ContactUs = () => {
               </li>
             </ul>
           </div>
-          <div className="flex items-ceter justify-between text-white text-2xl mt-12">
-            <button className="hover:scale-110 duration-500 ease-in-out">
-              <BsFacebook />
+          <div className="flex items-ceter justify-between text-2xl mt-12">
+            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <BsFacebook />
+              </a>
             </button>
-            <button className="hover:scale-110 duration-500 ease-in-out">
-              <BsInstagram />
+            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="nonreferer"
+              >
+                <BsInstagram />
+              </a>
             </button>
-            <button className="hover:scale-110 duration-500 ease-in-out">
-              <BsTwitter />
+            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+              <a href="https://twitter.com/" target="_blank" rel="nonreferer">
+                <BsTwitter />
+              </a>
             </button>
-            <button className="hover:scale-110 duration-500 ease-in-out">
-              <BsLinkedin />
+            <button className="hover:scale-110 hover:text-black duration-500 ease-in-out">
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="nonreferer"
+              >
+                <BsLinkedin />
+              </a>
             </button>
           </div>
         </div>
