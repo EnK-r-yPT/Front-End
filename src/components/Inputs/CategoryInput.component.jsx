@@ -34,7 +34,11 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
 
   const categoryDisplay = categoryList.map((name) => {
     return (
-      <option value={name.category} className="bg-gray-100" key={name.id}>
+      <option
+        value={name.category}
+        className="bg-[color:var(--main-color)]"
+        key={name.id}
+      >
         {name.category}
       </option>
     );
@@ -61,7 +65,7 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
           onBlur={categoryBlurHandler}
           value={selectedCategory}
         >
-          <option value="" className="text-white" key="">
+          <option value="" className="bg-[color:var(--main-color)]" key="">
             Select Category
           </option>
           {categoryDisplay}
