@@ -88,6 +88,7 @@ export const isUserExistHandler = (userInfo, allImages) => {
 
 export const verifyUserLogin = (userInfo) => {
   return async (dispatch) => {
+    console.log(userInfo);
     dispatch(setIsLoading(true));
     try {
       const response = await axios.post(URL_FOR_USER_VERIFICATION, userInfo);

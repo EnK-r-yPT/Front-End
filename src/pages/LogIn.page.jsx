@@ -7,7 +7,10 @@ import {
   fetchAllImages,
   verifyUserLogin,
 } from "../store/actions/logIn.actions";
-import { setLogInInitialState, setStep } from "../store/reducers/logIn.Reducer";
+import {
+  setLogInInitialState,
+  setStep,
+} from "../store/reducers/logIn.Reducer";
 import { setIsLoading } from "../store/reducers/ui.Reducer";
 
 const LogIn = () => {
@@ -21,7 +24,6 @@ const LogIn = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     return () => {
       dispatch(setLogInInitialState());
@@ -34,6 +36,7 @@ const LogIn = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    if (password.length === 0) return;
     if (!isFormValid) return;
     let stringPassword = "";
     for (let pass of password) {

@@ -27,6 +27,7 @@ const AccountRecovery = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    if (otp.length === 0) return;
     if (!isFormValid) return;
 
     const userInfo = {

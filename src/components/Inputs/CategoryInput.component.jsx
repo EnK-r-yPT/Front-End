@@ -4,6 +4,7 @@ import useSelect from "../../hooks/useSelect.hook";
 import { BiCategory } from "react-icons/bi";
 import { fetchCategories } from "../../store/actions/category.actions";
 import { useDispatch, useSelector } from "react-redux";
+import { setImages } from "../../store/reducers/category.Reducer";
 
 const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
   const categoryList = useSelector((state) => state.category.categoryList);
@@ -17,6 +18,11 @@ const CategoryInput = ({ data, setData, isInputValid, setIsInputValid }) => {
     inputBlurHandler: categoryBlurHandler,
   } = useSelect(data, setData);
 
+  useEffect(() => {
+    return () => {
+      dispatch(setImages([]));
+    };
+  });
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
