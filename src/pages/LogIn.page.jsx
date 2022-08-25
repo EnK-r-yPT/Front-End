@@ -7,10 +7,7 @@ import {
   fetchAllImages,
   verifyUserLogin,
 } from "../store/actions/logIn.actions";
-import {
-  setLogInInitialState,
-  setStep,
-} from "../store/reducers/logIn.Reducer";
+import { setLogInInitialState, setStep } from "../store/reducers/logIn.Reducer";
 import { setIsLoading } from "../store/reducers/ui.Reducer";
 
 const LogIn = () => {
@@ -57,7 +54,7 @@ const LogIn = () => {
     }
   };
 
-  const heading = step === 0 ? "LogIn To Account" : "Password";
+  const heading = step === 0 ? "LogIn To Account" : "is your image present?";
 
   return (
     <div className="mt-28 sm:mt-32 mx-auto md:mt-36 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-[color:var(--shadow-color)] rounded-xl   p-8 relative ">

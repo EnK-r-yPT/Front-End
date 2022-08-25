@@ -80,22 +80,32 @@ function Sliders() {
 
   return (
     <div className="flex items-center justify-center mb-16 mt-4">
-      <div className="flex flex-col justify-center items-center gap-6 w-full mx-6 min-w-[8rem] select-none">
-        <SliderInput
-          text="Yes"
-          sliderHandler={sliderHandler}
-          isFound={isFound}
-          ref={slideRight}
-          nextImageSlide={nextImageSlide}
-        />
-        <SliderInput
-          text="No"
-          isRightSlide={false}
-          sliderHandler={sliderHandler}
-          isFound={isFound}
-          ref={slideLeft}
-          nextImageSlide={nextImageSlide}
-        />
+      <div className="flex flex-col justify-center items-center gap-10 w-full mx-6 min-w-[8rem] select-none mt-4">
+        <div className="w-full relative">
+          <h2 className="text-center absolute text-sm text-[color:var(--color-primary)] left-1/2 -translate-x-1/2 font-bold">
+            Swipe right for
+          </h2>
+          <SliderInput
+            text="Yes"
+            sliderHandler={sliderHandler}
+            isFound={isFound}
+            ref={slideRight}
+            nextImageSlide={nextImageSlide}
+          />
+        </div>
+        <div className="w-full relative">
+          <h2 className="text-center absolute text-sm text-[color:var(--color-primary)] left-1/2 -translate-x-1/2 font-bold">
+            Swipe left for 
+          </h2>
+          <SliderInput
+            text="No"
+            isRightSlide={false}
+            sliderHandler={sliderHandler}
+            isFound={isFound}
+            ref={slideLeft}
+            nextImageSlide={nextImageSlide}
+          />
+        </div>
       </div>
     </div>
   );

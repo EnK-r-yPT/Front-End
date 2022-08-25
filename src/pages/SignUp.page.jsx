@@ -8,6 +8,8 @@ import { setSignUpInitialState } from "../store/reducers/signUp.Reducer";
 
 const key = parseInt(process.env.REACT_APP_ENCODE_KEY);
 
+
+
 const getCorrespondingKeysForNumber = (num) => {
   switch (num) {
     case "0":
