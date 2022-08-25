@@ -2,17 +2,22 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import {
   nextSetStep,
-  setEmailOtp,
   setAccountRecoveryInitialState,
+  setProfessionalEmailOtp,
+  setPersonalEmailOtp,
+  setPhoneNumberOtp,
 } from "../reducers/accountRecovery.Reducer";
 
 import { setCateogryInitialState } from "../reducers/category.Reducer";
 
 import { setIsLoading } from "../reducers/ui.Reducer";
 
-const URL_FOR_OTP_GENERATION = "https://sih-enkrypt.herokuapp.com/otp/generate";
-const URL_FOR_OTP_VERIFICATION = "https://sih-enkrypt.herokuapp.com/otp/verify";
-const URL_FOR_RESET_PASSWORD = "https://sih-enkrypt.herokuapp.com/otp/resetpass";
+const local = "http://localhost:4000/";
+// const remote = "https://sih-enkrypt.herokuapp.com/";
+
+const URL_FOR_OTP_GENERATION = `${local}otp/generate`;
+const URL_FOR_OTP_VERIFICATION = `${local}otp/verify`;
+const URL_FOR_RESET_PASSWORD = `${local}otp/resetpass`;
 
 export const isUserExistHandler = (userInfo, isResend = false) => {
   return async (dispatch) => {
@@ -22,9 +27,18 @@ export const isUserExistHandler = (userInfo, isResend = false) => {
       const response = await axios.post(URL_FOR_OTP_GENERATION, userInfo);
       const data = response.data;
       console.log(data);
-      const { email } = data;
-      dispatch(setEmailOtp(email));
+      const {
+        personalEmail: personalEmailOtp,
+        profEmail: professionalEmailOtp,
+        phoneNumber: phoneNumberOtp,
+      } = data;
+      dispatch(setPersonalEmailOtp(professionalEmailOtp));
+      dispatch(setProfessionalEmailOtp(personalEmailOtp));
+      dispatch(setPhoneNumberOtp(phoneNumberOtp));
       if (!isResend) dispatch(nextSetStep());
+      if (data.success === false) {
+        toast.error(data.message);
+      }
     } catch (error) {
       if (error.response.data) toast.error(error.response.data.message);
       else toast.error("Something went wrong!");

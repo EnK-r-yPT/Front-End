@@ -6,6 +6,7 @@ import { FaRegEnvelope, FaRegUser } from "react-icons/fa";
 import { BsKeyboard } from "react-icons/bs";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import { BiPhone } from "react-icons/bi";
 
 const inputValidationFunctions = (inputName) => {
   if (inputName.toLowerCase() === "email") {
@@ -54,7 +55,7 @@ const Input = ({
       <FaRegUser className="text-[color:var(--color-primary)]  mx-1 text-md" />
     );
     message = "Username must not be empty.";
-  } else if (inputFieldName.toLowerCase() === "email") {
+  } else if (inputFieldName.includes("Email")) {
     icon = (
       <FaRegEnvelope className="text-[color:var(--color-primary)] text-lg  mx-1" />
     );
@@ -64,6 +65,11 @@ const Input = ({
       <RiLockPasswordLine className="text-[color:var(--color-primary)]  mx-1 text-xl" />
     );
     message = "OTP must not be empty.";
+  } else if (inputFieldName.toLowerCase().includes("phone")) {
+    icon = (
+      <BiPhone className="text-[color:var(--color-primary)]  mx-1 text-xl" />
+    );
+    message = "Phone number must not be empty.";
   }
 
   const invalidContainer = " border-[0.12rem] border-red-400 ";

@@ -3,12 +3,22 @@ import { debounce } from "lodash";
 import Input from "../Inputs/Input.component";
 import { useDispatch, useSelector } from "react-redux";
 import { isUserExistHandler } from "../../store/actions/accoutRecovery.actions";
-import { setIsFormValid, setOtp } from "../../store/reducers/accountRecovery.Reducer";
+import {
+  setIsFormValid,
+  setOtp,
+} from "../../store/reducers/accountRecovery.Reducer";
 
 const OTPForRecovery = () => {
   const otp = useSelector((state) => state.accountRecovery.otp);
   const username = useSelector((state) => state.accountRecovery.username);
-  const email = useSelector((state) => state.accountRecovery.emailOtp);
+  const personalEmail = useSelector(
+    (state) => state.accountRecovery.personalEmail
+  );
+  const professionalEmail = useSelector(
+    (state) => state.accountRecovery.professionalEmail
+  );
+  const phoneNumber = useSelector((state) => state.accountRecovery.phoneNumber);
+
   const dispatch = useDispatch();
   const [isInputValid, setIsInputValid] = useState({
     otp: false,
@@ -34,7 +44,7 @@ const OTPForRecovery = () => {
         setCounter(120);
         dispatch(isUserExistHandler({ username }, true));
       }, 200),
-    [username,dispatch]
+    [username, dispatch]
   );
 
   const onResendHandler = () => {
@@ -45,9 +55,14 @@ const OTPForRecovery = () => {
     <div className="flex flex-col gap-4 mt-10">
       <div>
         <h3 className="text-sm text-gray-400 mb-1 ">
-          One Time Password (OTP) has been sent to your registered email address{" "}
-          <span className="text-[color:var(--color-primary)]">{email}</span>
+          One Time Password (OTP) has been sent to your registered email
+          addresses{" "}
         </h3>
+        <div className="text-sm text-[color:var(--color-primary)] flex flex-col gap-2">
+          <span>{personalEmail}</span>
+          <span>{professionalEmail}</span>
+          <span>{phoneNumber}</span>
+        </div>
       </div>
 
       <Input

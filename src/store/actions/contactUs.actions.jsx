@@ -2,7 +2,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { setIsLoading } from "../reducers/ui.Reducer";
 
-const URL_FOR_CONTACT_US = "https://sih-enkrypt.herokuapp.com/contactus";
+const local = "http://localhost:4000/";
+// const remote = "https://sih-enkrypt.herokuapp.com/";
+
+const URL_FOR_CONTACT_US = `${local}contactus`;
 
 export const contactUsFormSubmit = (userInfo) => {
   return async (dispatch) => {

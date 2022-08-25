@@ -8,7 +8,9 @@ const accountRecoveryInitialState = {
   otp: "",
   pass_image: "",
   step: 0,
-  emailOtp: "",
+  personalEmailOtp: "",
+  professionalEmailOtp: "",
+  phoneNumberOtp: "",
   isFormValid: false,
 };
 
@@ -25,8 +27,14 @@ const accountRecoverySlice = createSlice({
     setIsFormValid(state, action) {
       state.isFormValid = action.payload;
     },
-    setEmailOtp(state, action) {
+    setPersonalEmailOtp(state, action) {
       state.emailOtp = action.payload;
+    },
+    setProfessionalEmailOtp(state, action) {
+      state.professionalEmailOtp = action.payload;
+    },
+    setPhoneNumberOtp(state, action) {
+      state.phoneNumberOtp = action.payload;
     },
     setOtp(state, action) {
       state.otp = action.payload;
@@ -50,7 +58,10 @@ const accountRecoverySlice = createSlice({
       state.pass_image = accountRecoveryInitialState.pass_image;
       state.isFormValid = accountRecoveryInitialState.isFormValid;
       state.step = accountRecoveryInitialState.step;
-      state.emailOtp = accountRecoveryInitialState.emailOtp;
+      state.professionalEmailOtp =
+        accountRecoveryInitialState.professionalEmailOtp;
+      state.personalEmailOtp = accountRecoveryInitialState.personalEmailOtp;
+      state.phoneNumberOtp = accountRecoveryInitialState.phoneNumberOtp;
     },
   },
 });
@@ -64,7 +75,9 @@ export const {
   nextSetStep,
   backSetStep,
   setAccountRecoveryInitialState,
-  setEmailOtp,
+  setPersonalEmailOtp,
+  setProfessionalEmailOtp,
+  setPhoneNumberOtp,
 } = accountRecoverySlice.actions;
 
 export default accountRecoverySlice.reducer;

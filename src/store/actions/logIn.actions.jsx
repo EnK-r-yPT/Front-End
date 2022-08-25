@@ -14,9 +14,12 @@ import { setCategory, setPassword } from "../reducers/logIn.Reducer";
 import { fetchAllCategoryImages } from "../../firebase/firebase";
 import { login } from "../reducers/auth.Reducer";
 
-const URL_FOR_USER_EXIST = "https://sih-enkrypt.herokuapp.com/signin/check";
+const local = "http://localhost:4000/";
+// const remote = "https://sih-enkrypt.herokuapp.com/";
 
-const URL_FOR_USER_VERIFICATION = "https://sih-enkrypt.herokuapp.com/signin";
+const URL_FOR_USER_EXIST = `${local}signin/check`;
+
+const URL_FOR_USER_VERIFICATION = `${local}signin`;
 
 export const fetchAllImages = () => {
   return async (dispatch) => {

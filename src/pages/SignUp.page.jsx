@@ -8,7 +8,11 @@ import { setSignUpInitialState } from "../store/reducers/signUp.Reducer";
 
 const SignUp = () => {
   const username = useSelector((state) => state.signUp.username);
-  const email = useSelector((state) => state.signUp.email);
+  const personalEmail = useSelector((state) => state.signUp.personalEmail);
+  const professionalEmail = useSelector(
+    (state) => state.signUp.professionalEmail
+  );
+  const phoneNumber = useSelector((state) => state.signUp.phoneNumber);
   const category = useSelector((state) => state.signUp.category);
   const pass_image = useSelector((state) => state.signUp.pass_image);
   const isFormValid = useSelector((state) => state.signUp.isFormValid);
@@ -26,7 +30,9 @@ const SignUp = () => {
     if (!isFormValid) return;
     const userInfo = {
       username,
-      email,
+      personalEmail,
+      profEmail: professionalEmail,
+      phoneNumber,
       category,
       pass_image: pass_image.id,
     };

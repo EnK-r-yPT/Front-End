@@ -4,7 +4,9 @@ const NO_OF_STEPS_IN_SIGN_IN = 1; // 0 based indexing
 
 const signUpSliceInitialState = {
   username: "",
-  email: "",
+  professionalEmail: "",
+  personalEmail: "",
+  phoneNumber: "",
   category: "",
   pass_image: "",
   isFormValid: false,
@@ -18,8 +20,14 @@ const signUpSlice = createSlice({
     setUsername(state, action) {
       state.username = action.payload;
     },
-    setEmail(state, action) {
-      state.email = action.payload;
+    setPersonalEmail(state, action) {
+      state.personalEmail = action.payload;
+    },
+    setProfessionalEmail(state, action) {
+      state.professionalEmail = action.payload;
+    },
+    setPhoneNumber(state, action) {
+      state.phoneNumber = action.payload;
     },
     setCategory(state, action) {
       state.category = action.payload;
@@ -41,7 +49,9 @@ const signUpSlice = createSlice({
     setSignUpInitialState(state) {
       state.username = signUpSliceInitialState.username;
       state.category = signUpSliceInitialState.category;
-      state.email = signUpSliceInitialState.email;
+      state.personalEmail = signUpSliceInitialState.personalEmail;
+      state.professionalEmail = signUpSliceInitialState.professionalEmail;
+      state.phoneNumber = signUpSliceInitialState.phoneNumber;
       state.isFormValid = signUpSliceInitialState.isFormValid;
       state.pass_image = signUpSliceInitialState.pass_image;
       state.step = signUpSliceInitialState.step;
@@ -52,7 +62,9 @@ const signUpSlice = createSlice({
 export const {
   setUsername,
   setCategory,
-  setEmail,
+  setPersonalEmail,
+  setProfessionalEmail,
+  setPhoneNumber,
   setIsFormValid,
   setPassImage,
   nextSetStep,

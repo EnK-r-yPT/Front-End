@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCategory,
-  setEmail,
   setIsFormValid,
+  setPersonalEmail,
+  setPhoneNumber,
+  setProfessionalEmail,
   setUsername,
 } from "../../store/reducers/signUp.Reducer";
 import CategoryInput from "../Inputs/CategoryInput.component";
@@ -11,23 +13,35 @@ import Input from "../Inputs/Input.component";
 
 const SingUpInfo = () => {
   const username = useSelector((state) => state.signUp.username);
-  const email = useSelector((state) => state.signUp.email);
+  const professionalEmail = useSelector(
+    (state) => state.signUp.professionalEmail
+  );
+  const personalEmail = useSelector((state) => state.signUp.personalEmail);
+  const phoneNumber = useSelector((state) => state.signUp.phoneNumber);
   const category = useSelector((state) => state.signUp.category);
 
   const dispatch = useDispatch();
   const [isInputValid, setIsInputValid] = useState({
     username: false,
-    email: false,
+    "professional email": false,
+    "personal email": false,
+    "phone number": false,
     category: false,
   });
 
   useEffect(() => {
-    if (isInputValid.username && isInputValid.email && isInputValid.category) {
+    if (
+      isInputValid.username &&
+      isInputValid["professional email"] &&
+      isInputValid["personal email"] &&
+      isInputValid["phone number"] &&
+      isInputValid.category
+    ) {
       dispatch(setIsFormValid(true));
     } else {
       dispatch(setIsFormValid(false));
     }
-  }, [isInputValid,dispatch]);
+  }, [isInputValid, dispatch]);
 
   return (
     <div className="flex flex-col gap-8 mt-10">
@@ -41,9 +55,27 @@ const SingUpInfo = () => {
       />
 
       <Input
-        data={email}
-        setData={setEmail}
-        inputFieldName={"Email"}
+        data={professionalEmail}
+        setData={setProfessionalEmail}
+        inputFieldName={"Professional Email"}
+        type="email"
+        setIsInputValid={setIsInputValid}
+        isInputValid={isInputValid}
+      />
+
+      <Input
+        data={personalEmail}
+        setData={setPersonalEmail}
+        inputFieldName={"Personal Email"}
+        type="email"
+        setIsInputValid={setIsInputValid}
+        isInputValid={isInputValid}
+      />
+
+      <Input
+        data={phoneNumber}
+        setData={setPhoneNumber}
+        inputFieldName={"Phone Number"}
         type="email"
         setIsInputValid={setIsInputValid}
         isInputValid={isInputValid}
