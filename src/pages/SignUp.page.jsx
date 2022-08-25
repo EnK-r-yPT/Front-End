@@ -32,7 +32,7 @@ const SignUp = () => {
       username,
       personalEmail,
       profEmail: professionalEmail,
-      phoneNumber,
+      phoneNumber: `+91${phoneNumber}`,
       category,
       pass_image: pass_image.id,
     };
