@@ -6,6 +6,80 @@ import FormButtons from "../components/SignUp/FormButtons.component";
 import { userRegistration } from "../store/actions/signUp.actions";
 import { setSignUpInitialState } from "../store/reducers/signUp.Reducer";
 
+const key = parseInt(process.env.REACT_APP_ENCODE_KEY);
+
+const getCorrespondingKeysForNumber = (num) => {
+  switch (num) {
+    case "0":
+      return "wfftxr";
+    case "1":
+      return "brtwag";
+    case "2":
+      return "esbpom";
+    case "3":
+      return "gfvatj";
+    case "4":
+      return "ahtehs";
+    case "5":
+      return "cvdgfq";
+    case "6":
+      return "ppufbc";
+    case "7":
+      return "dhtebh";
+    case "8":
+      return "chdind";
+    case "9":
+      return "eetyuy";
+    default:
+      return "dhsytr";
+  }
+};
+
+const smallCharacters = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+
+const encrypt = (text) => {
+  const n = text.length;
+  let encrypted = [];
+  console.log(n);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < 26; j++) {
+      if (text[i] === smallCharacters[j]) {
+        encrypted.push(smallCharacters[(j + key) % 26]);
+        break;
+      }
+    }
+  }
+
+  return encrypted;
+};
+
 const SignUp = () => {
   const username = useSelector((state) => state.signUp.username);
   const personalEmail = useSelector((state) => state.signUp.personalEmail);
@@ -28,15 +102,20 @@ const SignUp = () => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     if (!isFormValid) return;
+    const passArray = [...pass_image.id.toString()];
+    const passSecured = passArray.map((num) =>
+      getCorrespondingKeysForNumber(num)
+    );
+    let encryptedArray = encrypt(passSecured.join(""));
+    const passEncrypted = encryptedArray.join("");
     const userInfo = {
       username,
       personalEmail,
       profEmail: professionalEmail,
       phoneNumber: `+91${phoneNumber}`,
       category,
-      pass_image: pass_image.id,
+      pass_image: passEncrypted,
     };
-    console.log(userInfo);
     const isSuccess = await dispatch(userRegistration(userInfo));
     if (isSuccess) {
       navigate("/login");
