@@ -12,12 +12,12 @@ import { setCateogryInitialState } from "../reducers/category.Reducer";
 
 import { setIsLoading } from "../reducers/ui.Reducer";
 
-const local = "http://localhost:4000/";
-// const remote = "https://sih-enkrypt.herokuapp.com/";
+// const local = "http://localhost:4000/";
+const remote = "https://sih-enkrypt.herokuapp.com/";
 
-const URL_FOR_OTP_GENERATION = `${local}otp/generate`;
-const URL_FOR_OTP_VERIFICATION = `${local}otp/verify`;
-const URL_FOR_RESET_PASSWORD = `${local}otp/resetpass`;
+const URL_FOR_OTP_GENERATION = `${remote}otp/generate`;
+const URL_FOR_OTP_VERIFICATION = `${remote}otp/verify`;
+const URL_FOR_RESET_PASSWORD = `${remote}otp/resetpass`;
 
 export const isUserExistHandler = (userInfo, isResend = false) => {
   return async (dispatch) => {
