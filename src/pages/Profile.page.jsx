@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import logos from "../assets/Images/logosss.png";
 import group1 from "../assets/Images/Group_1.png";
@@ -13,6 +13,12 @@ const ProfilePage = () => {
   );
   const personalEmail = useSelector((state) => state.auth.PERSONAL_EMAIL);
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
+
+  const [usernameStateChange, setUsernameStateChange] = useState(username);
+  const [render, setRender] = useState(false);
+  useEffect(() => {
+    setRender(true);
+  }, []);
 
   return (
     <div className="mt-28 sm:mt-32 mx-auto md:mt-36 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[440px] md:mx-auto shadow-[color:var(--shadow-color)] rounded-xl p-8">
