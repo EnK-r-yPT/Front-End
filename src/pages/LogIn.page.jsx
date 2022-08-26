@@ -78,7 +78,7 @@ const LogIn = () => {
         <div className="text-center mt-6">
           <Link to="/accountrecovery">
             <p className="text-[color:var(--color-primary)] text-sm">
-              Forgotten passowrd?
+              Forgotten password?
             </p>
           </Link>
         </div>
