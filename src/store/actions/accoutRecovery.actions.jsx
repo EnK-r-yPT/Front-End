@@ -29,11 +29,11 @@ export const isUserExistHandler = (userInfo, isResend = false) => {
       console.log(data);
       const {
         personalEmail: personalEmailOtp,
-        profEmail: professionalEmailOtp,
+        professionalEmail: professionalEmailOtp,
         phoneNumber: phoneNumberOtp,
       } = data;
-      dispatch(setPersonalEmailOtp(professionalEmailOtp));
-      dispatch(setProfessionalEmailOtp(personalEmailOtp));
+      dispatch(setProfessionalEmailOtp(professionalEmailOtp));
+      dispatch(setPersonalEmailOtp(personalEmailOtp));
       dispatch(setPhoneNumberOtp(phoneNumberOtp));
       if (!isResend) dispatch(nextSetStep());
       if (data.success === false) {

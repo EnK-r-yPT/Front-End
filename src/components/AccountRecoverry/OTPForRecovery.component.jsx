@@ -12,12 +12,14 @@ const OTPForRecovery = () => {
   const otp = useSelector((state) => state.accountRecovery.otp);
   const username = useSelector((state) => state.accountRecovery.username);
   const personalEmail = useSelector(
-    (state) => state.accountRecovery.personalEmail
+    (state) => state.accountRecovery.personalEmailOtp
   );
   const professionalEmail = useSelector(
-    (state) => state.accountRecovery.professionalEmail
+    (state) => state.accountRecovery.professionalEmailOtp
   );
-  const phoneNumber = useSelector((state) => state.accountRecovery.phoneNumber);
+  const phoneNumber = useSelector(
+    (state) => state.accountRecovery.phoneNumberOtp
+  );
 
   const dispatch = useDispatch();
   const [isInputValid, setIsInputValid] = useState({
@@ -56,13 +58,19 @@ const OTPForRecovery = () => {
       <div>
         <h3 className="text-sm text-gray-400 mb-1 ">
           One Time Password (OTP) has been sent to your registered email
-          addresses{" "}
+          addresses &nbsp;
+          <span className="text-[color:var(--color-primary)] inline-block text-xs">
+            {personalEmail}
+          </span>
+          ,&nbsp;
+          <span className="text-[color:var(--color-primary)] inline-block text-xs">
+            {professionalEmail}
+          </span>
+          ,&nbsp;
+          <span className="text-[color:var(--color-primary)] inline-block text-xs">
+            {phoneNumber}
+          </span>
         </h3>
-        <div className="text-sm text-[color:var(--color-primary)] flex flex-col gap-2">
-          <span>{personalEmail}</span>
-          <span>{professionalEmail}</span>
-          <span>{phoneNumber}</span>
-        </div>
       </div>
 
       <Input
@@ -91,6 +99,11 @@ const OTPForRecovery = () => {
           </span>
         )}
       </div>
+      <h4 className="text-xs text-gray-400 text-center">
+        <span className="text-[color:var(--color-primary)]">*</span>The OTP
+        sequence is Professional - Personal - Phone
+        <span className="text-[color:var(--color-primary)]">*</span>
+      </h4>
     </div>
   );
 };

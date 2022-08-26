@@ -28,7 +28,7 @@ const accountRecoverySlice = createSlice({
       state.isFormValid = action.payload;
     },
     setPersonalEmailOtp(state, action) {
-      state.emailOtp = action.payload;
+      state.personalEmailOtp = action.payload;
     },
     setProfessionalEmailOtp(state, action) {
       state.professionalEmailOtp = action.payload;

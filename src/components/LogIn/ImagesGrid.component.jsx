@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { twMerge } from "tailwind-merge";
 
 const ImagesGrid = () => {
   const step = useSelector((state) => state.logIn.step);
@@ -33,6 +34,14 @@ const ImagesGrid = () => {
 
   const noOfImages = imageList[step - 1].length;
   const gridCols = Math.floor(Math.sqrt(noOfImages));
+  let gridsDesign = `grid-cols-2`;
+  if (gridCols === 3) {
+    gridsDesign = "grid-cols-3";
+  } else if (gridCols === 4) {
+    gridsDesign = "grid-cols-4";
+  } else if (gridCols === 5) {
+    gridsDesign = "grid-cols-5";
+  }
 
   return (
     <div
@@ -40,7 +49,10 @@ const ImagesGrid = () => {
       ref={ref}
     >
       <div
-        className={`grid grid-cols-${gridCols} justify-center gap-4 items-center w-fit`}
+        className={twMerge(
+          `grid justify-center gap-4 items-center w-fit`,
+          `${gridsDesign}`
+        )}
       >
         {grid}
       </div>

@@ -8,8 +8,6 @@ import { setSignUpInitialState } from "../store/reducers/signUp.Reducer";
 
 const key = parseInt(process.env.REACT_APP_ENCODE_KEY);
 
-
-
 const getCorrespondingKeysForNumber = (num) => {
   switch (num) {
     case "0":
@@ -92,6 +90,8 @@ const SignUp = () => {
   const category = useSelector((state) => state.signUp.category);
   const pass_image = useSelector((state) => state.signUp.pass_image);
   const isFormValid = useSelector((state) => state.signUp.isFormValid);
+  const step = useSelector((state) => state.signUp.step);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -124,12 +124,14 @@ const SignUp = () => {
     }
   };
 
+  const heading = step === 0 ? "Create an Account" : "Select an Image";
+
   return (
     <div className="mt-28 sm:mt-32 mx-auto md:mt-36 bg-[color:var(--main-color)] shadow-[2px_4px_12px_rgba(0,0,0,0.2)] max-w-[480px] md:mx-auto shadow-[color:var(--shadow-color)] rounded-xl p-8">
       <form action="" className="w-4/5 mx-auto" onSubmit={onSubmitHandler}>
         <div className="header flex flex-col items-center justify-center">
           <h1 className="text-[color:var(--color-primary)] text-3xl font-semibold mb-2 text-center">
-            Create an Account
+            {heading}
           </h1>
           <div className="h-[0.30rem] w-12 bg-[color:var(--color-primary)] rounded-full"></div>
         </div>
