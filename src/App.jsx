@@ -15,6 +15,9 @@ import NewPassword from "./pages/NewPassword.page";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { jwtVerficationRequest } from "./store/actions/auth.actions";
+import ProfilePage from "./pages/Profile.page";
+import PrivateRoutes from "./routes/privateRoutes";
+import { removeUserDataFromStorage } from "./store/reducers/auth.Reducer";
 
 function App() {
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
@@ -29,6 +32,7 @@ function App() {
       const isSuccess = await dispatch(jwtVerficationRequest(token));
       if (!isSuccess) {
         toast.info("Session Expired!");
+        dispatch(removeUserDataFromStorage());
         navigate("/login");
       } else {
         toast.success("Welcome Back!");
@@ -48,6 +52,9 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/accountrecovery" element={<AccountRecovery />} />
           <Route path="/newpassword" element={<NewPassword />} />
+          <Route element={<PrivateRoutes />}>
+            <Route element={<ProfilePage />} path="/profile" />
+          </Route>
         </Routes>
       </Layout>
       <ToastContainer

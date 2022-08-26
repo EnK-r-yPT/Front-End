@@ -46,7 +46,7 @@ const LogIn = () => {
     };
     const isSuccess = await dispatch(verifyUserLogin(userInfo));
     if (isSuccess) {
-      navigate("/");
+      navigate("/profile");
     } else {
       dispatch(setIsLoading(true));
       dispatch(setStep(0));

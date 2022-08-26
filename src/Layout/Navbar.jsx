@@ -69,6 +69,14 @@ const Navbar = () => {
                 >
                   Contact
                 </NavLink>
+                {isLoggedIn && (
+                  <NavLink
+                    to="/profile"
+                    className="hover:text-[color:var(--color-primary)]"
+                  >
+                    Profile
+                  </NavLink>
+                )}
               </ul>
             </div>
             <div className="flex gap-4">

@@ -12,7 +12,7 @@ import {
 import { setIsLoading } from "../reducers/ui.Reducer";
 import { setCategory, setPassword } from "../reducers/logIn.Reducer";
 import { fetchAllCategoryImages } from "../../firebase/firebase";
-import { login } from "../reducers/auth.Reducer";
+import { login, saveUserDataToStorage } from "../reducers/auth.Reducer";
 
 // const local = "http://localhost:4000/";
 const remote = "https://sih-enkrypt.herokuapp.com/";
@@ -101,6 +101,14 @@ export const verifyUserLogin = (userInfo) => {
       dispatch(setIsLoading(false));
       toast.success("Loged in successfully!");
       dispatch(login(token)); // auth token
+      dispatch(
+        saveUserDataToStorage({
+          username: data.name,
+          personalEmail: data.personalEmail,
+          professionalEmail: data.professionalEmail,
+          phoneNumber: data.phoneNumber,
+        })
+      );
       return true;
     } catch (error) {
       if (error.response.data) toast.error(error.response.data.message);

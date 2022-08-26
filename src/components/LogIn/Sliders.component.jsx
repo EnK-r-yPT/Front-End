@@ -82,7 +82,7 @@ function Sliders() {
     <div className="flex items-center justify-center mb-16 mt-4">
       <div className="flex flex-col justify-center items-center gap-10 w-full mx-6 min-w-[8rem] select-none mt-4">
         <div className="w-full relative flex items-center justify-center">
-          <h2 className="text-center absolute text-sm text-[color:var(--color-primary)] left-1/2 -translate-x-1/2 font-bold -top-[0.1rem]">
+          <h2 className="text-center absolute text-xs text-[color:var(--color-primary)] left-1/2 -translate-x-1/2 font-bold -top-[0.1rem]">
             Swipe right for
           </h2>
           <SliderInput
@@ -94,7 +94,7 @@ function Sliders() {
           />
         </div>
         <div className="w-full relative flex items-center justify-center">
-          <h2 className="text-center absolute text-sm text-[color:var(--color-primary)] left-1/2 -translate-x-1/2 font-bold -top-[0.1rem]">
+          <h2 className="text-center absolute text-xs text-[color:var(--color-primary)] left-1/2 -translate-x-1/2 font-bold -top-[0.1rem]">
             Swipe left for 
           </h2>
           <SliderInput
