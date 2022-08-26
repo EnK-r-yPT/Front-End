@@ -150,6 +150,14 @@ const Navbar = () => {
               >
                 Contact
               </Link>
+              {isLoggedIn && (
+                <NavLink
+                  to="/profile"
+                  className="hover:text-[color:var(--color-primary)]"
+                >
+                  Profile
+                </NavLink>
+              )}
             </ul>
           </div>
           <div className="flex flex-col gap-4 ">
