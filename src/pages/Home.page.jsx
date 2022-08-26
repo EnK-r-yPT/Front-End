@@ -27,9 +27,18 @@ const Home = () => {
           isDarkMode ? "text-gray-300" : "text-gray-500"
         )}
       >
-        <img src={SihLogo} alt="" />
+        <div className="w-full my-8 flex justify-center items-center">
+          <img src={SihLogo} className="w-96 object-cover" alt="" />
+        </div>
         <div>
-          <h1 className={twMerge("text-2xl text-gray-700",isDarkMode ? "text-gray-100" : "text-gray-700")}>Instructions</h1>
+          <h1
+            className={twMerge(
+              "text-2xl text-gray-700",
+              isDarkMode ? "text-gray-100" : "text-gray-700"
+            )}
+          >
+            Instructions
+          </h1>
         </div>
         <div
           className={twMerge(
@@ -37,7 +46,9 @@ const Home = () => {
             isDarkMode ? "text-gray-300" : "text-gray-500"
           )}
         >
-          <h2 className={isDarkMode?"text-gray-200":"text-gray-600"}>Sign Up</h2>
+          <h2 className={isDarkMode ? "text-gray-200" : "text-gray-600"}>
+            Sign Up
+          </h2>
           <ul className="flex gap-1 flex-col mt-1">
             <li className="flex gap-1 tracking-wider text-sm ">
               <span className="text-[color:var(--color-primary)]">➤</span> Click
@@ -68,7 +79,9 @@ const Home = () => {
           </ul>
         </div>
         <div className="mt-4">
-          <h2 className={isDarkMode?"text-gray-200":"text-gray-600"}>Log In</h2>
+          <h2 className={isDarkMode ? "text-gray-200" : "text-gray-600"}>
+            Log In
+          </h2>
           <ul className="flex gap-1 flex-col mt-1">
             <li className="flex gap-1 tracking-wider text-sm ">
               <span className="text-[color:var(--color-primary)]">➤</span> Click
@@ -91,7 +104,9 @@ const Home = () => {
           </ul>
         </div>
         <div className="mt-4">
-          <h2 className={isDarkMode?"text-gray-200":"text-gray-600"}>Forgot password</h2>
+          <h2 className={isDarkMode ? "text-gray-200" : "text-gray-600"}>
+            Forgot password
+          </h2>
           <ul className="flex gap-1 flex-col mt-1">
             <li className="flex gap-1 tracking-wider text-sm ">
               <span className="text-[color:var(--color-primary)]">➤</span> Under

@@ -30,6 +30,8 @@ function App() {
       if (!isSuccess) {
         toast.info("Session Expired!");
         navigate("/login");
+      } else {
+        toast.success("Welcome Back!");
       }
     };
     verifyJWT();
