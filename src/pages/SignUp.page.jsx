@@ -104,10 +104,11 @@ const SignUp = () => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     if (!isFormValid) return;
-    const passArray = [...pass_image.id.toString()];
-    const passSecured = passArray.map((num) =>
-      getCorrespondingKeysForNumber(num)
-    );
+    const passString = pass_image.id.toString();
+    const passArray = [...passString];
+    const passSecured = passArray.map((num) => {
+      return getCorrespondingKeysForNumber(num);
+    });
     let encryptedArray = encrypt(passSecured.join(""));
     const passEncrypted = encryptedArray.join("");
     const userInfo = {
@@ -118,6 +119,7 @@ const SignUp = () => {
       category,
       pass_image: passEncrypted,
     };
+    console.log(userInfo);
     const isSuccess = await dispatch(userRegistration(userInfo));
     if (isSuccess) {
       navigate("/login");
