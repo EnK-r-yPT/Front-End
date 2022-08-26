@@ -13,8 +13,7 @@ const ProfilePage = () => {
   );
   const personalEmail = useSelector((state) => state.auth.PERSONAL_EMAIL);
   const isDarkMode = useSelector((state) => state.ui.isDarkMode);
-
-  const [usernameStateChange, setUsernameStateChange] = useState(username);
+  // eslint-disable-next-line
   const [render, setRender] = useState(false);
   useEffect(() => {
     setRender(true);
