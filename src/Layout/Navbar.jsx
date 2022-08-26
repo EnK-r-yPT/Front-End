@@ -5,7 +5,10 @@ import { ImCross } from "react-icons/im";
 import logo from "../assets/logo/logo.png";
 import Button from "../components/Button/Button.component";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/reducers/auth.Reducer";
+import {
+  logout,
+  removeUserDataFromStorage,
+} from "../store/reducers/auth.Reducer";
 import { toast } from "react-toastify";
 import { twMerge } from "tailwind-merge";
 
@@ -23,6 +26,7 @@ const Navbar = () => {
 
   const onLogOutHandler = () => {
     dispatch(logout());
+    dispatch(removeUserDataFromStorage());
     toast.success("Logged out successfully!");
   };
 
