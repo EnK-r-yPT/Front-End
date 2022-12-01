@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { logout } from "../reducers/auth.Reducer";
 
 // const local = "http://localhost:4000/";
-const remote = "https://sih-enkrypt.herokuapp.com/";
+const remote = "https://sih-enkrypt.onrender.com/";
 
 const URL_FOR_JWT_TOKEN_VERIFICATION = `${remote}authentication`;
 

@@ -15,7 +15,7 @@ import { fetchAllCategoryImages } from "../../firebase/firebase";
 import { login, saveUserDataToStorage } from "../reducers/auth.Reducer";
 
 // const local = "http://localhost:4000/";
-const remote = "https://sih-enkrypt.herokuapp.com/";
+const remote = "https://sih-enkrypt.onrender.com/";
 
 const URL_FOR_USER_EXIST = `${remote}signin/check`;
 

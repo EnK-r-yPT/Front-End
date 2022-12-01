@@ -13,7 +13,7 @@ import { setCateogryInitialState } from "../reducers/category.Reducer";
 import { setIsLoading } from "../reducers/ui.Reducer";
 
 // const local = "http://localhost:4000/";
-const remote = "https://sih-enkrypt.herokuapp.com/";
+const remote = "https://sih-enkrypt.onrender.com/";
 
 const URL_FOR_OTP_GENERATION = `${remote}otp/generate`;
 const URL_FOR_OTP_VERIFICATION = `${remote}otp/verify`;

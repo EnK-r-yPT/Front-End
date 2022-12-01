@@ -4,7 +4,7 @@ import { nextSetStep } from "../reducers/signUp.Reducer";
 import { setIsLoading } from "../reducers/ui.Reducer";
 
 // const local = "http://localhost:4000/";
-const remote = "https://sih-enkrypt.herokuapp.com/";
+const remote = "https://sih-enkrypt.onrender.com/";
 
 let URL_FOR_USER_CHECK = `${remote}signup/check`;
 let URL_FOR_USER_REGISTRATION = `${remote}signup`;
